@@ -155,6 +155,7 @@ function Page() {
     // };
     try {
       const response = await axios.post(`${BASE_URL}/api/like_post`, payload);
+      NearYou(payload.user_id);
       if (response.data.code === 200) {
         NearYou(payload.user_id);
       }

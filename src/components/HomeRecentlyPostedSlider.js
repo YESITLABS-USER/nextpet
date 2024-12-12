@@ -47,8 +47,8 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
     };
   }, []);
 
-  const handleModal = (post_id, breeder_id, contacts_colour, total_contact) => {
-    setModalData({ post_id, breeder_id, "total_contacts" : total_contact });
+  const handleModal = (post_id, breeder_id, contacts_colour, total_contact, contacts_date) => {
+    setModalData({ post_id, breeder_id, "total_contacts" : total_contact, "date_contacts_breeder" : contacts_date });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {
@@ -74,14 +74,15 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
   }
   
   function handleViewMore (slide) {
-    if(isAuthenticated){
-      router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.like_colour}`)
-    } else{
-      toast.error("User must be logged in");
-      setTimeout(() => {
-        router.push('/user/sign-in');
-      }, 1000);
-    }
+    router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.like_colour}`)
+    // if(isAuthenticated){
+    //   router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.like_colour}`)
+    // } else{
+    //   toast.error("User must be logged in");
+    //   setTimeout(() => {
+    //     router.push('/user/sign-in');
+    //   }, 1000);
+    // }
   }
 
   return (
@@ -166,7 +167,8 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
                                slide.id,
                                slide.user_breeder_id,
                                slide?.contacts_colour,
-                               slide?.total_contact
+                               slide?.total_contact,
+                               slide?.contacts_date
                              )
                            }
                            style={{ cursor: "pointer" }}
@@ -218,6 +220,7 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
           modalIsOpen={showModal}
           closeModal={closeModal}
           modalDetails={modalData}
+          onLike={onClick}
         />
         <PreviouslyContacted
           modalIsOpen={showPreviousModal}

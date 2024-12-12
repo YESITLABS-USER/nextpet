@@ -58,8 +58,8 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
     setShowModal(false);
   };
 
-  const handlePreviouslyContactedModal = (post_id, breeder_id) => {
-    setModalData({ post_id, breeder_id });
+  const handlePreviouslyContactedModal = (post_id, breeder_id, date_contacts_breeder ) => {
+    setModalData({ post_id, breeder_id, "date_contacts_breeder": date_contacts_breeder });
     setShowPreviouslyContactedModal(true);
   };
 
@@ -78,14 +78,15 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
     }
   }
   function handleViewMore (slide) {
-    if(isAuthenticated){
-      router.push(`/user/trending-pets/${slide.user_breeder_id}/${slide.id}`)
-    } else{
-      toast.error("User must be logged in");
-      setTimeout(() => {
-        router.push('/user/sign-in');
-      }, 1000);
-    }
+    router.push(`/user/trending-pets/${slide.user_breeder_id}/${slide.id}`)
+    // if(isAuthenticated){
+    //   router.push(`/user/trending-pets/${slide.user_breeder_id}/${slide.id}`)
+    // } else{
+    //   toast.error("User must be logged in");
+    //   setTimeout(() => {
+    //     router.push('/user/sign-in');
+    //   }, 1000);
+    // }
   }
 
 
@@ -169,7 +170,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
                                   onClick={() =>
                                     handlePreviouslyContactedModal(
                                       slide.id,
-                                      slide.user_breeder_id
+                                      slide.user_breeder_id, slide.contacts_date
                                     )
                                   }
                                   style={{
@@ -199,7 +200,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
                                 <div
                                   name="mail-boxwrap"
                                   onClick={() =>
-                                    handleModal(slide.id, slide.user_breeder_id, slide.total_contact)
+                                    handleModal(slide.id, slide.user_breeder_id, slide.total_contact, slide?.date_contacts_breeder)
                                   }
                                   style={{ cursor: "pointer" }}
                                 >

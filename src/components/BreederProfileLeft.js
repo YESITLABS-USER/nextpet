@@ -118,7 +118,7 @@ const BreederProfileLeft = ({ data }) => {
               <p>Posts</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/breeder/favorites"
               className={data.page === "favorites" ? "active" : ""}
@@ -131,7 +131,7 @@ const BreederProfileLeft = ({ data }) => {
               />
               <p>Favorites</p>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               href="/breeder/subscription"

@@ -7,14 +7,8 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 import { Rating } from "react-simple-star-rating";
-import {
-  ShowNotes,
-  AddNotes,
-  StatusNotesLeadsUpdate,
-  GetRatting,
-  SetRatting,
-  StatusLeadsBreederDetails,
-} from "../../../services/breeder";
+import { ShowNotes, AddNotes, StatusNotesLeadsUpdate, GetRatting, SetRatting,StatusLeadsBreederDetails, } from "../../../services/breeder";
+import { useRouter } from "next/navigation";
 
 const Contacted = () => {
   const [addNotes, setAddNotes] = useState();
@@ -26,8 +20,8 @@ const Contacted = () => {
   const [user_id, setUserId] = useState();
   const [post_id, setPostId] = useState();
   const [breeder_id, setBreederId] = useState();
+  const router = useRouter();
   
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const queryParams = new URLSearchParams(window.location.search);
@@ -61,7 +55,6 @@ const Contacted = () => {
 
       // Call the API and await the response
       const res = await StatusLeadsBreederDetails(payload);
-
       if (res?.data?.code === 200) {
         setPageData(res.data);
 
@@ -98,6 +91,17 @@ const Contacted = () => {
       ShowNotesFunction();
     }
   };
+  function handleViewMore (view) {
+    router.push(`/user/posts/${view.user_id}/${view.post_id}/${view.pet_total_like}`)
+    // if(isAuthenticated){
+    //   router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.check_like}`)
+    // } else{
+    //   toast.error("User must be logged in");
+    //   setTimeout(() => {
+    //     router.push('/user/sign-in');
+    //   }, 1000);
+    // }
+  }
 
   const handleUserStatusNotesLeadsUpdate = async (val) => {
     try {
@@ -168,6 +172,8 @@ const Contacted = () => {
     }
   };
 
+
+
   let communication_rating = [];
   for (let i = 1; i <= 5; i++) {
     const starSrc =
@@ -227,7 +233,6 @@ const Contacted = () => {
         post_id: post_id,
       };
       const getBidderRes = await GetRatting(payload);
-      console.log(getBidderRes, 'eghe')
       if(getBidderRes.data.code == 200) {
         setBidrAllRate(getBidderRes?.data?.data[0]);
       }
@@ -239,23 +244,19 @@ const Contacted = () => {
   const handleRating = async (rate, type) => {
     setRating(rate);
 
-    //
     await SetRatting({
       breeder_id: breeder_id,
       user_id: user_id,
       post_id: post_id,
       politeness_rating:
         type == "Politeness" && rate !== null
-          ? rate
-          : bidrAllRate?.politeness_rating,
+          ? rate : bidrAllRate?.politeness_rating,
       responsive_rating:
         type == "Responsive" && rate !== null
-          ? rate
-          : bidrAllRate?.responsive_rating,
+          ? rate : bidrAllRate?.responsive_rating,
       communication_rating:
         type == "Communication" && rate !== null
-          ? rate
-          : bidrAllRate?.communication_rating,
+          ? rate : bidrAllRate?.communication_rating,
     });
 
   };
@@ -325,9 +326,8 @@ const Contacted = () => {
                       />
                       &nbsp;
                       <a href="#">
-                        +1
                         {pageData.data?.[0].user_phone
-                          ? pageData.data?.[0].user_phone
+                          ? `+1 ${pageData.data?.[0].user_phone}`
                           : "Not Available"}
                       </a>
                     </li>
@@ -365,7 +365,7 @@ const Contacted = () => {
                       <Image
                         width={15}
                         height={15}
-                        src="/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
+                        src={ pageData?.pet_breeder_details?.[0].total_like > 0 ? "/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg" : "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"}
                         alt=""
                         className="active"
                       />
@@ -390,7 +390,7 @@ const Contacted = () => {
                         : "Not Available"}
                     </h4>
                     <div className="action-wrap">
-                      <a href="#" onClick={(e) => e.preventDefault()}>
+                      <a  onClick={() => handleViewMore(pageData.data[0])} style={{ cursor:'pointer'}}>
                         View More&nbsp;<i className="fas fa-angle-right"></i>
                       </a>
                     </div>

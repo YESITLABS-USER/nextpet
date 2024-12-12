@@ -63,8 +63,8 @@ const Homenearyou = ({ slides, onLike }) => {
     setShowModal(false);
   };
 
-  const handlePreviouslyContactedModal = (post_id, breeder_id) => {
-    setModalData({ post_id, breeder_id });
+  const handlePreviouslyContactedModal = (post_id, breeder_id, contacts_date) => {
+    setModalData({ post_id, breeder_id, "date_contacts_breeder" : contacts_date });
     setShowPreviouslyContactedModal(true);
   };
 
@@ -73,14 +73,15 @@ const Homenearyou = ({ slides, onLike }) => {
   };
 
   function handleViewMore (slide) {
-    if(isAuthenticated){
-      router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.check_like}`)
-    } else{
-      toast.error("User must be logged in");
-      setTimeout(() => {
-        router.push('/user/sign-in');
-      }, 1000);
-    }
+    router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.check_like}`)
+    // if(isAuthenticated){
+    //   router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.check_like}`)
+    // } else{
+    //   toast.error("User must be logged in");
+    //   setTimeout(() => {
+    //     router.push('/user/sign-in');
+    //   }, 1000);
+    // }
   }
 
   return (
@@ -162,7 +163,7 @@ const Homenearyou = ({ slides, onLike }) => {
                         {slide.contacts_colour == 1 ? (
                           <div
                             name="mail-boxwrap"
-                            onClick={() => handlePreviouslyContactedModal(slide.id, slide.user_breeder_id)}
+                            onClick={() => handlePreviouslyContactedModal(slide.id, slide.user_breeder_id, slide?.contacts_date)}
                             style={{ cursor: 'pointer' }}
                           >
                             <Image

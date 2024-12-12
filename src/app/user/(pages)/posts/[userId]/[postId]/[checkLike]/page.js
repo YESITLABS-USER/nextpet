@@ -4,12 +4,14 @@ import Image from "next/image";
 import axios from "axios";
 import BASE_URL from "../../../../../../utils/constant";
 import Carousel from "../../../../../../../components/Carousel.js";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { PostDetail } from "../../../../../../services/user/post";
 import ContactModal from "../../../../../../../components/ContactModal";
 import PreviouslyContacted from "../../../../../../../components/PreviouslyContacted";
 import { CustomPlaceholder } from "react-placeholder-image";
-import ProtectedRoute from "../../../../../../context/ProtectedRoute";
+import { useAuth } from "@/src/app/context/AuthContext";
+import { toast } from "react-toastify";
+// import ProtectedRoute from "../../../../../../context/ProtectedRoute";
 const ContactPetDetails = () => {
   const [userId, setUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +23,8 @@ const ContactPetDetails = () => {
     post_id: "",
     // breeder_id: "",
   });
+  const { isAuthenticated } = useAuth(); 
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -48,21 +52,28 @@ const ContactPetDetails = () => {
   };
 
   const handlePostLike = async () => {
-    let checkLikeDislike = postData?.check_like == "0" ? 1 : 111;
-    let likeData = {
-      user_id: userId,
-      post_id: postData?.post_id || "",
-      breeder_id: postData?.post_id || "",
-      like_post: checkLikeDislike,
-    };
+    if(isAuthenticated){
+      let checkLikeDislike = postData?.check_like == "0" ? 1 : 111;
+      let likeData = {
+        user_id: userId,
+        post_id: postData?.post_id || "",
+        breeder_id: postData?.post_id || "",
+        like_post: checkLikeDislike,
+      };
 
-    try {
-      const response = await axios.post(`${BASE_URL}/api/like_post`, likeData);
-      if (response.data.code === 200) {
-        PostDetailGet();
+      try {
+        const response = await axios.post(`${BASE_URL}/api/like_post`, likeData);
+        if (response.data.code === 200) {
+          PostDetailGet();
+        }
+      } catch (err) {
+        console.error("error : ", err);
       }
-    } catch (err) {
-      console.error("error : ", err);
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
     }
   };
   
@@ -110,7 +121,8 @@ const ContactPetDetails = () => {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
+    <>
       <div className="breedeerdasboard-createpost-wrap">
         <div className="container">
           <div className="col-lg-12">
@@ -412,7 +424,8 @@ const ContactPetDetails = () => {
           modalDetails={modalData}
         />
       </div>
-    </ProtectedRoute>
+    {/* </ProtectedRoute> */}
+    </>
   );
 };
 
