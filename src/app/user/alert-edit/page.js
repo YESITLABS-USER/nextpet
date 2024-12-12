@@ -114,7 +114,7 @@ const Alert = () => {
 
   //       setAnimalTypes(formattedAnimalTypes);
   //     } catch (err) {
-  //       console.log("error : ", err);
+  //       console.error("error : ", err);
   //     }
   //   };
 
@@ -140,7 +140,7 @@ const Alert = () => {
   //       }
   //       console.log("responseresponseresponseresponse breed_type", data);
   //     } catch (err) {
-  //       console.log("error : ", err);
+  //       console.error("error : ", err);
   //     }
   //   };
   //   setAlertsGet();

@@ -55,7 +55,7 @@ const Favorites = () => {
         setShowPreviousModal(false);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -82,7 +82,7 @@ const Favorites = () => {
         getFavoriteList();
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 

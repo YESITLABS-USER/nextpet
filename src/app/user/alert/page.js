@@ -75,7 +75,7 @@ const Alert = () => {
 
         setAnimalTypes(formattedAnimalTypes);
       } catch (err) {
-        console.log("error : ", err);
+        console.error("error : ", err);
       }
     };
 
@@ -100,7 +100,7 @@ const Alert = () => {
           setAnimalTypeId(data.animal_type_id);
         }
       } catch (err) {
-        console.log("error : ", err);
+        console.error("error : ", err);
       }
     };
 

@@ -66,7 +66,7 @@ const ContactPetDetails = () => {
         });
         // setBreederData(response.data);
       } catch (err) {
-        console.log("Error:", err);
+        console.error("error:", err);
       }
     };
   
@@ -117,7 +117,7 @@ const ContactPetDetails = () => {
         }
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -138,7 +138,7 @@ const ContactPetDetails = () => {
         setShowPreviousModal(false);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
   const handleShare = async () => {

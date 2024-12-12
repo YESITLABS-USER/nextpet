@@ -61,7 +61,7 @@ function Page() {
 
       setData(response.data);
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -101,7 +101,7 @@ function Page() {
         setHomePageData(response.data.data);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -129,11 +129,12 @@ function Page() {
         `${BASE_URL}/api/breeder_like`,
         payload
       );
+      NearYou(payload.user_id);
       if (response.data.code === 200) {
         NearYou(payload.user_id);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -158,7 +159,7 @@ function Page() {
         NearYou(payload.user_id);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 

@@ -63,6 +63,7 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
       user_id: userId,
       breeder_id: value?.breeder_id,
       breeder_do_not_show_me: checkConnect,
+      "total_contacts": value?.breeder_total_count_all
     });
     if (checkConnect == 1) {
       setShowModal(true);
@@ -188,13 +189,14 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
                               style={{ cursor: "pointer" }}
                             >
                               <Image
-                                src="/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
-                                alt=""
+                                src={slide.contacts_colour_breeder ? "/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
+                                 : "/images/Nextpet-imgs/dashboard-imgs/yellow-mail-letter.svg"}
+                                alt="mail"
                                 width={20}
                                 height={20}
                               />
                               <div className="mail-count pt-1">
-                                <span> {slide.total_contact ? slide.total_contact : 0} </span>
+                                <span> {slide.breeder_total_count_all ? slide.breeder_total_count_all : 0} </span>
                               </div>
                             </div>
                           </div>
@@ -276,6 +278,7 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
         modalIsOpen={showModal}
         closeModal={closeModal}
         modalDetails={modalData}
+        onLike={onClick}
       />
       <PreviouslyContacted
         modalIsOpen={showPreviousModal}

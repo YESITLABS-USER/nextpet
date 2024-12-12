@@ -119,7 +119,7 @@ const UserDashboard = () => {
       toast.success("Profile Updated Successfully");
       setMakeEditable(false);
     } catch (error) {
-      console.log("Error config:", error);
+      console.error("error config:", error);
       toast.error("Failed to update profile. Please try again.");
     }
   };

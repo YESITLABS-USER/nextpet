@@ -45,7 +45,7 @@ const Leads = () => {
         setLeadsData(response.data.data);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -63,7 +63,7 @@ const Leads = () => {
         setLeadsData(response.data.data);
       }
     } catch (err) {
-      console.log("error: ", err);
+      console.error("error: ", err);
     }
   };
 

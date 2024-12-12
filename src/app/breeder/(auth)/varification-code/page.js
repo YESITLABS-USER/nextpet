@@ -34,7 +34,7 @@ const VerificationCode = () => {
       }
     } else{
       setError('Otp Send Error. Please try again later')
-      console.log('Error in Sending OTP')
+      console.error('Error in Sending OTP')
     }
   }
 

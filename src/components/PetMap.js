@@ -16,7 +16,7 @@ const PetMap = () => {
           });
         },
         () => {
-          console.log("Unable to retrieve location.");
+          console.error("Unable to retrieve location.");
         }
       );
     }

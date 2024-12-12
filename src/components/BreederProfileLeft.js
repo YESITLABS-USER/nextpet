@@ -66,7 +66,7 @@ const BreederProfileLeft = ({ data }) => {
         window.location.href = "/";
       }
     } catch (error) {
-      console.log("Error", error);
+      console.error("error", error);
     }
   };
 

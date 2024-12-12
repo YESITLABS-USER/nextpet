@@ -62,7 +62,6 @@ const UserProfileLeft = ({ userPages = {} }) => {
       };
       const res = await DeleteUser(payload);
       if (res?.data?.status_code === 200) {
-        console.log("Account Deleted!");
         localStorage.removeItem("user_user_id");
         localStorage.removeItem("authToken");
         toast.success("User Deleted Successfully");

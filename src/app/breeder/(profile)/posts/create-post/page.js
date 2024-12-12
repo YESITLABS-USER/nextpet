@@ -76,7 +76,16 @@ const CreatePost = () => {
   };
   const validationSchema = Yup.object({
     petname: Yup.string().required("Pet name is required"),
-    description: Yup.string().required("Description is required"),
+    description: Yup.string().test(
+      'min-words',
+      'Description must be at least 20 words',
+      (value) => {
+        if (!value) return false;
+        const wordCount = value.trim().split(/\s+/).length;
+        return wordCount >= 20;
+      }
+    )
+    .required('Description is required'),
     price: Yup.number()
       .required("Price is required")
       .positive("Price must be positive"),

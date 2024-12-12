@@ -84,7 +84,7 @@ const EditPost = () => {
         setLongitude(longitude);
       });
     } else {
-      console.log("Not Allow location");
+      console.error("Not Allow location");
     }
   }, []);
 
@@ -138,7 +138,7 @@ const EditPost = () => {
         setLongitude(longitude);
       });
     } else {
-      console.log("Not Allow location");
+      console.error("Not Allow location");
       setLatitude(35.1258);
       setLongitude(117.9859);
     }
@@ -280,7 +280,7 @@ const EditPost = () => {
     formData.append("breed_type[]", additionalRequestBreedType);
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/api/additional_breeder_add`,
         formData,
         {
@@ -289,7 +289,6 @@ const EditPost = () => {
           },
         }
       );
-      console.log("Response: ", response);
       toast.success("Your request has been submitted");
       closeModal();
     } catch (error) {
@@ -321,9 +320,7 @@ const EditPost = () => {
           },
         }
       );
-      console.log(response.data.status);
       if (response.data.status == true) {
-        console.log("Apicallnew");
 
         const formData2 = new FormData();
         formData2.append("user_id", breederUserId);
@@ -349,7 +346,6 @@ const EditPost = () => {
     }
   };
   const handleDeleteImage = async (imgUrl) => {
-    console.log(imgUrl);
     const formData = new FormData();
     formData.append("id", id);
     formData.append("img", imgUrl);

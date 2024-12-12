@@ -49,9 +49,8 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
     breeder_id: "",
   });
 
-  const handleModal = (post_id, breeder_id) => {
-    setModalData({ post_id, breeder_id });
-    console.log(modalData);
+  const handleModal = (post_id, breeder_id, total_contact) => {
+    setModalData({ post_id, breeder_id, "total_contacts" : total_contact });
     setShowModal(true);
   };
 
@@ -200,7 +199,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
                                 <div
                                   name="mail-boxwrap"
                                   onClick={() =>
-                                    handleModal(slide.id, slide.user_breeder_id)
+                                    handleModal(slide.id, slide.user_breeder_id, slide.total_contact)
                                   }
                                   style={{ cursor: "pointer" }}
                                 >
@@ -303,6 +302,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
         modalIsOpen={showModal}
         closeModal={closeModal}
         modalDetails={modalData}
+        onLike = {onLike}
       />
       <PreviouslyContacted
         modalIsOpen={showPreviouslyContactedModal}

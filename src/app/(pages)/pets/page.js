@@ -132,7 +132,7 @@ const Pets = () => {
         setAllPets(response.data.pets_list);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -151,7 +151,7 @@ const Pets = () => {
         setAllPets(response.data.pets_list_without_login);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -208,7 +208,7 @@ const Pets = () => {
         getAllPets();
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 

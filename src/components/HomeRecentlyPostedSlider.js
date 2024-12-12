@@ -47,8 +47,8 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
     };
   }, []);
 
-  const handleModal = (post_id, breeder_id, contacts_colour) => {
-    setModalData({ post_id, breeder_id });
+  const handleModal = (post_id, breeder_id, contacts_colour, total_contact) => {
+    setModalData({ post_id, breeder_id, "total_contacts" : total_contact });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {
@@ -165,7 +165,8 @@ const HomeRecentlyPostedSlider = ({ slides, onClick }) => {
                              handleModal(
                                slide.id,
                                slide.user_breeder_id,
-                               slide?.contacts_colour
+                               slide?.contacts_colour,
+                               slide?.total_contact
                              )
                            }
                            style={{ cursor: "pointer" }}

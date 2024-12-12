@@ -31,7 +31,7 @@ const BreederDashboard = () => {
 
       setLoading(false);
     } catch (err) {
-      console.log("Show Error");
+      console.error("Show Error");
       setError("Failed to load user details.");
       setLoading(false);
     }

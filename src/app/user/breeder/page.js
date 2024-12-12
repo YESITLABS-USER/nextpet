@@ -128,7 +128,7 @@ const Breeder = () => {
           getBreederList();
         }
       } catch (err) {
-        console.log("error : ", err);
+        console.error("error : ", err);
       } 
     }else {
         toast.error("User must be logged in")

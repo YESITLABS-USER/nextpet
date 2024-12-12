@@ -54,9 +54,8 @@ const Homenearyou = ({ slides, onLike }) => {
     }
   }
 
-  const handleModal = (post_id, breeder_id) => {
-    setModalData({ post_id, breeder_id });
-    console.log(modalData);
+  const handleModal = (post_id, breeder_id, total_contact) => {
+    setModalData({ post_id, breeder_id, "total_contacts" : total_contact });
     setShowModal(true);
   };
 
@@ -161,21 +160,6 @@ const Homenearyou = ({ slides, onLike }) => {
                       <div className="heading-content">
                         <h3>{slide.name ? slide.name : "Animal"}</h3>
                         {slide.contacts_colour == 1 ? (
-                          // <div
-                          //   className="mail-boxwrap"
-                          //   onClick={() => handlePreviouslyContactedModal(slide.id, slide.user_breeder_id)}
-                          //   style={{ cursor: 'pointer' }}
-                          // >
-                          //   <Image
-                          //     src="/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
-                          //     alt="Mail"
-                          //     width={20}
-                          //     height={20} className="bg-white p-2" style={{boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)', borderRadius:"50%"}}
-                          //   />
-                          //   <div className="mail-count" style={{ cursor: 'pointer' }}>
-                          //     <span  style={{left: '50%', transform: 'translateX(-50%)', textAlign: 'center'}}>{slide.total_contact ? slide.total_contact : 0}</span>
-                          //   </div>
-                          // </div>
                           <div
                             name="mail-boxwrap"
                             onClick={() => handlePreviouslyContactedModal(slide.id, slide.user_breeder_id)}
@@ -194,7 +178,7 @@ const Homenearyou = ({ slides, onLike }) => {
                         ) : (
                           <div
                             name="mail-boxwrap"
-                            onClick={() => handleModal(slide.id, slide.user_breeder_id)}
+                            onClick={() => handleModal(slide.id, slide.user_breeder_id, slide.total_contact)}
                             style={{ cursor: 'pointer' }}
                           >
                             <Image
@@ -275,6 +259,7 @@ const Homenearyou = ({ slides, onLike }) => {
         modalIsOpen={showModal}
         closeModal={closeModal}
         modalDetails={modalData}
+        onLike = {onLike}
       />
       <PreviouslyContacted
         modalIsOpen={showPreviouslyContactedModal}

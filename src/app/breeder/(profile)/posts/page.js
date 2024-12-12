@@ -60,7 +60,7 @@ const Post = () => {
       setAllBreederPosts(response.data.data);
     } catch (error) {
       setLoading(false);
-      console.log("Error fetching breeder posts:", error);
+      console.error("error fetching breeder posts:", error);
     }
   };
 
@@ -97,7 +97,7 @@ const Post = () => {
         setAllBreederPosts(response.data.data);
       }
     } catch (err) {
-      console.log("error: ", err);
+      console.error("error: ", err);
     }
   };
 

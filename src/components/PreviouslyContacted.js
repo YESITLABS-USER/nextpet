@@ -45,15 +45,12 @@ const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails }) => {
 
     try {
 
-      //////////////////////////////////////Here Required Another Api ///////////////////////////
-      const response = await axios.post(`${BASE_URL}/api/contact_breeder`, formData, {
+      await axios.post(`${BASE_URL}/api/contact_breeder`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       closeModal()
-      console.log("Success response submitPreviouslyContacted1111",response);
-      // setSuccessModalIsOpen(true); // Open the Success Modal
 
       toast.success("Contact Successfully");
      

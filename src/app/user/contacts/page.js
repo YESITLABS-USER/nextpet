@@ -46,7 +46,7 @@ const Contacts = () => {
         setContactsList(response.data.data);
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
 
@@ -64,7 +64,7 @@ const Contacts = () => {
         setContactsList(response.data.data);
       }
     } catch (err) {
-      console.log("error: ", err);
+      console.error("error: ", err);
     }
   };
 

@@ -43,7 +43,7 @@ const Post = () => {
             }
           } catch (error) {
             setLoading(false);
-            console.log("Error fetching breeder posts:", error);
+            console.error("error fetching breeder posts:", error);
           }
        }
        LoadPageData();

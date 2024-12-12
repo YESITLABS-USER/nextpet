@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -96,13 +96,14 @@ const SuccessModal = ({ modalIsOpen, closeModal, modalDetails }) => {
   );
 };
 
-const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails }) => {
+const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails, onLike }) => {
   const { isAuthenticated } = useAuth(); 
   const router = useRouter();
 
   const subtitleRef = useRef(null);
   const [isChecked, setIsChecked] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [userId, setUserId] = useState();
 
   const afterOpenModal = () => {
     if (subtitleRef.current) {
@@ -114,6 +115,12 @@ const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails }) => {
     setIsChecked(event.target.checked);
   };
 
+  useEffect(() => {
+    if (typeof window!== "undefined") {
+      const storedUserId = localStorage.getItem("user_user_id");
+      setUserId(storedUserId)
+    }
+  }, [])
   // console.log("checakvalueee44", modalDetails);
 
   const submitContactBreeder = async () => {
@@ -141,7 +148,10 @@ const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails }) => {
             headers: {
               "Content-Type": "multipart/form-data",
             },
-          });
+          });  
+          if(onLike){
+            onLike(userId);        
+          }
           closeModal();
           setSuccessModalIsOpen(true);
           setIsChecked(false);
@@ -175,8 +185,8 @@ const PreviouslyContacted = ({ modalIsOpen, closeModal, modalDetails }) => {
               your contact information will be shared with the breeder.
             </p>
             <h4>
-              Hurry up! 21 users have already contacted the breeder for this
-              pet.
+              `Hurry up! {modalDetails?.total_contacts ? modalDetails?.total_contacts : 0} users have already contacted the breeder for this
+              pet.`
             </h4>
             <div className="agreed-wrap">
               <input

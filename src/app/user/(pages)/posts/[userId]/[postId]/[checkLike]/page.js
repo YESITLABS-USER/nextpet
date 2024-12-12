@@ -22,6 +22,7 @@ const ContactPetDetails = () => {
     // breeder_id: "",
   });
 
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserId = localStorage.getItem("user_user_id");
@@ -61,16 +62,16 @@ const ContactPetDetails = () => {
         PostDetailGet();
       }
     } catch (err) {
-      console.log("error : ", err);
+      console.error("error : ", err);
     }
   };
   
   const handleModal = ({
     post_id = postData?.post_id,
     breeder_id = postData?.user_id,
-    contacts_colour = postData?.contacts_colour,
+    contacts_colour = postData?.contacts_colour
   }) => {
-    setModalData({ post_id, breeder_id, contacts_colour });
+    setModalData({ post_id, breeder_id, contacts_colour, "total_contacts" : postData?.total_contact });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {
