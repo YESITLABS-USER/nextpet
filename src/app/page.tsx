@@ -166,7 +166,7 @@ function Page() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={2}/>
       <BreederPopup />
       <Banner homePageData={homePageData} />
       <Slider />

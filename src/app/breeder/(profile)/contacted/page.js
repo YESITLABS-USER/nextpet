@@ -3,24 +3,23 @@ import { React, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
-// import { useSearchParams } from "next/navigation";
 import moment from "moment";
-
-import { Rating } from "react-simple-star-rating";
+import { FaStar } from "react-icons/fa";
 import { ShowNotes, AddNotes, StatusNotesLeadsUpdate, GetRatting, SetRatting,StatusLeadsBreederDetails, } from "../../../services/breeder";
 import { useRouter } from "next/navigation";
 
 const Contacted = () => {
   const [addNotes, setAddNotes] = useState();
   const [showBreederNotes, setBreederShowNotes] = useState();
-  const [rattinData, setRatingData] = useState({});
   const [pageData, setPageData] = useState({});
 
-  const [rating, setRating] = useState(3);
+  // const [rating, setRating] = useState(3);
   const [user_id, setUserId] = useState();
   const [post_id, setPostId] = useState();
   const [breeder_id, setBreederId] = useState();
   const router = useRouter();
+  const [ratings, setRatings] = useState({"politeness_rating": "0", "responsive_rating": "0", 
+    "communication_rating": "0" });
   
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -31,8 +30,6 @@ const Contacted = () => {
     }
   }, []);
 
-  const [bidrAllRate, setBidrAllRate] = useState([]);
-
   useEffect(() => {
     if (user_id && post_id && breeder_id) {
       loadData();
@@ -41,7 +38,7 @@ const Contacted = () => {
 
   const loadData = () => {
     ShowNotesFunction();
-    GetRattingFunction();
+    fetchRatings();
     StatusLeadsBreederDetailsFunction();
   };
 
@@ -124,141 +121,28 @@ const Contacted = () => {
     }
   };
 
-  const GetRattingFunction = async () => {
-    const payload = {
-      breeder_id: breeder_id,
-      user_id: user_id,
-      post_id: post_id,
-    };
-    const response = await GetRatting(payload);
-    if (response.data.code === 200) {
-      setRatingData(response?.data?.data[0]);
-    }
-  };
-
-  const SetRattingFunction = async (num, ret) => {
-    const payload = {
-      breeder_id: breeder_id,
-      user_id: user_id,
-      post_id: post_id,
-    };
-    const allReatingResponse = await GetRatting(payload);
-
-    if (allReatingResponse.data.code == 200) {
-      // console.log("True ::", allReatingResponse.data.data[0]);
-      let res = allReatingResponse.data.data[0];
-      const payloadTwo = {
-        breeder_id: 429,
-        user_id: 356,
-        post_id: 540,
-        politeness_rating: num == 1 ? ret : res.politeness_rating,
-        responsive_rating: num == 2 ? ret : res.responsive_rating,
-        communication_rating: num == 3 ? ret : res.communication_rating,
-      };
-      await SetRatting(payloadTwo);
-      GetRattingFunction();
-    } else {
-      // const payloadTwo = {
-      //   breeder_id: 429,
-      //   user_id: 356,
-      //   post_id: 540,
-      //   politeness_rating: num == 1 ? ret : 0,
-      //   responsive_rating: num == 2 ? ret : 0,
-      //   communication_rating: num == 3 ? ret : 0,
-      // };
-
-      await SetRatting(payload);
-      GetRattingFunction();
-    }
-  };
-
-
-
-  let communication_rating = [];
-  for (let i = 1; i <= 5; i++) {
-    const starSrc =
-      i <= rattinData.communication_rating
-        ? "/images/Nextpet-imgs/contacted-imgs/star.svg"
-        : "/images/Nextpet-imgs/contacted-imgs/mail.svg"; // Adjust empty star path
-
-    communication_rating.push(
-      <img
-        key={i} // Add a unique key for each element
-        onClick={() => SetRattingFunction(3, i)}
-        src={starSrc}
-        alt="Star"
-      />
-    );
-  }
-
-  let politeness_rating = [];
-  for (let i = 1; i <= 5; i++) {
-    const starSrc =
-      i <= rattinData.politeness_rating
-        ? "/images/Nextpet-imgs/contacted-imgs/star.svg"
-        : "/images/Nextpet-imgs/contacted-imgs/mail.svg"; // Adjust empty star path
-
-    politeness_rating.push(
-      <img
-        key={i} // Add a unique key for each element
-        onClick={() => SetRattingFunction(1, i)}
-        src={starSrc}
-        alt="Star"
-      />
-    );
-  }
-
-  let responsive_rating = [];
-  for (let i = 1; i <= 5; i++) {
-    const starSrc =
-      i <= rattinData.responsive_rating
-        ? "/images/Nextpet-imgs/contacted-imgs/star.svg"
-        : "/images/Nextpet-imgs/contacted-imgs/mail.svg"; // Adjust empty star path
-
-    responsive_rating.push(
-      <img
-        key={i} // Add a unique key for each element
-        onClick={() => SetRattingFunction(2, i)}
-        src={starSrc}
-        alt="Star"
-      />
-    );
-  }
-
-  useEffect(() => {
-    async function getAllBidderRatting() {
-      const payload = {
-        breeder_id: breeder_id,
-        user_id: user_id,
-        post_id: post_id,
-      };
-      const getBidderRes = await GetRatting(payload);
-      if(getBidderRes.data.code == 200) {
-        setBidrAllRate(getBidderRes?.data?.data[0]);
+  const fetchRatings = async () => {
+    try {
+      const payload = { breeder_id, post_id, user_id };
+      const response = await GetRatting(payload);
+      if (response.status === 200 && response.data.data.length > 0) {
+        setRatings(response.data.data[0]);
       }
+    } catch (error) {
+      console.error("Error in fetchRatings:", error);
     }
+  };
 
-    getAllBidderRatting();
-  }, [rating, rattinData]);
-
-  const handleRating = async (rate, type) => {
-    setRating(rate);
-
-    await SetRatting({
-      breeder_id: breeder_id,
-      user_id: user_id,
-      post_id: post_id,
-      politeness_rating:
-        type == "Politeness" && rate !== null
-          ? rate : bidrAllRate?.politeness_rating,
-      responsive_rating:
-        type == "Responsive" && rate !== null
-          ? rate : bidrAllRate?.responsive_rating,
-      communication_rating:
-        type == "Communication" && rate !== null
-          ? rate : bidrAllRate?.communication_rating,
-    });
-
+  const handleRatingClick = async (ratingType, newValue) => {
+    try {
+      const payload = { breeder_id, post_id, user_id, ...ratings, [ratingType]: newValue, };
+      const response = await SetRatting(payload)
+      if (response.status === 200) {
+        setRatings((prev) => ({ ...prev, [ratingType]: newValue }));
+      }
+    } catch (error) {
+      console.error("Error updating rating:", error);
+    }
   };
 
   return (
@@ -447,11 +331,7 @@ const Contacted = () => {
                         Politeness
                       </button>
                       <div className="star-ratings-coming">
-                        <Rating
-                          onClick={(rate) => handleRating(rate, "Politeness")}
-                          allowHover={false}
-                          initialValue={bidrAllRate?.politeness_rating}
-                        />
+                        <Rating rating={ratings.politeness_rating} onClick={(newValue) => handleRatingClick('politeness_rating', newValue)} />
                       </div>
                     </div>
                     <div className="inner-btns-rating">
@@ -459,11 +339,7 @@ const Contacted = () => {
                         Responsive
                       </button>
                       <div className="star-ratings-coming">
-                        <Rating
-                          onClick={(rate) => handleRating(rate, "Responsive")}
-                          allowHover={false}
-                          initialValue={bidrAllRate?.responsive_rating}
-                        />
+                        <Rating rating={ratings.responsive_rating} onClick={(newValue) => handleRatingClick('responsive_rating', newValue)} />
                       </div>
                     </div>
                     <div className="inner-btns-rating">
@@ -471,13 +347,7 @@ const Contacted = () => {
                         Communication
                       </button>
                       <div className="star-ratings-coming">
-                        <Rating
-                          onClick={(rate) =>
-                            handleRating(rate, "Communication")
-                          }
-                          allowHover={false}
-                          initialValue={bidrAllRate?.communication_rating}
-                        />
+                        <Rating rating={ratings.communication_rating} onClick={(newValue) => handleRatingClick('communication_rating', newValue)} />
                       </div>
                     </div>
                   </div>
@@ -620,6 +490,20 @@ const Contacted = () => {
         </div>
       </div>
     </>
+  );
+};
+
+
+const Rating = ({ rating, onClick }) => {
+  return (
+      <div style={{ display: 'flex', gap: '10px' }}>
+          {[1, 2, 3, 4, 5].map((value) => (
+              <button key={value} onClick={() => onClick(value)}
+                  style={{ all: 'unset', fontSize:'30px' }} >
+                    {value <= rating ? <FaStar style={{ cursor: 'pointer',color:'#f2ae0e'}}/> : <FaStar style={{cursor: 'pointer',color:'gray'}} />} 
+              </button>
+          ))}
+      </div>
   );
 };
 

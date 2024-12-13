@@ -334,7 +334,7 @@ const Pets = () => {
   // }
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={2}/>
       <div className="pets-breeder-wrap">
         <div className="container">
           <div className="aligns-filter-pets">
@@ -511,8 +511,8 @@ const Pets = () => {
                   {/* <p>{item?.description}</p> */}
                   <p>
                     {item.description
-                      ? item.description.length > 50
-                      ? `${item.description.slice(0, 50)}...`
+                      ? item.description.length > 40
+                      ? `${item.description.slice(0, 40)}...`
                       : item.description
                       : "Description not available"}
                     </p>

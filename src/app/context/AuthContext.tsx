@@ -79,12 +79,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = () => {
     localStorage.removeItem("authToken");
-    // localStorage.removeItem("name");
-    // localStorage.removeItem("email");
     localStorage.removeItem("user_user_id");
     localStorage.removeItem("breeder_user_id");
     setIsAuthenticated(false);
-    // router.push("/");
     window.location.href = "/user/sign-in";
   };
 

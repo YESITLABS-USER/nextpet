@@ -123,7 +123,7 @@ const SignUp = () => {
                 className="login-txt"
                 placeholder="Name"
                 required
-                value={name}
+                value={name} autoComplete="new-password"
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
@@ -139,7 +139,7 @@ const SignUp = () => {
                 className="login-txt"
                 placeholder="Email/Phone"
                 required
-                value={email}
+                value={email} autoComplete="new-password"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
@@ -156,7 +156,7 @@ const SignUp = () => {
                 id="password"
                 placeholder="Create Password"
                 required
-                value={password}
+                value={password} autoComplete="new-password"
                 onChange={(e) => setPassword(e.target.value)}
               />
 

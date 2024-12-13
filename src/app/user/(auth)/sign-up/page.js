@@ -117,7 +117,7 @@ const SignUp = () => {
           />
         </div>
         <div className="breeder-signin-rightsec">
-          <form onSubmit={handleSignUp}>
+          <form onSubmit={handleSignUp} autoComplete="off">
             <h1>User Sign Up</h1>
             <label className="login-lbl">
               <Image
@@ -130,7 +130,7 @@ const SignUp = () => {
                 type="text"
                 className="login-txt"
                 placeholder="Name"
-                required
+                required autoComplete="off"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -146,7 +146,7 @@ const SignUp = () => {
                 type="text"
                 className="login-txt"
                 placeholder="Email/Phone"
-                required
+                required autoComplete="off" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -163,7 +163,7 @@ const SignUp = () => {
                 className="login-txt"
                 id="password"
                 placeholder="Create Password"
-                required
+                required autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

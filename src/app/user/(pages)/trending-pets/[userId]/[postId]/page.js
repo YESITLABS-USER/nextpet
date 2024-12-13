@@ -14,7 +14,7 @@ import {
   SetRattingTrendingPost,
 } from "../../../../../services/user/post";
 import moment from "moment";
-import ProtectedRoute from "../../../../../context/ProtectedRoute";
+// import ProtectedRoute from "../../../../../context/ProtectedRoute";
 import Image from "next/image";
 import BASE_URL from "@/src/app/utils/constant";
 import axios from "axios";
@@ -261,7 +261,7 @@ const ContactPetDetails2 = () => {
   //
   return (
     <>
-      <ProtectedRoute>
+      {/* <ProtectedRoute> */}
         <div className="breedeerdasboard-createpost-wrap">
           <div className="container">
             <div className="col-lg-12">
@@ -708,7 +708,7 @@ const ContactPetDetails2 = () => {
             </div>
           </div>
         </div>
-      </ProtectedRoute>
+      {/* </ProtectedRoute> */}
     </>
   );
 };

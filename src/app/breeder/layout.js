@@ -12,7 +12,7 @@ const Layout = ({children}) => {
     <>
      {/* <Header /> */}
       {children}
-      <ToastContainer/>
+      <ToastContainer limit={2}/>
       {/* <Footer /> */}
     </>
   )

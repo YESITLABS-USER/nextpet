@@ -8,11 +8,13 @@ import Select from "react-select";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import BASE_URL from "../../utils/constant";
+import { useRouter } from "next/navigation";
 
 // Dynamically import the Map component to ensure it only runs on the client
 const Map = dynamic(() => import("../../../components/Map"), { ssr: false });
 
 const Index = () => {
+  const router = useRouter();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [activeRadio, setActiveRadio] = useState("");
   const [allPets, setAllPets] = useState([]);
@@ -345,13 +347,13 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="location-filter">
-                    <a onClick={() => setFilter("nearby")}>
+                    <a style={{background: "#e49a01",}}>
                       {/* <i className="fas fa-map-marker-alt"></i> */}
                       <MdLocationOn className="fas fa-map-marker-alt"
-                      style={{ color: "#e49a01", margin: "12px", cursor: "pointer" }}
+                      style={{ color:'white', margin: "12px", cursor: "pointer" }}
                       size={20} />
                     </a>
-                    <button type="button">
+                    <button type="button"  style={{background:'white'}} className="shadow-lg" onClick={() => router.push('/pets')}>
                       <Image width={23} height={23} src="/images/Nextpet-imgs/all-icons/filter-map-icon.svg" alt="filter-map-icon"/></button>
                   </div>
                 </div>
