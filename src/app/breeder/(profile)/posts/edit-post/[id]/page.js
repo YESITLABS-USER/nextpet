@@ -28,7 +28,7 @@ const EditPost = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   // const [imageError, setPostImageError] = useState(null);
-  // const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [additionalRequestAnimalType, setAdditionalRequestAnimalType] =
     useState(null);
@@ -40,7 +40,7 @@ const EditPost = () => {
   const [editPostPage, setEditPostPage] = useState(false);
   const [countDetail, setCountDetail] = useState(null);
 
-  // console.log("postDetailsss", postDetails);
+  console.log("selectedAnimal", selectedAnimal);
   
   useEffect(() => {
     const fetchPostCount = async () => {
@@ -225,41 +225,48 @@ const EditPost = () => {
     setShowModal(false);
   };
 
+
   const handleSelectedAnimalTypesChange = async (selectedOption) => {
-    if (selectedOption === "other") {
-      setShowModal(true);
-    } else {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/api/additional_request_web`
-        );
-
-        let formattedBreedTypes = [];
-        formattedBreedTypes = response.data.data.filter((item) =>
-          item.animal === selectedOption?.label
-            ? selectedOption?.labels
-            : postDetails?.type
-        );
-        setAnimalTypeId(formattedBreedTypes[0]?.id);
-        setType(formattedBreedTypes[0]?.animal);
-
-        formattedBreedTypes = formattedBreedTypes[0]?.sub[0]?.breed_type.map(
-          (item) => {
-            return { value: item, label: item };
-          }
-        );
-        // console.log("formattedAnimalTypes", formattedBreedTypes);
-        setAnimalBreeds(formattedBreedTypes);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+    if(selectedOption?.value){
+      setSelectedAnimal(selectedOption.value);
+    }
+  
+    if (selectedOption?.value === "other") {
+      setShowModal(true); // Open modal for "Other" selection
+      return;
+    }
+  
+    try {
+      const response = await axios.get(`${BASE_URL}/api/additional_request_web`);
+      const data = response.data.data;
+  
+      // Filter breeds based on selected type
+      const selectedAnimalData = data.find(
+        (item) => item.animal.toLowerCase() === selectedOption.value
+      );
+  
+      if (selectedAnimalData) {
+        setAnimalTypeId(selectedAnimalData.id);
+        setType(selectedAnimalData.animal);
+  
+        const formattedBreeds = selectedAnimalData.sub[0].breed_type.map((breed) => ({
+          value: breed.toLowerCase().replace(/\s+/g, "_"),
+          label: breed,
+        }));
+  
+        setAnimalBreeds(formattedBreeds);
+      } else {
+        setAnimalBreeds([]); // Reset if no breeds found
       }
+    } catch (err) {
+      console.error("Error fetching breeds:", err.message);
     }
   };
+  
 
   const submitAdditionalRequest = async (e) => {
     e.preventDefault();
-
+  
     const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
     if (!additionalRequestAnimalType || !additionalRequestBreedType) {
       setErrorsAdditionalRequest("Both fields are required.");
@@ -272,32 +279,27 @@ const EditPost = () => {
       setErrorsAdditionalRequest("Special characters are not allowed.");
       return;
     }
-
-    setErrorsAdditionalRequest("");
+  
+    setErrorsAdditionalRequest(""); // Clear previous errors
     const formData = new FormData();
     formData.append("breeders_id", breederUserId);
     formData.append("animal", additionalRequestAnimalType);
     formData.append("breed_type[]", additionalRequestBreedType);
-
+  
     try {
-      await axios.post(
-        `${BASE_URL}/api/additional_breeder_add`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.success("Your request has been submitted");
+      await axios.post(`${BASE_URL}/api/additional_breeder_add`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success("Your request has been submitted.");
       closeModal();
     } catch (error) {
-      console.error("Error submitting request: ", error);
+      console.error("Error submitting request:", error);
+      setErrorsAdditionalRequest("Failed to submit request. Please try again.");
     }
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  
 
   const handleEditImage = async (e) => {
     if (e.length + editPostImageLength > 10) {
@@ -374,6 +376,8 @@ const EditPost = () => {
     setEditPostPage(true);
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className="breedeerdasboard-createpost-wrap">
       <div className="container">
@@ -487,19 +491,18 @@ const EditPost = () => {
                           onChange={(selectedOption) => {
                             if (selectedOption) {
                               setFieldValue("type", selectedOption.value);
+                              handleSelectedAnimalTypesChange(selectedOption);
                             }
-                            handleSelectedAnimalTypesChange(selectedOption);
                           }}
                           value={animalTypes.find(
-                            (option) =>
-                              option.value === values.type.toLowerCase()
+                            (option) => option.value === values.type.toLowerCase()
                           )}
                           isDisabled={!editPostPage}
                         />
                         <ErrorMessage
-                          name="animalType"
+                          name="type"
                           component="div"
-                          style={{ color: "red"}}
+                          style={{ color: "red" }}
                         />
                       </div>
 
@@ -515,7 +518,7 @@ const EditPost = () => {
                             control: (provided) => ({
                               ...provided,
                               width: 250,
-                              backgroundColor: "transpertant",
+                              backgroundColor: "transparent",
                               border: "none",
                             }),
                           }}
@@ -524,17 +527,16 @@ const EditPost = () => {
                               setFieldValue("breed", selectedOption.value);
                             }
                           }}
-                          value={animalBreeds?.find(
-                            (option) => option.value === values.breed
-                          )}
+                          value={animalBreeds.find((option) => option.value === values.breed)}
                           isDisabled={!editPostPage}
                         />
                         <ErrorMessage
                           name="breed"
                           component="div"
-                          style={{ color: "red"}}
+                          style={{ color: "red" }}
                         />
                       </div>
+
 
                       <div className="formdata-wrap">
                         <p>Price ($)</p>

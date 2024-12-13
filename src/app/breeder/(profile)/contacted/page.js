@@ -239,7 +239,7 @@ const Contacted = () => {
     }
 
     getAllBidderRatting();
-  }, [rating]);
+  }, [rating, rattinData]);
 
   const handleRating = async (rate, type) => {
     setRating(rate);
@@ -377,8 +377,8 @@ const Contacted = () => {
                     </div>
                   </div>
                   <p>
-                    {pageData?.pet_breeder_details?.[0].breeder_bio
-                      ? pageData?.pet_breeder_details?.[0].breeder_bio
+                    {pageData?.data?.[0].pet_description
+                      ? pageData?.data?.[0].pet_description
                       : "Description Not Available"}
                   </p>
 

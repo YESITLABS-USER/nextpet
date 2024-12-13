@@ -50,7 +50,6 @@ function Header() {
       : `${BASE_URL}/api/user-get`;
     try {
       const response = await axios.post(apiURL, userLogin);
-      console.log(response)
       if (response.status === 200) {
         setUserData(response?.data?.data)
       }

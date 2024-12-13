@@ -222,10 +222,10 @@ const ContactPetDetails = () => {
                           </div>
                         </div>
                         <div className="inner-heartt" style={{ padding: "7px 4px" }}>
-                          <div className="inner-heartt-div">
+                          <div className="inner-heartt-div" onClick={handleShare}>
                             <Image
                               src="/images/Nextpet-imgs/dashboard-imgs/share.svg"
-                              alt="share" width={45} height={39}  onClick={handleShare}
+                              alt="share" width={45} height={39} 
                             />
                           </div>
                         </div>
@@ -300,15 +300,15 @@ const ContactPetDetails = () => {
                       </div>
                     </div>
                     
-                    <p className="pt-1">
-                  {item?.description && item?.description.length > 50 ? item.description.slice(0, 40) + "..." : item?.description || "No Description available"}
+                  <p className="pt-1">
+                    {item?.description && item?.description.length > 50 ? item.description.slice(0, 40) + "..." : item?.description || "No Description available"}
                   </p>
 
 
                     <div className="viewmore-wrap">
                       <h4>${item?.price}</h4>
                       <div className="action-wrap">
-                        <Link href="/user/contact-pet-details">
+                        <Link href={`/user/posts/${item.user_id}/${item.post_id}/${item.like_colour}`}>
                           View More&nbsp;<i className="fas fa-angle-right"></i>
                         </Link>
                       </div>

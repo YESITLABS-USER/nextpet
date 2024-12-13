@@ -78,7 +78,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
     }
   }
   function handleViewMore (slide) {
-    router.push(`/user/trending-pets/${slide.user_breeder_id}/${slide.id}`)
+    router.push(`/user/posts/${slide.user_breeder_id}/${slide.id}/${slide.like_colour}`)
     // if(isAuthenticated){
     //   router.push(`/user/trending-pets/${slide.user_breeder_id}/${slide.id}`)
     // } else{

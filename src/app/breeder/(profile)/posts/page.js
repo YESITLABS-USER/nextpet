@@ -132,14 +132,14 @@ const Post = () => {
     setDropdownVisible(!isDropdownVisible);
   }
 
-  function formatDate(timestamp) {
-    const date = new Date(timestamp);
+  // function formatDate(timestamp) {
+  //   const date = new Date(timestamp);
   
-    // Format the date in dd-mm-yyyy format
-    const formattedDate = `${("0" + date.getDate()).slice(-2)}-${("0" + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
+  //   // Format the date in dd-mm-yyyy format
+  //   const formattedDate = `${("0" + date.getDate()).slice(-2)}-${("0" + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
   
-    return formattedDate;
-  }
+  //   return formattedDate;
+  // }
 
   return (
     <>
@@ -210,7 +210,7 @@ const Post = () => {
                       {currentPosts.length > 0 && currentPosts.map((post) => (
                         <div className="post-cards-wrap" key={post.post_id}>
                           <div className="post-cardsimg-wrap relative">
-                            <span style={{position:'absolute', top:'5px', left:'5px', fontSize:'12px', color:'gray'}}> {formatDate(post?.created_at)} </span>
+                            {/* <span style={{position:'absolute', top:'5px', left:'5px', fontSize:'12px', color:'gray'}}> {formatDate(post?.created_at)} </span> */}
                             <Image
                               src={post.image[0] || "/images/Nextpet-imgs/Image_not_available.webp"}
                               alt="image"

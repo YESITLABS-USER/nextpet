@@ -147,7 +147,7 @@ const ContactPetDetails = () => {
                       <div className="inner-heartt-div">
                         <Image
                           src={
-                            postData?.contacts_colour == 1
+                            postData?.contacts_colour == "1"
                               ? "/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
                               : "/images/Nextpet-imgs/dashboard-imgs/yellow-mail-letter.svg"
                           }
@@ -161,7 +161,7 @@ const ContactPetDetails = () => {
                       <div className="inner-heartt-div">
                         <Image
                           src={
-                            postData?.check_like == 0
+                            (postData?.check_like == "0")
                               ? "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"
                               : "/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
                           }

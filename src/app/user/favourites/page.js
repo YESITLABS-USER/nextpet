@@ -289,7 +289,7 @@ const Favorites = () => {
                                 />
                               </div>
                               <div className="post-cardsimg-wrap">
-                                <img src={item?.image?.[0] || "/images/Nextpet-imgs/Image_not_available.webp"} alt="" />
+                                <Image src={item?.image?.[0] || "/images/Nextpet-imgs/Image_not_available.webp"} alt="" width={400} height={300} style={{minHeight:'150px'}}/>
                                 <div className="actionpost-heart">
                                   <div
                                     className="heart-icon-wrap"
@@ -343,7 +343,13 @@ const Favorites = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <p>{item?.description}</p>
+                                {/* <p>{item?.description}</p> */}
+                                <p style={{width:'85%'}}> {item?.description
+                              ? item?.description.length > 35
+                                ? `${item?.description.slice(0, 35)}...`
+                                : item?.description
+                              : "Description not available"} </p>
+
                                 <div className="viewmore-wrap">
                                   <h4>${item?.price}</h4>
                                   <div className="action-wrap">

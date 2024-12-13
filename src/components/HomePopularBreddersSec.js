@@ -209,8 +209,8 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
                           </p> */}
                           <p>
                             {slide.bio
-                              ? slide.bio.length > 50
-                                ? `${slide.bio.slice(0, 50)}...`
+                              ? slide.bio.length > 35
+                                ? `${slide.bio.slice(0, 35)}...`
                                 : slide.bio
                               : "Description not available"}
                           </p>
