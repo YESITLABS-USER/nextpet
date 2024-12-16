@@ -1,21 +1,22 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "./AuthContext";
 import { useRouter } from "next/navigation";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/"); // Redirect to login if not authenticated
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push("/"); // Redirect to homepage if not authenticated
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, router]);
 
-  if (!isAuthenticated) return null; // Optionally, display a loader while redirecting
+  if (isLoading) return <div>Loading...</div>; // Show loader while determining authentication
+  if (!isAuthenticated) return null;
 
   return <>{children}</>;
 };

@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import BASE_URL from "../app/utils/constant";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function Banner({ homePageData }) {
   const router = useRouter()
+  const [errMsg, setErrMsg] = useState();
 
   function handleSubmit(e){
     e.preventDefault();
     if(!e.target.SearchBtn.value){
-      alert("Please enter a search term");
+      setErrMsg('Please enter Animal Type, Breed or Location')
       return;
     }
-    console.log(e.target.SearchBtn.value)
     router.push(`/pets?searchItem=${encodeURIComponent(e.target.SearchBtn.value)}`)
   }
   return (
@@ -28,7 +28,7 @@ function Banner({ homePageData }) {
                   <label htmlFor="search-input">
                     <input
                       id="search-input"
-                      type="text" name="SearchBtn"
+                      type="text" name="SearchBtn" onChange={()=> setErrMsg('')}
                       placeholder="Search by Animal Type, Breed or Location"
                     />
                     <button type="submit">
@@ -40,6 +40,7 @@ function Banner({ homePageData }) {
                       />
                     </button>
                   </label>
+                    <span style={{color: 'red', paddingLeft:'15px'}}> {errMsg} </span>
                 </form>
               </div>
             </div>

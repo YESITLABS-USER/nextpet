@@ -28,6 +28,7 @@ const ContactPetDetails2 = () => {
   const [addNotes, setAddNotes] = useState();
   const [rattinData, setRatingData] = useState({});
   const [postData, setPostData] = useState("");
+  const [errorMsg, setErrorMsg] = useState();
 
   async function likeHandler() {
     const updatedLikeStatus = postData?.check_like == "0"? false : true; // Toggle the like status
@@ -106,10 +107,15 @@ const ContactPetDetails2 = () => {
       notes: addNotes,
     };
 
-    const response = await UserAddNotes(payload);
-    if (response.data.code === 200) {
-      UserShowNotesFun();
+    if(addNotes == "" && addNotes) {
+      const response = await UserAddNotes(payload);
+      if (response.data.code === 200) {
+        UserShowNotesFun();
+      }
+    } else {
+      setErrorMsg('Please fill the notes!')
     }
+    
   };
 
   const handleUserStatusNotesLeadsUpdate = async (val) => {
@@ -148,7 +154,7 @@ const ContactPetDetails2 = () => {
 
     const allReatingResponse = await GetRattingTrendingPost(payload);
 
-    console.log("allReatingResponse", allReatingResponse);
+    // console.log("allReatingResponse", allReatingResponse);
 
     if (allReatingResponse.data.code == 200) {
       console.log("True ::", allReatingResponse.data.data[0]);
@@ -200,7 +206,6 @@ const ContactPetDetails2 = () => {
     }
   };
 
-  console.log("rattinData", rattinData.communication_rating);
 
   let politeness_rating = [];
   for (let i = 1; i <= 5; i++) {
@@ -664,13 +669,14 @@ const ContactPetDetails2 = () => {
                           <textarea
                             name=""
                             id=""
-                            onChange={(e) => setAddNotes(e.target.value)}
+                            onChange={(e) => {setErrorMsg(''); setAddNotes(e.target.value)}}
                             placeholder="You can add a personal memo here..."
                           ></textarea>
                         </label>
                       </div>
                     </div>
                   </div>
+                    <span style={{ color: 'red', paddingLeft:'5px'}}> {errorMsg && errorMsg} </span>
                   <div className="contucted-btn-wrap pt-4">
                     <button
                       type="button"
@@ -680,6 +686,7 @@ const ContactPetDetails2 = () => {
                       Add Note
                     </button>
                   </div>
+                  
 
                   <div className="contacted-breeder-inner">
                     <div className="col-lg-12 col-md-12">

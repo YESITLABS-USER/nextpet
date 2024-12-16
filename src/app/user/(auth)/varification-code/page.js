@@ -118,7 +118,7 @@ const VerificationCode = () => {
         </div>
         <div className="breeder-signin-rightsec">
           <form onSubmit={handleSubmit}>
-            <h1>U Verification Code</h1>
+            <h1>Verification Code</h1>
             <p>Enter the verification code sent to your registered email/phone</p>
             {error && <p>{error}</p>}
             {/* {success && <p>{success}</p>} */}

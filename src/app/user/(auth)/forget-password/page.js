@@ -75,7 +75,7 @@ const ForgetPassword = () => {
                 <Image src="/images/Nextpet-imgs/breeder-signin-imgs/mail-icon.svg" className="login-lbl-img" alt="" width={50} height={15}/>
                 <input type="text" className="login-txt" onChange={(e) => setEmail(e.target.value)} placeholder="Email/Phone" required/>
               </label>
-              <span style={{ color: 'red'}}>{validation_error}</span>
+              <span style={{ color: "red"}}>{validation_error}</span>
               <input type="submit" className="login-btn" value="Send Verification"/>
             </form>
           </div>

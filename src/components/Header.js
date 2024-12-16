@@ -185,8 +185,8 @@ function Header() {
                           <Image
                             src={(userData?.profile_img || userData?.image) || "/images/Nextpet-imgs/all-icons/user.svg"}
                             alt="Profile pic"
-                            width={15}
-                            height={15} style={{ borderRadius: "50%"}}
+                            width={100}
+                            height={100} style={{ borderRadius: "50%"}}
                           />
                           { userId ? ( userData?.name ? (userData.name.split(" ").length > 10 ? `${userData.name.split(" ").slice(0, 10).join(" ")}...` : userData.name) : "User Profile")
                           : ( userData?.name ? (userData.name.split(" ").length > 10 ? `${userData.name.split(" ").slice(0, 10).join(" ")}...` : userData.name) : "Breeder Profile" ) }

@@ -162,7 +162,7 @@ const VerificationCode = () => {
               )}
             />
             </div>
-            <spam>{otp_error}</spam>
+            <span style={{ color:'red'}}>{otp_error}</span >
             <input type="submit" className="login-btn" value="Verify & Proceed"/>
             <div className="terms-condition-paragraph">
               {isExpired ? (

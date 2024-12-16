@@ -25,8 +25,9 @@ const StoreMap = ({ data, location }) => {
     if (location) {
       const { lat, lon } = location;
       setCenter([lat, lon]);
-    }
-  }, [location]);
+    } 
+  }, [location, data]);
+  
 
   return (
     <div style={{ height: "90vh" }}>

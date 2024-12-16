@@ -360,7 +360,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="modal fade modal-common" id="contact-coach" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal fade modal-common" id="contact-coach" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div className="modal-dialog modal-dialog-edit" role="document">
                 <div className="modal-content">
                   <div className="modal-heading">

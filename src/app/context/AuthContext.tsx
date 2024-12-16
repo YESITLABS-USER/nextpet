@@ -1,17 +1,17 @@
 "use client";
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   isBreederAuthenticated: boolean;
+  isLoading: boolean; // Add a loading state
   login: (token: Token) => void;
   logout: () => void;
 }
 
 interface Token {
-  type: 'user-type' | 'breeder-admin-type';
+  type: "user-type" | "breeder-admin-type";
   user_id: string; // Assuming user_id is part of the token
 }
 
@@ -20,58 +20,46 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [isBreederAuthenticated, setIsBreederAuthenticated] = useState<boolean | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isBreederAuthenticated, setIsBreederAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-  
     if (token) {
       try {
         const parsedToken = JSON.parse(token);
-  
-        // Check the 'type' of the token to set the authentication states
-        if (parsedToken.type === 'user-type') {
-          setIsAuthenticated(true); 
-          setIsBreederAuthenticated(false); 
-          localStorage.removeItem('breeder_user_id')
-          if (isBreederAuthenticated){
-            toast.success('Breeder Logout Successfully')
-          }
-        } else if (parsedToken.type === 'breeder-admin-type') {
+
+        if (parsedToken.type === "user-type") {
+          setIsAuthenticated(true);
+          setIsBreederAuthenticated(false);
+          localStorage.removeItem("breeder_user_id");
+        } else if (parsedToken.type === "breeder-admin-type") {
           setIsAuthenticated(false);
-          setIsBreederAuthenticated(true); 
-          localStorage.removeItem('user_user_id')
-          if (isAuthenticated){
-            toast.success('User Logout Successfully')
-          }
+          setIsBreederAuthenticated(true);
+          localStorage.removeItem("user_user_id");
         } else {
-          // In case the token type is unknown or invalid, reset authentication states
           setIsAuthenticated(false);
           setIsBreederAuthenticated(false);
         }
       } catch (error) {
-        // Handle any errors during parsing
         console.error("Failed to parse token from localStorage", error);
         setIsAuthenticated(false);
         setIsBreederAuthenticated(false);
       }
     } else {
-      // If no token found in localStorage, reset authentication states
       setIsAuthenticated(false);
       setIsBreederAuthenticated(false);
     }
-  }, [isAuthenticated, isBreederAuthenticated]);
+    setIsLoading(false); // Mark initialization as complete
+  }, []);
 
   const login = (token: Token) => {
-    // localStorage.setItem("authToken", token);
     localStorage.setItem("authToken", JSON.stringify(token));
-
-    if(token.type == 'user-type') {
+    if (token.type === "user-type") {
       setIsAuthenticated(true);
-    } else if(token.type == 'breeder-admin-type'){
+    } else if (token.type === "breeder-admin-type") {
       setIsBreederAuthenticated(true);
     }
     router.push("/user/sign-in");
@@ -85,14 +73,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     window.location.href = "/user/sign-in";
   };
 
-  // if (isAuthenticated === null) {
-  //   // While we're determining the authentication status, show a loading state
-  //   setIsAuthenticated(true);
-  // }
-
   return (
-    // <AuthContext.Provider value={{ isAuthenticated, isBreederAuthenticated, login, logout }}>
-    <AuthContext.Provider value={{ isAuthenticated: isAuthenticated ?? false, isBreederAuthenticated: isBreederAuthenticated ?? false, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        isBreederAuthenticated,
+        isLoading,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -106,4 +96,3 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-``;

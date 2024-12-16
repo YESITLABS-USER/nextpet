@@ -85,7 +85,7 @@ const BreederDashboard = () => {
                         }}
                         id="imagePreview"
                       />
-                      <label className="upload-icon">
+                      {/* <label className="upload-icon">
                         <Image
                           src="/images/Nextpet-imgs/profile-page-imgs/breeder-img.svg"
                           alt="Upload Icon"
@@ -93,7 +93,7 @@ const BreederDashboard = () => {
                           height={15}
                         />
                         <input type="file" />
-                      </label>
+                      </label> */}
                     </div>
                     <div className="profile-form-wrap">
                       <label>

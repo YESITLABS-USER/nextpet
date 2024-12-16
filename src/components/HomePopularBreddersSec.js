@@ -90,16 +90,35 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
     }
   }
   function handleViewMore (slide) {
-    if(isAuthenticated){
-      let likeId="";
-      if(slide?.like_colour==null){
-        likeId=0;
-      }
-      else{
-        likeId=1;
-      }
+    let likeId="";
+    if(slide?.like_colour==null){
+      likeId=0;
+    }
+    else{
+      likeId=1;
+    }
+    router.push(`/user/breeder-profile/${slide.breeder_id}/${likeId} `)
+    // if(isAuthenticated){
+      // let likeId="";
+      // if(slide?.like_colour==null){
+      //   likeId=0;
+      // }
+      // else{
+      //   likeId=1;
+      // }
 
-      router.push(`/user/breeder-profile/${slide.breeder_id}/${likeId} `)
+    //   router.push(`/user/breeder-profile/${slide.breeder_id}/${likeId} `)
+    // } else{
+    //   toast.error("User must be logged in");
+    //   setTimeout(() => {
+    //     router.push('/user/sign-in');
+    //   }, 1000);
+    // }
+  }
+
+  function handleMail(slide) {
+    if(isAuthenticated){
+      handleModal(slide)
     } else{
       toast.error("User must be logged in");
       setTimeout(() => {
@@ -187,7 +206,7 @@ const HomePopularBreddersSec = ({ slides, onClick }) => {
                             </div>
                             <div
                               className="mail-boxwrap"
-                              onClick={() => handleModal(slide)}
+                              onClick={() => handleMail(slide)}
                               style={{ cursor: "pointer" }}
                             >
                               <Image

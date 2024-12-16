@@ -84,6 +84,17 @@ const Homenearyou = ({ slides, onLike }) => {
     // }
   }
 
+  function handleMail(slide) {
+    if(isAuthenticated){
+      handleModal(slide.id, slide.user_breeder_id, slide.total_contact)
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
+  }
+
   return (
     <>
       <div className="newyear-cat-dog-wrap" style={{ position: "relative" }}>
@@ -179,7 +190,7 @@ const Homenearyou = ({ slides, onLike }) => {
                         ) : (
                           <div
                             name="mail-boxwrap"
-                            onClick={() => handleModal(slide.id, slide.user_breeder_id, slide.total_contact)}
+                            onClick={() => handleMail(slide)}
                             style={{ cursor: 'pointer' }}
                           >
                             <Image
@@ -196,8 +207,8 @@ const Homenearyou = ({ slides, onLike }) => {
                       </div>
                       <p>
                         {slide.description
-                          ? slide.description.length > 50
-                            ? `${slide.description.slice(0, 50)}...`
+                          ? slide.description.length > 40
+                            ? `${slide.description.slice(0, 40)}...`
                             : slide.description
                           : "Description not available"}
                       </p>

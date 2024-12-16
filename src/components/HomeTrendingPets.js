@@ -89,6 +89,17 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
     // }
   }
 
+  function handleMail(slide) {
+    if(isAuthenticated){
+      handleModal(slide.id, slide.user_breeder_id, slide.total_contact, slide?.date_contacts_breeder)
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
+  }
+
 
   return (
     <>
@@ -199,9 +210,7 @@ const HomeRecentlyPostedSlider = ({ slides, onLike }) => {
                               ) : (
                                 <div
                                   name="mail-boxwrap"
-                                  onClick={() =>
-                                    handleModal(slide.id, slide.user_breeder_id, slide.total_contact, slide?.date_contacts_breeder)
-                                  }
+                                  onClick={() => handleMail(slide)}
                                   style={{ cursor: "pointer" }}
                                 >
                                   <Image

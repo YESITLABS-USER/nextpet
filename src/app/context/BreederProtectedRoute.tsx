@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "./AuthContext";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -7,17 +7,18 @@ import { toast } from "react-toastify";
 const BreederProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { isBreederAuthenticated } = useAuth();
+  const { isBreederAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isBreederAuthenticated) {
-        router.push("/breeder/sign-in"); // Redirect to login if not authenticated
-        toast.error('Please Login First...')
+  React.useEffect(() => {
+    if (!isLoading && !isBreederAuthenticated) {
+      toast.error("Please Login First...");
+      router.push("/breeder/sign-in"); // Redirect to breeder login if not authenticated
     }
-  }, [isBreederAuthenticated, router]);
+  }, [isBreederAuthenticated, isLoading, router]);
 
-  if (!isBreederAuthenticated) return null; // Optionally, display a loader while redirecting
+  if (isLoading) return <div>Loading...</div>; // Show loader while determining authentication
+  if (!isBreederAuthenticated) return null;
 
   return <>{children}</>;
 };

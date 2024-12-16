@@ -80,9 +80,9 @@ const ContactPetDetails = () => {
   const handleModal = ({
     post_id = postData?.post_id,
     breeder_id = postData?.user_id,
-    contacts_colour = postData?.contacts_colour
+    contacts_colour = postData?.contacts_colour,
   }) => {
-    setModalData({ post_id, breeder_id, contacts_colour, "total_contacts" : postData?.total_contact });
+    setModalData({ post_id, breeder_id, contacts_colour, "date_contacts_breeder" : postData?.total_contact });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {

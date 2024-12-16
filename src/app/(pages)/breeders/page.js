@@ -9,6 +9,9 @@ import { MdNavigateNext } from "react-icons/md";
 import Pagination from "../../../components/Pagination";
 import ContactModal from "../../../components/ContactModal";
 import PreviouslyContacted from "../../../components/PreviouslyContacted";
+import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const Breeder = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -28,6 +31,9 @@ const Breeder = () => {
     breeder_id: "",
   });
 
+  const { isAuthenticated } = useAuth(); 
+  const router = useRouter();
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserId = localStorage.getItem("user_user_id");
@@ -146,6 +152,7 @@ const Breeder = () => {
       user_id: userId,
       breeder_id: value?.breeder_id,
       breeder_do_not_show_me: checkConnect,
+      "date_contacts_breeder" : value?.date_contacts_breeder
     });
     if (checkConnect == 1) {
       setShowModal(true);
@@ -162,6 +169,18 @@ const Breeder = () => {
 
   function handleModel() {
     setDropdownVisible(!isDropdownVisible);
+  }
+
+  
+  function handleMail(item) {
+    if(isAuthenticated){
+      handleModal(item) 
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
   }
 
   return (
@@ -310,7 +329,7 @@ const Breeder = () => {
                     </div>
                     <div
                       className="mail-boxwrap"
-                      onClick={() => handleModal(item)}
+                      onClick={() => handleMail(item)}
                       style={{ cursor: "pointer" }}
                     >
                       <Image

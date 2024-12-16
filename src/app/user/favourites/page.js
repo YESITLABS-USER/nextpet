@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import BASE_URL from "../../utils/constant";
 import axios from "axios";
 import UserProfileLeft from "../../../components/UserProfileLeft";
-import Image from "next/image";
 import Link from "next/link";
 import ContactModal from "../../../components/ContactModal";
 import PreviouslyContacted from "../../../components/PreviouslyContacted";
@@ -11,6 +10,7 @@ import { FaStar } from "react-icons/fa";
 import { MdNavigateNext } from "react-icons/md";
 import ProtectedRoute from "../../context/ProtectedRoute";
 import Pagination from "../../../components/Pagination";
+import Image from "next/image";
 
 const Favorites = () => {
   const [userId, setUserId] = useState(null);
@@ -225,7 +225,11 @@ const Favorites = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <p>{item?.bio}</p>
+                                <p style={{width:'85%'}}> {item?.bio
+                              ? item?.bio.length > 30
+                                ? `${item?.bio.slice(0, 40)}...`
+                                : item?.bio
+                              : "Description not available"} </p>
 
                                 <div className="viewmore-wrap">
                                   <h4>11 active posts</h4>

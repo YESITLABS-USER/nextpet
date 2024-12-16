@@ -12,6 +12,7 @@ import PreviouslyContacted from "../../../../../components/PreviouslyContacted";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuth } from "@/src/app/context/AuthContext";
 
 const ContactPetDetails = () => {
   const { breeder_id, like_colour } = useParams();
@@ -26,6 +27,8 @@ const ContactPetDetails = () => {
     breeder_id: "",
   });
 
+  const { isAuthenticated } = useAuth(); 
+  
   const router = useRouter();
   // const [breederData, setBreederData] = useState(null);
 
@@ -43,15 +46,15 @@ const ContactPetDetails = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUserId = localStorage.getItem("authToken");
-      if (!storedUserId) {
-        toast.error('User or Breeder must be login')
-        router.push('/')
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const storedUserId = localStorage.getItem("authToken");
+  //     if (!storedUserId) {
+  //       toast.error('User or Breeder must be login')
+  //       router.push('/')
+  //     }
+  //   }
+  // }, []);
 
   
   useEffect(() => {
@@ -95,6 +98,14 @@ const ContactPetDetails = () => {
   };
 
   const handlePostLike = async (value) => {
+    const storedUserId = localStorage.getItem("authToken");
+    if (!storedUserId) {
+      toast.error('User or Breeder must be login')
+      setTimeout(() => {
+        router.push('/')
+      }, 1000);
+      }
+   
     let checkBreederLike = like_colour ? 1 : 111;
     let checkUserLike = value?.check_like == "0" ? 1 : 111;
     let likeData = {
@@ -183,6 +194,17 @@ const ContactPetDetails = () => {
     setShowModal(false);
     setShowPreviousModal(false);
   };
+
+  function handleMail(item) {
+    if(isAuthenticated){
+      handleModal(item)
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
+  }
 
   return (
     <>
@@ -283,7 +305,7 @@ const ContactPetDetails = () => {
                       <h3>{item?.name}</h3>
                       <div
                         className="mail-boxwrap"
-                        onClick={() => handleModal(item)}
+                        onClick={() => handleMail(item)}
                         style={{ cursor: "pointer" }}
                       >
                         <img

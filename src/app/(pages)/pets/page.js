@@ -42,8 +42,6 @@ const Pets = () => {
   const { isAuthenticated } = useAuth();
   
   const router = useRouter();
-  
-  // const { searchItem } = router.query;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -97,12 +95,6 @@ const Pets = () => {
   }, [filter, activeRadio]);
 
   useEffect(() => {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   setMapLocation({
-    //     lat: position.coords.latitude,
-    //     lon: position.coords.longitude,
-    //   });
-    // });
     const userId = localStorage.getItem("user_user_id");
     const breaderId = localStorage.getItem("breeder_user_id");
     if (userId) {
@@ -194,24 +186,6 @@ const Pets = () => {
     }
   };
 
-  const handlePostLike = async (value) => {
-    let checkLikeDislike = value?.check_like == "0" ? 1 : 111;
-    let likeData = {
-      user_id: userIdOrBreederId,
-      post_id: value?.id || "",
-      breeder_id: value?.user_breeder_id || "",
-      like_post: checkLikeDislike,
-    };
-    try {
-      const response = await axios.post(`${BASE_URL}/api/like_post`, likeData);
-      if (response.data.code === 200) {
-        getAllPets();
-      }
-    } catch (err) {
-      console.error("error : ", err);
-    }
-  };
-
   function fillterPets() {
     if (recentDate || location) {
       setAnimalTypeFilter(null);
@@ -243,11 +217,14 @@ const Pets = () => {
   
   // Logic for pagination
   let petsData = filteredData?.length > 0 ? filteredData : allPets;
+  let allfilteredData = filteredData?.length > 0 ? filteredData : [];
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = petsData.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = (searchItemParam || searchQuery.length>3) && filteredData ? allfilteredData.slice(indexOfFirstPost, indexOfLastPost) : petsData.slice(indexOfFirstPost, indexOfLastPost);
+  
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
     if (event.target.value.length < 1) {
@@ -272,6 +249,7 @@ const Pets = () => {
     });
     setFilteredData(filtered);
   };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -281,9 +259,27 @@ const Pets = () => {
   function handleModel() {
     setDropdownVisible(!isDropdownVisible);
   }
+  
+  const handlePostLike = async (value) => {
+    let checkLikeDislike = value?.check_like == "0" ? 1 : 111;
+    let likeData = {
+      user_id: userIdOrBreederId,
+      post_id: value?.id || "",
+      breeder_id: value?.user_breeder_id || "",
+      like_post: checkLikeDislike,
+    };
+    try {
+      const response = await axios.post(`${BASE_URL}/api/like_post`, likeData);
+      if (response.data.code === 200) {
+        getAllPets();
+      }
+    } catch (err) {
+      console.error("error : ", err);
+    }
+  };
 
-  const handleModal = (post_id, breeder_id, contacts_colour) => {
-    setModalData({ post_id, breeder_id });
+  const handleModal = (post_id, breeder_id, contacts_colour, contacts_date) => {
+    setModalData({ post_id, breeder_id,"date_contacts_breeder":contacts_date });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {
@@ -308,8 +304,16 @@ const Pets = () => {
     }
   }
   function handleViewMore (item) {
+    router.push(`/user/posts/${item.user_breeder_id}/${item.id}/${item.check_like} `)
+  }
+
+  function handleAuth() {
+    router.push("/map?user=");
+  }
+
+  function handleMail(item) {
     if(isAuthenticated){
-      router.push(`/user/posts/${item.user_breeder_id}/${item.id}/${item.check_like} `)
+      handleModal(item.id, item.user_breeder_id, item?.contacts_colour, item?.contacts_date ) 
     } else{
       toast.error("User must be logged in");
       setTimeout(() => {
@@ -317,24 +321,9 @@ const Pets = () => {
       }, 1000);
     }
   }
-
-  function handleAuth() {
-    router.push("/map?user=");
-  }
-  // function handleAuth() {
-  //   if (!isAuthenticated) {
-  //     toast.error("User must be logged in");
-  //     setTimeout(() => {
-  //       router.push("/user/sign-in");
-  //     }, 1000);
-  //   } else {
-  //     router.push("/user/map");
-  //   }
-
-  // }
   return (
     <>
-      <ToastContainer limit={2}/>
+      <ToastContainer limit={1}/>
       <div className="pets-breeder-wrap">
         <div className="container">
           <div className="aligns-filter-pets">
@@ -440,8 +429,13 @@ const Pets = () => {
           </div>
 
           <div className="pets-breeder-cards">
-            {(currentPosts && currentPosts.length < 0) && <p> No data available...</p>}
-            {currentPosts?.map((item, index) => (
+            
+            {/* {(currentPosts && currentPosts.length < 0) && <p> No data available...</p>} */}
+            {currentPosts?.length === 0 ? (
+              <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Data Found...</h1>
+            ) : (
+            currentPosts?.map((item, index) => (
+            // (currentPosts?.map((item, index) => (
               <div className="newyear-cat-dog-in" key={index}>
                 <div className="newyear-catimg-wrap">
                   <Image
@@ -484,13 +478,7 @@ const Pets = () => {
                     <h3>{item?.name}</h3>
                     <div
                       className="mail-boxwrap"
-                      onClick={() =>
-                        handleModal(
-                          item.id,
-                          item.user_breeder_id,
-                          item?.contacts_colour
-                        )
-                      }
+                      onClick={() => handleMail(item)}
                       style={{ cursor: "pointer" }}
                     >
                       <Image
@@ -524,7 +512,7 @@ const Pets = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))}
           </div>
           <div className="influ-pagi pt-4">
             <Pagination
