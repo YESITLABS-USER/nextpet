@@ -230,15 +230,15 @@ const BreederDashboard = () => {
                           Contact a Coach
                         </button>
                       </div>
-                      <div class="modal fade modal-common" id="contact-coach" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-dialog-edit" role="document">
-                          <div class="modal-content">
-                            <div class="modal-heading">
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style={{ background: 'url(/images/Nextpet-imgs/close-icon.svg', backgroundSize:'contain'}}></button>
+                      <div className="modal fade modal-common" id="contact-coach" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div className="modal-dialog modal-dialog-edit" role="document">
+                          <div className="modal-content">
+                            <div className="modal-heading">
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" style={{ background: 'url(/images/Nextpet-imgs/close-icon.svg', backgroundSize:'contain'}}></button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                               <form action="">
-                                <div class="conatctcpach-popup-wrap">
+                                <div className="conatctcpach-popup-wrap">
                                   <h1>Contact Coach</h1>
                                   <div className="coach-form-wrap">
                                     <input type="text" placeholder="Anna Brown" />

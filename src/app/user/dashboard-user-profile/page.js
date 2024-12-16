@@ -15,6 +15,8 @@ const UserDashboard = () => {
   const [makeEditable, setMakeEditable] = useState(false);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
+  
 
   const [formData, setFormData] = useState({
     name: "",
@@ -47,10 +49,11 @@ const UserDashboard = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      image: file,
-    });
+    setProfileImage(file)
+    // setFormData({
+    //   ...formData,
+    //   image: file,
+    // });
     setImagePreview(URL.createObjectURL(file));
   };
 
@@ -70,28 +73,27 @@ const UserDashboard = () => {
           setFormData(response.data.data);
         })
         .catch((error) => {
-          console.log(error.message);
+          console.error(error.message);
         });
     };
     // if ("geolocation" in navigator) {
     //   navigator.geolocation.getCurrentPosition(({ coords }) => {
     //     const { latitude, longitude } = coords;
-    //     console.log("Latitude ::", latitude, "Longitude ::", longitude);
+        console.log("Latitude ::", latitude, "Longitude ::", longitude);
     //     setLatitude(latitude);
     //     setLongitude(longitude);
     //   });
     // } else {
     //   setLatitude(35.1258);
     //   setLongitude(17.9859);
-    //   console.log("Not Allow location");
+      console.log("Not Allow location");
     // }
 
     loadUser();
   }, [userId]);
 
   const handleSubmit = async () => {
-    console.log("Form Submitted:", formData);
-    const { name, email, phone, location, image } = formData;
+    const { name, email, phone, location, } = formData;
     let finalLatitude = latitude ? latitude : (formData?.latitude || "35.1258");
     let finalLongitude = longitude ? longitude : (formData?.longitude || "17.9859");
   
@@ -106,7 +108,7 @@ const UserDashboard = () => {
           location: location,
           latitude: finalLatitude,
           longitude: finalLongitude,
-          image
+          image:profileImage?profileImage:null
         },
         {
           headers: {
@@ -115,8 +117,7 @@ const UserDashboard = () => {
         }
       );
   
-      console.log("Response:", response.data);
-      toast.success("Profile Updated Successfully");
+      toast.success(response.data.msg);
       setMakeEditable(false);
     } catch (error) {
       console.error("error config:", error);

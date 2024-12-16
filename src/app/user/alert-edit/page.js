@@ -280,7 +280,7 @@ const Alert = () => {
                           </div>
                         </div>
                       </div>
-                      <label for="">
+                      <label htmlFor="">
                         <select
                           name="animal"
                           value={selectedAnimal}
@@ -297,7 +297,7 @@ const Alert = () => {
                           })}
                         </select>
                       </label>
-                      <label for="">
+                      <label htmlFor="">
                         {/* {console.log(breeds_typss.length)} */}
                         <select
                           name="breed"
@@ -340,7 +340,7 @@ const Alert = () => {
                           </div>
                         </div>
                       </div>
-                      <label for="">
+                      <label htmlFor="">
                         <input
                           type="text"
                           placeholder="Enter location"

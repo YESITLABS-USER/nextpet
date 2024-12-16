@@ -33,7 +33,7 @@ const ContactPetDetails = () => {
                                     <a href="#"><Image src="/images/Nextpet-imgs/dashboard-imgs/yellow-mail-letter.svg" alt="" width={37} height={31}/></a>
                                 </div>
                                 <div className="heart-icon-wrap">
-                                    <Image src="/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg" alt="" class="active" width={39} height={39}/>
+                                    <Image src="/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg" alt="" className="active" width={39} height={39}/>
                                     <Image src="/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg" alt="" width={37} height={31}/>
                                 </div>
                                 <div className="inner-heartt">

@@ -13,7 +13,7 @@ const Favorites = () => {
             <div className="searchbar-filter-sec">
               <div className="search-wrap">
                 <form action="">
-                  <label for="">
+                  <label htmlFor="">
                     <input
                       type="text"
                       placeholder="Search by Animal Type, Breed or Location"

@@ -15,7 +15,7 @@ const Alert = () => {
   const [rangeValue, setRangeValue] = useState(200);
   const [animalTypes, setAnimalTypes] = useState([]);
   const [animal_type_id, setAnimalTypeId] = useState(null);
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [selectedAnimal, setSelectedAnimal] = useState("");
   const [breed, setBreed] = useState(null);
   const [address, setAddress] = useState(null);
   const [latitude, setLatitude] = useState(35.1258);
@@ -234,7 +234,7 @@ const Alert = () => {
                             </div>
                           </div>
                         </div>
-                        <label for="">
+                        <label htmlFor="">
                           <select
                             name="animal"
                             value={selectedAnimal}
@@ -252,7 +252,7 @@ const Alert = () => {
                             })}
                           </select>
                         </label>
-                        <label for="">
+                        <label htmlFor="">
                           <select
                             name="breed"
                             id=""
@@ -295,7 +295,7 @@ const Alert = () => {
                             </div>
                           </div>
                         </div>
-                        <label for="">
+                        <label htmlFor="">
                           {/* <input
                             type="text"
                             placeholder="Enter location"

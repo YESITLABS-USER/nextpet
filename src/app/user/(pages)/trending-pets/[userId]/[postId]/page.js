@@ -70,9 +70,6 @@ const ContactPetDetails2 = () => {
   }, []);
 
   const PostDetailGet = async () => {
-    console.log("id", postId);
-    console.log("user_id", userId);
-
     const payload = {
       user_id: userId,
       id: postId,

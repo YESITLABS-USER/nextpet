@@ -50,7 +50,6 @@ const Favorites = () => {
       const response = await axios.post(apiURL, user);
       if (response.data.code === 200 || 400) {
         setFavoriteList(response.data.data);
-        console.log("checkresponse", response.data.data);
         setShowModal(false);
         setShowPreviousModal(false);
       }
@@ -72,10 +71,7 @@ const Favorites = () => {
       like_post: checkLikeDislike,
     };
     try {
-      let apiURL =
-        isBreeder == true
-          ? `${BASE_URL}/api/breeder_like`
-          : `${BASE_URL}/api/like_post`;
+      let apiURL = isBreeder == true ? `${BASE_URL}/api/breeder_like` : `${BASE_URL}/api/like_post`;
 
       const response = await axios.post(apiURL, likeData);
       if (response.data.code === 200) {
@@ -101,7 +97,6 @@ const Favorites = () => {
 
   const handleModalbreeder = (value) => {
     let checkConnect = value?.breeder_do_not_show_me == null ? 1 : 0;
-    console.log("checkkkbrederconect", value);
     setModalData({
       user_id: userId,
       breeder_id: value?.breeder_id,
@@ -154,46 +149,29 @@ const Favorites = () => {
                     </div>
                   </div>
                   <form action="">
-                    <div
-                      className={
-                        isBreeder ? "breeder-main-wrap" : "leads-inner-wrap"
-                      }
-                    >
-                      <div
-                        className={
-                          isBreeder ? "pets-breeder-cards" : "all-posts-cards"
-                        }
-                      >
+                    <div className={ isBreeder ? "breeder-main-wrap" : "leads-inner-wrap" }>
+                      <div className={isBreeder ? "pets-breeder-cards" : "all-posts-cards"}>
                         {(!favoriteList || favoriteList.length === 0) && (
                           <p style={{ margin:'0 auto', padding:'40px 0'}}>No favorites found.</p>
                         )}
 
-                        {console.log(currentPosts, "curr", favoriteList, "fav")}
                         {currentPosts?.map((item, index) =>
                           isBreeder ? (
-                            <div
-                              className="newyear-cat-dog-in"
-                              style={{ width: "33%" }}
-                              key={index}
-                            >
+                            <div className="newyear-cat-dog-in" style={{ width: "33%" }} key={index} >
                               <div className="popular-breedersimg-wrap">
                                 <Image
-                                  src={item?.image || "/imageimages/Nextpet-imgs/Image_not_available.webp"}
+                                  src={item?.image || "/images/Nextpet-imgs/Image_not_available.webp"}
                                   width={250}
                                   height={206}
                                   alt="new "
                                   loading="lazy"
                                 />
-                                <div
-                                  className="heart-icon-wrap"
-                                  onClick={() => handlePostLike(item)}
-                                  style={{ cursor: "pointer" }}
-                                >
+                                <div className="heart-icon-wrap" onClick={() => handlePostLike(item)}
+                                  style={{ cursor: "pointer" }} >
                                   <Image
                                     width={15}
                                     height={15}
-                                    src={
-                                      item?.like_colour == 1
+                                    src={ item?.like_colour == 1
                                         ? "/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
                                         : "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"
                                     }

@@ -30,58 +30,58 @@ const Post = () => {
     // isHealthGuaranteed isDeliveryAvailability isBoardingAvailability isFlyingAvailability
     return (
         <>
-            <div class="breedeerdasboard-createpost-wrap">
-                <div class="container">
-                    <div class="col-lg-12">
-                    <div class="breedeerdasboard-createpost-inner">
+            <div className="breedeerdasboard-createpost-wrap">
+                <div className="container">
+                    <div className="col-lg-12">
+                    <div className="breedeerdasboard-createpost-inner">
                         
-                        <div class="breedeerdasboard-createpost-left">
+                        <div className="breedeerdasboard-createpost-left">
                         
-                        <div class="edit-uploadpost-wrap">
-                            <div class="edit-post-icon">
+                        <div className="edit-uploadpost-wrap">
+                            <div className="edit-post-icon">
                             <a href="#"><Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/edit-post-icon.svg" alt=""
                                 loading="lazy"/></a>
                             </div>
                             <div id="uploaded-post-imgs" className="owl-carousel">
                             
-                            <div class="uploded-post-wrap">
+                            <div className="uploded-post-wrap">
                                 <Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/post-img1.png" alt="" loading="lazy"/>
                             </div>
                             
                             
-                            <div class="uploded-post-wrap">
+                            <div className="uploded-post-wrap">
                                 <Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/post-img1.png" alt="" loading="lazy"/>
                             </div>
                             
                             
-                            <div class="uploded-post-wrap">
+                            <div className="uploded-post-wrap">
                                 <Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/post-img1.png" alt="" loading="lazy"/>
                             </div>
                             
                             
-                            <div class="uploded-post-wrap">
+                            <div className="uploded-post-wrap">
                                 <Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/post-img1.png" alt="" loading="lazy"/>
                             </div>
                             
                             </div>
                         </div>
                         
-                        <div class="error-message">
+                        <div className="error-message">
                             <p>Error: You can only add up to 10 images.</p>
                         </div>
                         </div>
                         
                         
-                        <div class="breedeerdasboard-createpost-right">
-                        <div class="postcreate-heading">
+                        <div className="breedeerdasboard-createpost-right">
+                        <div className="postcreate-heading">
                             <h3>Pet name </h3>
-                            <div class="edit-heartpost">
-                            <div class="inner-heartt">
+                            <div className="edit-heartpost">
+                            <div className="inner-heartt">
                                 <a href="#"><Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/heart-post.png" alt=""
                                     loading="lazy"/></a>
                                 <span>55</span>
                             </div>
-                            <div class="inner-heartt">
+                            <div className="inner-heartt">
                                 <a href="#"><Image width={15} height={15} src="/images/Nextpet-imgs/dashboard-imgs/message-post.png" alt=""
                                     loading="lazy"/></a>
                                 <span>55</span>
@@ -94,9 +94,9 @@ const Post = () => {
                                 placeholder="There are  of Lorem Ipsum available, but the majority have su alteration in some form, by injected oir  which don't look even slightly believable. There are  of Lorem Ipsum available, but the majority have su alteration in some form, by injected oir  which don't look even slightly believable. "></textarea>
                             </label>
                             <h4>About Pet-name</h4>
-                            <div class="list-post-form">
+                            <div className="list-post-form">
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Type</p>
                                 <select name="" id="">
                                 <option value="0">Type of animal</option>
@@ -106,7 +106,7 @@ const Post = () => {
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Breed</p>
                                 <select name="" id="">
                                 <option value="0"></option>
@@ -114,13 +114,13 @@ const Post = () => {
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Price</p>
                                 <input type="text" placeholder=""/>
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>General Size</p>
                                 <select name="" id="">
                                 <option value="0">N/A</option>
@@ -131,19 +131,19 @@ const Post = () => {
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Anticipated Weight</p>
                                 <input type="text" placeholder=""/>
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Birthdate</p>
                                 <input type="text" id="datepicker" placeholder=""/>
                             </div>
                             
                             
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Date Available</p>
                                 <input type="text" id="datepicker2" placeholder=""/>
                             </div>
@@ -173,7 +173,7 @@ const Post = () => {
                                 </div>
                             </div>
 
-                            <div class="formdata-wrap">
+                            <div className="formdata-wrap">
                                 <p>Certifications</p>
                                 <input type="text" placeholder=""/>
                             </div>
@@ -254,7 +254,7 @@ const Post = () => {
                                 </div>
                             </div>
                             
-                            <div class="posts-btn-wrap">
+                            <div className="posts-btn-wrap">
                                 <button type="button" value="Submit" data-bs-target="#contact-coach" data-bs-toggle="modal">Post
                                 a Pet</button>
                                 <p>4 out of 6 post remaining</p>

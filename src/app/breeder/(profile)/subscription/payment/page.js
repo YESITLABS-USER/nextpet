@@ -6,6 +6,7 @@ import BreederProfileLeft from "../../../../../components/BreederProfileLeft";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import BASE_URL from "@/src/app/utils/constant";
+import { useEffect, useState } from "react";
 
 // Load Stripe asynchronously
 const stripePromise = loadStripe(
@@ -15,13 +16,19 @@ const stripePromise = loadStripe(
 const Payment = () => {
   const searchParams = useSearchParams();
   const stripe = useStripe();
+  const [user_id, setUser_id] = useState();
   // const elements = useElements();
   // const [processing, setProcessing] = useState(false);
   // const [paymentStatus, setPaymentStatus] = useState("");
 
   const searchParamsObj = Object.fromEntries(searchParams.entries());
 
-  const user_iddd = localStorage.getItem("breeder_user_id");
+  useEffect(() => {
+    if (typeof window!== "undefined") {
+      const user_iddd = localStorage.getItem("breeder_user_id");
+      setUser_id(user_iddd);
+    }
+  }, [])
 
   // console.log("checkingpayment", paymentStatus);
   // const handleSubmit = async (event) => {
@@ -63,7 +70,7 @@ const Payment = () => {
     event.preventDefault();
 
     const payload = {
-      user_id: user_iddd, // pass the id of above condition i have get from localstorage user_iddd
+      user_id: user_id, // pass the id of above condition i have get from localstorage user_iddd
       sub_id: parseInt(searchParamsObj?.sub_id),
       price: parseInt(searchParamsObj?.price),
       sub_plan: searchParamsObj?.sub_plan,
@@ -114,16 +121,16 @@ const Payment = () => {
             <div className="breedeerdasboard-subscription-right">
               <h1>Payment Details</h1>
               <form onSubmit={handleSubmit}>
-                <div class="subscription-payment-box">
-                  <div class="header-subscription">
+                <div className="subscription-payment-box">
+                  <div className="header-subscription">
                     <h3>Card Details</h3>
                   </div>
-                  <div class="inner-subscription mt-4">
+                  <div className="inner-subscription mt-4">
                     <p>Amount: {searchParamsObj?.price}</p>
                     <p>Plans: {searchParamsObj?.name}</p>
                   </div>
 
-                  {/* <div class="inner-subscription mt-4">
+                  {/* <div className="inner-subscription mt-4">
                     <CardElement
                       options={{
                         style: {
@@ -144,7 +151,7 @@ const Payment = () => {
                   </div> */}
                 </div>
 
-                <div class="subscription-btn-wrap">
+                <div className="subscription-btn-wrap">
                   {/* <button type="submit" disabled={!stripe || processing}>
                     {processing ? "Processing..." : "Pay Now"}
                   </button> */}

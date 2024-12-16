@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "react-modal";
@@ -11,8 +11,11 @@ const BreederProfileLeft = ({ data }) => {
   const { logout } = useAuth();
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
   const [showLogOut, setShowLogOut] = useState(false);
+  const [breeder_id, setBreeder_id] = useState();
 
-  const breaderId = localStorage.getItem("breeder_user_id");
+  useEffect(() => {
+    setBreeder_id(localStorage.getItem("breeder_user_id"));
+  }, []);
 
   const customStyles = {
     content: {
@@ -57,7 +60,7 @@ const BreederProfileLeft = ({ data }) => {
   const DeleteBreederAccount = async () => {
     try {
       const payload = {
-        user_id: breaderId,
+        user_id: breeder_id,
       };
       const res = await DeleteBreeder(payload);
       if (res?.data?.status_code == 200) {

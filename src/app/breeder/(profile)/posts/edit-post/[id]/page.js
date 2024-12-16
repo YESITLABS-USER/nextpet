@@ -392,7 +392,7 @@ const EditPost = () => {
               />
               {/* {imageError && <p style={{ color: "red" }}>{imageError}</p>} */}
               {editPostPage && 
-                <div class="error-message" style={{fontStyle:'italic'}}>
+                <div className="error-message" style={{fontStyle:'italic'}}>
                   <p>Error: You can only add up to 10 images.</p>
                 </div>
               }
@@ -780,11 +780,11 @@ const EditPost = () => {
                   document.body.style.overflow = "auto";
                 }}
               >
-                <div class="modal-body">
+                <div className="modal-body">
                   <form onSubmit={submitAdditionalRequest}>
-                    <div class="conatctcpach-popup-wrap">
+                    <div className="conatctcpach-popup-wrap">
                       <h1>Additional Request</h1>
-                      <div class="coach-form-wrap">
+                      <div className="coach-form-wrap">
                         {errorAdditionalRequest && (
                           <spam style={{ color: "red" }}>
                             {errorAdditionalRequest}
@@ -804,7 +804,7 @@ const EditPost = () => {
                             setAdditionalRequestBreedType(e.target.value)
                           }
                         />
-                        <div class="d-flex justify-content-center">
+                        <div className="d-flex justify-content-center">
                           <button
                             type="submit"
                             value="Submit"

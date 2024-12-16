@@ -19,16 +19,16 @@ const TermsConditions = () => {
 
   return (
     <>
-      <div class="terms-privacy-wrap">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
+      <div className="terms-privacy-wrap">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
               <h1
                 dangerouslySetInnerHTML={{ __html: termsConditions?.title }}
               />
             </div>
-            <div class="col-lg-12 col-md-6">
-              <div class="terms-privacy-in">
+            <div className="col-lg-12 col-md-6">
+              <div className="terms-privacy-in">
                 <h2>NextPet</h2>
 
                 <p

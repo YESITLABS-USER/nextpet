@@ -7,7 +7,7 @@ import { loginBreeder } from "../../../services/user/loginService"; // Import th
 import { useAuth } from "../../../context/AuthContext";
 import { toast } from "react-toastify";
 // import {GoogleLogin} from "../../../../components/GoogleLogin";
-import { auth, provider, signInWithPopup, OAuthProvider  } from "../../../../components/GoogleLogin";
+import { auth, provider, signInWithPopup  } from "../../../../components/GoogleLogin";
 import axios from "axios";
 import BASE_URL from "@/src/app/utils/constant";
 
@@ -54,41 +54,41 @@ const SignIn = () => {
     }
   };
 
-  const handleUserAppleLogin = async () => {
-    try {
-      const provider = new OAuthProvider("apple.com");
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+  // const handleUserAppleLogin = async () => {
+  //   try {
+  //     const provider = new OAuthProvider("apple.com");
+  //     const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
   
-      // Extract user data
-      const { displayName, email, uid } = user;
-      console.log("User Info:", { displayName, email, uid });
+  //     // Extract user data
+  //     const { displayName, email, uid } = user;
+  //     console.log("User Info:", { displayName, email, uid });
   
-      // Prepare payload
-      const payload = {
-        email,
-        name: displayName,
-        social_id: uid,
-      };
+  //     // Prepare payload
+  //     const payload = {
+  //       email,
+  //       name: displayName,
+  //       social_id: uid,
+  //     };
   
-      // Send data to backend
-      const response = await axios.post(`${BASE_URL}/api/user_social_login`, payload);
+  //     // Send data to backend
+  //     const response = await axios.post(`${BASE_URL}/api/user_social_login`, payload);
   
-      if (response.status === 200) {
-        login({UniqueKey: response.data.data.user_id, type: 'user-type'});
-        localStorage.setItem("user_user_id", response.data.data.user_id);
+  //     if (response.status === 200) {
+  //       login({UniqueKey: response.data.data.user_id, type: 'user-type'});
+  //       localStorage.setItem("user_user_id", response.data.data.user_id);
   
-        toast.success("Login successful!");
-        window.location.href = "/user/dashboard-user-profile";
-      } else {
-        toast.error("Login successful, but an error occurred on the server.");
-        console.error("Backend Response Error:", response.data);
-      }
-    } catch (error) {
-      console.error("Firebase Apple Login Error or Backend Error:", error);
-      toast.error("Failed to login with Apple.");
-    }
-  };
+  //       toast.success("Login successful!");
+  //       window.location.href = "/user/dashboard-user-profile";
+  //     } else {
+  //       toast.error("Login successful, but an error occurred on the server.");
+  //       console.error("Backend Response Error:", response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Firebase Apple Login Error or Backend Error:", error);
+  //     toast.error("Failed to login with Apple.");
+  //   }
+  // };
   
   
 
@@ -203,7 +203,7 @@ const SignIn = () => {
                   src="/images/Nextpet-imgs/breeder-signin-imgs/social2.png"
                   alt="Social 2"
                   width={40}
-                  height={40} style={{ cursor: 'pointer'}} onClick={handleUserAppleLogin}
+                  height={40} style={{ cursor: 'pointer'}} 
                 />
               {/* </a> */}
               {/* <a href="#"> */}

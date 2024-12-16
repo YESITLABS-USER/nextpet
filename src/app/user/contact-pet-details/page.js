@@ -69,7 +69,7 @@ const ContactPetDetails = () => {
                     <Image
                       src="/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"
                       alt=""
-                      class="active"
+                      className="active"
                       width={39}
                       height={39}
                     />
