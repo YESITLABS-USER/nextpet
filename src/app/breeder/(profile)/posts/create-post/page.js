@@ -42,9 +42,7 @@ const CreatePost = () => {
         const response = await axios.post(`${BASE_URL}/api/post_count`, {
           user_breeder_id: breederUserId,
         });
-  
-        console.log(response);
-  
+   
         if (response.data.code === 200) {
           setCountDetail(response.data.data);
         }
@@ -71,7 +69,7 @@ const CreatePost = () => {
     animalType: "",
     type: "",
     breed: "",
-    crtifications: "",
+    certification: "",
     deliveryAvailability: "",
   };
   const validationSchema = Yup.object({
@@ -97,7 +95,7 @@ const CreatePost = () => {
     birthdate: Yup.date().required("Birthdate is required"),
     date_available: Yup.date().required("Date Available is required"),
     animalType: Yup.string().required("Animal type is required"),
-    crtifications: Yup.string().required("Certification is required"),
+    certification: Yup.string().required("Certification is required"),
     breed: Yup.string().required("Breed type is required"),
     // deliveryAvailability: Yup.number().required(
     //   "Delivery availability is required"
@@ -194,11 +192,16 @@ const CreatePost = () => {
     formData.append("latitude", location.latitude);
     formData.append("longitude", location.longitude);
     formData.append("user_id", breederUserId);
-    formData.append("crtifications", values.crtifications);
+    formData.append("certification", values.certification);
 
     images.forEach((img) => {
       formData.append("image[]", img);
     });
+
+    // Log FormData contents
+for (let [key, value] of formData.entries()) {
+  console.log(`${key}: ${value}`);
+}
 
     try {
       await axios.post(
@@ -353,10 +356,9 @@ const CreatePost = () => {
                               }),
                             }}
                             onChange={(selectedOption) =>
-                              handleSelectedAnimalTypesChange(
-                                selectedOption,
-                                setFieldValue
-                              )
+                            {handleSelectedAnimalTypesChange(
+                                selectedOption, setFieldValue ); setFieldValue("type", selectedOption.value)}
+                              
                             }
                           />
                           <ErrorMessage className="ErrorMessage"
@@ -408,9 +410,9 @@ const CreatePost = () => {
                         <p>General Size</p>
                         <Field as="select" name="size">
                           <option value="">Select size</option>
-                          <option value="small">Small</option>
-                          <option value="medium">Medium</option>
-                          <option value="large">Large</option>
+                          <option value="Standard">Standard</option>
+                          <option value="Mini">Mini</option>
+                          <option value="Micro">Micro</option>
                         </Field>
                         <ErrorMessage className="ErrorMessage"
                           name="size"
@@ -423,8 +425,8 @@ const CreatePost = () => {
                         <p>Animal Gender</p>
                         <Field as="select" name="animalGender">
                           <option value="">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                         </Field>
                         <ErrorMessage className="ErrorMessage"
                           name="animalGender"
@@ -485,9 +487,9 @@ const CreatePost = () => {
                       </div>
                       <div className="formdata-wrap">
                         <p>Certifications</p>
-                        <Field type="text" name="crtifications" />
+                        <Field type="text" name="certification" />
                         <ErrorMessage className="ErrorMessage"
-                          name="crtifications"
+                          name="certification"
                           component="div"
                           style={{ color: "red" }}
                         />

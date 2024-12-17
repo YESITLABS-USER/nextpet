@@ -39,8 +39,6 @@ const EditPost = () => {
   const [editPostImageLength, setPostImageLength] = useState(null);
   const [editPostPage, setEditPostPage] = useState(false);
   const [countDetail, setCountDetail] = useState(null);
-
-  console.log("selectedAnimal", selectedAnimal);
   
   useEffect(() => {
     const fetchPostCount = async () => {
@@ -55,7 +53,7 @@ const EditPost = () => {
         console.error("Error fetching post count:", error);
       }
     };
-  
+  console.log(selectedAnimal, 'selectedAnimal')
     if (breederUserId) {
       fetchPostCount();
     }
@@ -74,7 +72,6 @@ const EditPost = () => {
     date_available: postDetails?.avialable || "",
     certification: postDetails?.certification || "",
   };
-
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {

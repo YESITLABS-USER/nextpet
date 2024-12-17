@@ -7,7 +7,8 @@ import "toastr/build/toastr.min.css";
 import BASE_URL from "../app/utils/constant";
 import axios from "axios";
 import { GoClock } from "react-icons/go";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
+// import { FaAngleUp } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
 function Header() {
@@ -131,7 +132,7 @@ function Header() {
                   src="/images/Nextpet-imgs/LOGO.png"
                   alt="Logo"
                   width={100}
-                  height={50}
+                  height={100}
                 />
               </Link>
               <button onClick={() => setMobileToggleBtn((prev) => !prev)} className="navbar-toggler"
@@ -183,7 +184,7 @@ function Header() {
                           type="button"
                         >
                           <Image
-                            src={(userData?.profile_img || userData?.image) || "/images/Nextpet-imgs/all-icons/user.svg"}
+                            src={(userData?.profile_img || userData?.image) || "/images/Nextpet-imgs/contact-default.webp"}
                             alt="Profile pic"
                             width={100}
                             height={100} style={{ borderRadius: "50%"}}
@@ -192,8 +193,8 @@ function Header() {
                           : ( userData?.name ? (userData.name.split(" ").length > 10 ? `${userData.name.split(" ").slice(0, 10).join(" ")}...` : userData.name) : "Breeder Profile" ) }
 
                           {/* <i className="far fa-chevron-down"></i> */}
-                          <span style={{ display: "inline-block", transition: "transform 0.3s ease", transform: `rotate(${isOpen ? 180 : 0}deg)`}}  className="mt-1">
-                            {userId && isOpen ? <FaAngleUp/> : < FaAngleDown/>}
+                          <span style={{ display: "inline-block", transition: "transform 0.3s ease", transform: `rotate(${isOpen ? 360 : 0}deg)`}}  className="mt-1">
+                            {userId && isOpen ? < FaAngleDown/> : < FaAngleDown/>}
                           </span>
                         </button>
 
@@ -412,7 +413,7 @@ const DropdownUserMenu = ({
               </Link>
             </div>
             <div className="influ-drop-list-item">
-              <Link href="/breeder/breeder-profile" onClick={closeDropdown}>
+              <Link href="/breeder/breeder-profile/dashboard-breeder-profile" onClick={closeDropdown}>
                 <Image
                   src="/images/Nextpet-imgs/all-icons/profile.png"
                   width={15}

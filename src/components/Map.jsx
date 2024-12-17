@@ -50,8 +50,8 @@ const StoreMap = ({ data, location }) => {
               <Marker
                 key={store.id}
                 position={[
-                  store.latitude === "null" ? "28.5665" : store.latitude,
-                  store.longitude === "null" ? "77.3039" : store.longitude,
+                  store.latitude && store.latitude !== "null" ? store.latitude : "28.5665",
+                  store.longitude && store.longitude !== "null" ? store.longitude : "77.3039",
                 ]}
                 icon={storeIcon}
               >
@@ -67,16 +67,16 @@ const StoreMap = ({ data, location }) => {
                     }}
                   >
                     <Image
-                      src={store?.image[0] || "/images/Nextpet-imgs/contact-default.webp"}
+                    src={ Array.isArray(store?.image) && store.image.length > 0 ? store.image[0] : store?.image || "/images/Nextpet-imgs/contact-default.webp"}                      
                       alt="profile"
                       width={40}
                       height={40}
                       style={{ borderRadius: "50%" }}
                     />
                     <div style={{ color: "#e49a01", fontWeight: "bold", padding: "0" }}>
-                      {store.name} {`(${store.type})`}
+                      {store?.name} {store?.type && `(${store?.type})`}
                     </div>
-                    <div>{store?.breed}</div>
+                    <div>{store?.breed && store?.breed}</div>
                     <button
                       style={{
                         color: "white",

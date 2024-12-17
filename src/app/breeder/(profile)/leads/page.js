@@ -59,6 +59,10 @@ const Leads = () => {
         `${BASE_URL}/api/status_leads_breeder_filter`,
         user
       );
+
+      if(response.data.status_code ===400){
+        setLeadsData([]);
+      }
       if (response.data.status_code === 200) {
         setLeadsData(response.data.data);
       }
@@ -166,7 +170,9 @@ const Leads = () => {
                       <p>3 days ago</p>
                     </div>
                     <div className="leads-card-wrap">
-                      {leadsData?.length > 0 ? (
+                    {currentPosts?.length === 0 ? (
+                        <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Leads Found...</h1>
+                      ) : (
                         currentPosts?.map((lead, index) => (
                           <div key={index} className="leads-box">
                             <div className="image-circle">
@@ -182,7 +188,7 @@ const Leads = () => {
                                 <h3>{lead?.user_name || "Account Deleted"}</h3>
                                 <div className="rating-count">
                                   <span>
-                                  {lead?.breeder_star_rating ? (Math.round(lead.breeder_star_rating * 10) / 10).toFixed(1) : 4.4}&nbsp; &nbsp;
+                                  {lead?.breeder_star_rating ? (Math.round(lead.breeder_star_rating * 10) / 10).toFixed(1) : 0.0}&nbsp; &nbsp;
                                     <FaStar
                                       style={{
                                         color: "white",
@@ -233,10 +239,7 @@ const Leads = () => {
                               </div>
                             </div>
                           </div>
-                        ))
-                      ) : (
-                        <p>No leads available</p>
-                      )}
+                        ))) }
                     </div>
 
                     <div className="influ-pagi">

@@ -139,6 +139,10 @@ const Pets = () => {
     try {
       const response = await axios.post(
         `${BASE_URL}/api/all_pets_listing_without_login`,user);
+      
+      if(response.data.code === 404){
+        setAllPets([])
+      }
       if (response.data.code === 200) {
         setAllPets(response.data.pets_list_without_login);
       }
@@ -187,6 +191,9 @@ const Pets = () => {
   };
 
   function fillterPets() {
+    console.log(animalTypeFilter,'animalTypeFilter')
+    console.log(breedTypeFilter,'breedTypeFilter')
+
     if (recentDate || location) {
       setAnimalTypeFilter(null);
       setBreedTypeFilter(null);
@@ -227,7 +234,7 @@ const Pets = () => {
   
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-    if (event.target.value.length < 1) {
+    if (event.target.value.length < 3) {
       setFilteredData();
     }
   };
@@ -308,7 +315,7 @@ const Pets = () => {
   }
 
   function handleAuth() {
-    router.push("/map?user=");
+    router.push("/map");
   }
 
   function handleMail(item) {
@@ -321,6 +328,7 @@ const Pets = () => {
       }, 1000);
     }
   }
+
   return (
     <>
       <ToastContainer limit={1}/>
@@ -517,7 +525,7 @@ const Pets = () => {
           <div className="influ-pagi pt-4">
             <Pagination
               postPerPage={postsPerPage}
-              totalPosts={allPets.length}
+              totalPosts={currentPosts?.length == 0 ? 1 : allPets.length}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -613,7 +621,7 @@ const Pets = () => {
                     />
                     <div className="d-flex justify-content-center">
                       <button
-                        type="submit"
+                        type="submit" disabled={!animalTypeFilter || !breedTypeFilter}
                         data-bs-dismiss={animalTypeFilter && breedTypeFilter ? "modal" : ''} // Modal closes only when fields are valid
                         // disabled={!animalTypeFilter || !breedTypeFilter} // Disable button if fields are invalid
                         // onClick={fillterPets}

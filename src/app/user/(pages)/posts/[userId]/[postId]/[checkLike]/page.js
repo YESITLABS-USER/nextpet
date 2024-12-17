@@ -156,6 +156,7 @@ const ContactPetDetails = () => {
                           height={31}
                         />
                       </div>
+                      {postData?.total_contact && postData?.total_contact}
                     </div>
                     <div className="inner-heartt" onClick={handlePostLike}>
                       <div className="inner-heartt-div">
@@ -170,6 +171,7 @@ const ContactPetDetails = () => {
                           height={39}
                         />
                       </div>
+                      {postData?.total_like && postData?.total_like}
                     </div>
                     <div className="inner-heartt"  style={{ padding: "7px 4px", borderRadius:'100%' }}>
                       <div className="inner-heartt-div" onClick={handleShare}>

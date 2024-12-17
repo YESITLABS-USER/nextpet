@@ -16,6 +16,8 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const HomePopularBreddersSec = ({ slides, onClick }) => {
+console.log(slides)
+
   const [userId, setUserId] = useState(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);

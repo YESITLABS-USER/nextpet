@@ -71,10 +71,10 @@ const Post = () => {
     
                         
                         <div className="leads-right">
-                            <h1>You have no Posts Created.</h1>
+                            <h1 style={{color:'black'}}>You have no Posts Created.</h1>
                             <form>
                                 <div className="profile-btn-wrap">
-                                    <button type="submit" value="Submit"><Link href="create-post">Post a Pet</Link> </button>
+                                    <button type="submit" value="Submit"><Link href="create-post" style={{ color:'black'}}>Post a Pet</Link> </button>
                                 </div>
                             </form>
                         </div>

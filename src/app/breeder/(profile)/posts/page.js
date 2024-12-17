@@ -93,6 +93,9 @@ const Post = () => {
     };
     try {
       const response = await axios.post(`${BASE_URL}/api/post_filter`, user);
+      if(response.data.code== 400){
+        setAllBreederPosts([]);
+      }
       if (response.data.code === 200) {
         setAllBreederPosts(response.data.data);
       }
@@ -206,8 +209,10 @@ const Post = () => {
                         <div>
                           loading ....
                         </div>}
-                      { }
-                      {currentPosts.length > 0 && currentPosts.map((post) => (
+                    {currentPosts?.length === 0 ? (
+                      <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Posts Found...</h1>
+                    ) : (
+                      currentPosts.length > 0 && currentPosts.map((post) => (
                         <div className="post-cards-wrap" key={post.post_id}>
                           <div className="post-cardsimg-wrap relative">
                             {/* <span style={{position:'absolute', top:'5px', left:'5px', fontSize:'12px', color:'gray'}}> {formatDate(post?.created_at)} </span> */}
@@ -305,7 +310,7 @@ const Post = () => {
                             </div>
                           )}
                         </div>
-                      ))}
+                      )))}
                     </div>
 
                     <Pagination

@@ -10,7 +10,7 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 body::-webkit-scrollbar {
@@ -50,7 +50,11 @@ img {
   padding: 12px 14px;
 
   & .inner-sectiontop {
-    display: flex;
+    display: flex !important;
+
+
+
+
     gap: 15px;
     margin-right: 13px;
     justify-content: end;
@@ -64,7 +68,7 @@ img {
     }
 
     .social-icons {
-      display: flex;
+      display: flex !important;
       gap: 19px;
       align-items: center;
 
@@ -148,7 +152,7 @@ img {
 .notification-list-item {
   width: 100%;
   height: auto;
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
   align-items: center;
   gap: 15px;
@@ -198,7 +202,7 @@ img {
 /* RADIO BTN CSS */
 
 .notification-heading {
-  display: flex;
+  display: flex !important;
   align-items: center;
 }
 
@@ -240,18 +244,19 @@ img {
   transition: 0.4s;
 }
 
-.notification-heading input:checked + .slider {
+.notification-heading input:checked+.slider {
   background-color: #fff;
 }
 
-.notification-heading input:focus + .slider {
+.notification-heading input:focus+.slider {
   box-shadow: 0 0 1px #fff;
 }
 
-.notification-heading input:checked + .slider:before {
+.notification-heading input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+  background: linear-gradient(144.49deg, #e49a01 19.53%, #ffc21a 104.52%);
 }
 
 .notification-heading .slider.round {
@@ -260,6 +265,7 @@ img {
 
 .notification-heading .slider.round:before {
   border-radius: 50%;
+  background: #bbb;
 }
 
 /* RADIO BTN CSS */
@@ -287,7 +293,7 @@ img {
   .nav-location {
     margin-right: auto;
     margin-left: 100px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 4px;
   }
@@ -304,7 +310,7 @@ img {
 
   ul.navbar-nav {
     gap: 50px;
-    display: flex;
+    display: flex !important;
     align-items: center;
   }
 
@@ -313,6 +319,7 @@ img {
     font-size: 16px;
     font-weight: 400;
     padding: 0;
+    box-shadow: none;
   }
 
   ul.navbar-nav li.nav-item a.active {
@@ -345,7 +352,7 @@ img {
 
 .my-profile-nav {
   a {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -380,7 +387,7 @@ img {
   outline: none;
   border-radius: 24px;
   background: #fff;
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 5px;
 
@@ -397,7 +404,7 @@ img {
     margin-left: 5px;
     width: auto;
     height: 21px;
-    display: flex;
+    display: flex !important;
     align-items: center;
   }
 }
@@ -425,7 +432,7 @@ img {
   width: 100%;
   border-radius: 5px;
   background: rgba(3, 45, 98, 0.12);
-  display: flex;
+  display: flex !important;
   align-items: center;
 }
 
@@ -469,7 +476,7 @@ img {
   color: #333;
   font-size: 14px;
   font-weight: 500;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
@@ -551,7 +558,7 @@ img {
   font-weight: 400;
   font-family: "GoodDog New";
   line-height: 50px;
-  margin-left: 36px;
+  margin-left: 0;
   margin-bottom: 25px;
 }
 
@@ -562,7 +569,7 @@ img {
   color: #fff;
   margin-bottom: 26px;
   line-height: 29.44px;
-  margin-left: 36px;
+  margin-left: 0;
   text-align: left;
 }
 
@@ -570,12 +577,13 @@ img {
   width: 90%;
   height: auto;
   margin: auto;
+  margin-left: 0;
 }
 
 .banner-inner form label {
   width: 100%;
   height: 50px;
-  display: flex;
+  display: flex !important;
   align-items: center;
   position: relative;
   padding: 0px;
@@ -636,7 +644,7 @@ img {
   border-radius: 4px;
   background: #fff;
   /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25); */
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -651,7 +659,7 @@ img {
 }
 
 .banner-inner-category {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 14px;
   padding: 14px 24px;
@@ -741,7 +749,7 @@ img {
 #banner-cat-slider .owl-nav button i {
   font-size: 14px;
   text-align: center;
-  display: flex;
+  display: flex !important;
   font-weight: 600;
   justify-content: center;
   height: 100%;
@@ -792,7 +800,7 @@ img {
 
 .breederform-popup-wrap {
   .agreed-wrap {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 3px;
     margin-top: 15px;
@@ -829,7 +837,7 @@ img {
   }
 
   img {
-    display: flex;
+    display: flex !important;
     margin: 0 auto;
   }
 
@@ -861,7 +869,7 @@ img {
   }
 
   .breederimg-popup-wrap {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 14px;
 
@@ -935,7 +943,7 @@ img {
 }
 
 .ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   position: relative;
   align-items: center;
@@ -1045,7 +1053,7 @@ img {
   }
 
   img {
-    display: flex;
+    display: flex !important;
     margin: 0 auto;
   }
 }
@@ -1093,7 +1101,7 @@ img {
   }
 
   img {
-    display: flex;
+    display: flex !important;
     margin: 0 auto;
   }
 
@@ -1103,7 +1111,7 @@ img {
     color: #000 !important;
     padding: 9px 43px;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 30px;
     background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
     text-align: center;
@@ -1173,7 +1181,7 @@ img {
     color: #000 !important;
     padding: 9px 43px;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 30px;
     background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
     text-align: center;
@@ -1184,7 +1192,7 @@ img {
   }
 
   .coach-form-wrap {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 14px;
 
@@ -1230,6 +1238,7 @@ img {
     textarea::placeholder {
       color: #424242;
     }
+
   }
 }
 
@@ -1275,6 +1284,8 @@ img {
   text-align: left;
   color: #e49a01;
   font-size: 24px;
+  display: inline-block;
+  margin-bottom: 12px;
 }
 
 .aboutus-wrap-in h2 {
@@ -1338,7 +1349,7 @@ img {
   .newyear-cat-dog-in {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: flex !important;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
@@ -1351,6 +1362,7 @@ img {
     margin: 18px 0px 0px 0px;
     gap: 0px;
     border-radius: 10px !important;
+    overflow: hidden;
   }
 
   .newyear-catimg-wrap {
@@ -1362,7 +1374,7 @@ img {
     /* width: 274px; */
     width: 100%;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10px 10px 66px 0px;
   }
 
@@ -1370,7 +1382,7 @@ img {
     position: absolute;
     top: 11px;
     padding: 10px 10px;
-    display: flex;
+    display: flex !important;
     right: 11px;
     background: #fff;
     border-radius: 33px;
@@ -1398,7 +1410,7 @@ img {
   }
 
   .heading-content {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-between;
   }
@@ -1407,7 +1419,7 @@ img {
     box-shadow: 0px 1px 4px 0px #00000040;
     padding: 10px 9px;
     border-radius: 32px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     /* gap: 22px; */
     flex-direction: column;
@@ -1427,7 +1439,7 @@ img {
   }
 
   .viewmore-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
   }
 
@@ -1435,11 +1447,15 @@ img {
     background: #197e00;
     padding: 4px 9px;
     border-radius: 4px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
   }
 
   .rating-wrap span {
     font-size: 9px;
     color: #fff;
+    display: inline-block;
   }
 
   .viewmore-wrap a {
@@ -1495,6 +1511,10 @@ img {
     width: 80%;
     line-height: 22px;
     margin-bottom: 7px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   #newyear-cat-dog-slider .owl-nav {
@@ -1522,7 +1542,7 @@ img {
   #newyear-cat-dog-slider .owl-nav button i {
     font-size: 14px;
     text-align: center;
-    display: flex;
+    display: flex !important;
     font-weight: 600;
     justify-content: center;
     height: 100%;
@@ -1562,7 +1582,7 @@ img {
 
 .between-bannershead-wrap {
   padding: 0px 40px 3px 40px;
-  display: flex;
+  display: flex !important;
   align-items: baseline;
   justify-content: space-between;
   margin-top: -36px;
@@ -1602,7 +1622,7 @@ img {
   .recentposted-cat-dog-in {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: flex !important;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
@@ -1621,7 +1641,7 @@ img {
     width: 100%;
     /* width: 274px; */
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10px 10px 66px 0px;
   }
 
@@ -1689,7 +1709,7 @@ img {
   #recentposted-cat-dog-slider .owl-nav button i {
     font-size: 14px;
     text-align: center;
-    display: flex;
+    display: flex !important;
     font-weight: 600;
     justify-content: center;
     height: 100%;
@@ -1730,7 +1750,7 @@ img {
       position: absolute;
       top: 11px;
       padding: 10px 10px;
-      display: flex;
+      display: flex !important;
       right: 11px;
       background: #fff;
       border-radius: 33px;
@@ -1760,7 +1780,7 @@ img {
 
   .recentposted-content-card {
     .heading-content {
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: space-between;
     }
@@ -1769,7 +1789,7 @@ img {
       box-shadow: 0px 1px 4px 0px #00000040;
       padding: 10px 9px;
       border-radius: 32px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       /* gap: 22px; */
       flex-direction: column;
@@ -1789,7 +1809,7 @@ img {
     }
 
     .viewmore-wrap {
-      display: flex;
+      display: flex !important;
       justify-content: space-between;
     }
 
@@ -1797,6 +1817,7 @@ img {
       background: #197e00;
       padding: 4px 9px;
       border-radius: 4px;
+      display: flex !important;
     }
 
     .rating-wrap span {
@@ -1820,6 +1841,12 @@ img {
       margin-bottom: 0;
     }
   }
+}
+
+.recentposted-cat-dog-wrap .custom-navigation button.swiper-button-prev,
+.recentposted-cat-dog-wrap .custom-navigation button.swiper-button-next {
+  background: #FFC21A;
+  color: #2F353E;
 }
 
 /* RECENTLY POSTED SEC CSS */
@@ -1891,8 +1918,7 @@ img {
   text-align: left;
 }
 
-.nextpet-app-wrap-in a {
-}
+.nextpet-app-wrap-in a {}
 
 .nextpet-app-wrap-in a img {
   width: 143px;
@@ -1912,9 +1938,9 @@ img {
 .popular-breedersimg-wrap img {
   /* width: 274px; */
   width: 100%;
-  height: 206px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px 10px 40px 40px;
+  border-radius: 10px 10px 30px 30px;
 }
 
 #popular-breeders-slider .owl-nav {
@@ -1942,7 +1968,7 @@ img {
 #popular-breeders-slider .owl-nav button i {
   font-size: 14px;
   text-align: center;
-  display: flex;
+  display: flex !important;
   font-weight: 600;
   justify-content: center;
   height: 100%;
@@ -1973,7 +1999,7 @@ img {
     position: absolute;
     top: 11px;
     padding: 10px 10px;
-    display: flex;
+    display: flex !important;
     right: 11px;
     background: #fff;
     border-radius: 33px;
@@ -2011,7 +2037,7 @@ img {
   /* width: 274px; */
   width: 100%;
   object-fit: cover;
-  border-radius: 10px 10px 40px 40px;
+  border-radius: 10px 10px 30px 30px;
 }
 
 #trending-pets-slider .owl-nav {
@@ -2039,7 +2065,7 @@ img {
 #trending-pets-slider .owl-nav button i {
   font-size: 14px;
   text-align: center;
-  display: flex;
+  display: flex !important;
   font-weight: 600;
   justify-content: center;
   height: 100%;
@@ -2072,7 +2098,7 @@ img {
 .breeder-signinflow-inner {
   width: 100%;
   height: auto;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   /* background: #fff; */
@@ -2086,7 +2112,7 @@ img {
   flex: 50%;
   height: 100%;
   padding: 50px 103px;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   position: relative;
 
@@ -2095,10 +2121,10 @@ img {
   }
 }
 
-.breeder-signin-rightsec {
+.c {
   flex: 50%;
   height: 100%;
-  display: flex;
+  display: flex !important;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -2111,7 +2137,7 @@ img {
     background: #fff;
     padding: 51px 50px 58px 50px;
     /* padding: 0px; */
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     gap: 25px;
@@ -2142,7 +2168,7 @@ img {
     background: #fff;
     position: relative;
     overflow: hidden;
-    display: flex;
+    display: flex !important;
     align-items: center;
 
     .login-lbl-img {
@@ -2184,7 +2210,7 @@ img {
 
   .otp-verification-input {
     width: 100%;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     gap: 15px;
     margin-bottom: 15px;
@@ -2203,9 +2229,7 @@ img {
     text-align: center;
   }
 
-  .otp-verification-input
-    .otp-verification-input
-    .inputs::-webkit-outer-spin-button,
+  .otp-verification-input .otp-verification-input .inputs::-webkit-outer-spin-button,
   .otp-verification-input .inputs::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -2218,7 +2242,7 @@ img {
     height: auto;
     color: #000 !important;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 30px;
     background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
     text-align: center;
@@ -2228,6 +2252,10 @@ img {
     font-weight: 700;
     padding: 12px 0;
     display: flex !important;
+
+
+
+
     margin: 0 auto !important;
   }
 
@@ -2240,6 +2268,10 @@ img {
     line-height: 5px;
     color: #000;
     display: flex !important;
+
+
+
+
     font-size: 16px;
     font-weight: 500;
     justify-content: end;
@@ -2248,8 +2280,13 @@ img {
       color: #000000;
     }
   }
-  .signin-button-wrap{
+
+  .signin-button-wrap {
     display: flex !important;
+
+
+
+
     justify-content: center !important;
   }
 
@@ -2284,7 +2321,11 @@ img {
   }
 
   .social-login-wrap {
-    display: flex !important  ;
+    display: flex !important;
+
+
+
+
     justify-content: center !important;
     gap: 35px !important;
     padding: 10px 0 !important;
@@ -2297,6 +2338,10 @@ img {
 
   .dont-have-accountwrap {
     display: flex !important;
+
+
+
+
     flex-direction: column !important;
     gap: 13px !important;
 
@@ -2350,7 +2395,7 @@ img {
   position: absolute;
   width: 20px;
   height: 20px;
-  display: flex;
+  display: flex !important;
   top: auto;
   right: 15px;
   border: none;
@@ -2447,7 +2492,7 @@ img {
       height: 34px;
       position: absolute;
       bottom: 9px;
-      display: flex;
+      display: flex !important;
       right: -4px;
       margin: 0;
       background: #fff;
@@ -2474,7 +2519,7 @@ img {
 
   .profile-form-wrap {
     padding: 0 30px 0 30px;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 15px;
 
@@ -2538,7 +2583,7 @@ img {
     }
 
     .profile-btn-wrap {
-      display: flex;
+      display: flex !important;
       justify-content: center;
 
       button {
@@ -2547,7 +2592,7 @@ img {
         color: #000 !important;
         padding: 14px 62px;
         border: none;
-        display: flex;
+        display: flex !important;
         border-radius: 30px;
         background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
         text-align: center;
@@ -2584,7 +2629,7 @@ img {
       .gallery-heading {
         border-bottom: 1px solid #e49a01;
         padding-bottom: 6px;
-        display: flex;
+        display: flex !important;
         align-items: center;
 
         h3 {
@@ -2592,7 +2637,7 @@ img {
           font-size: 20px;
           font-weight: 500;
           font-family: Open Sans;
-          display: flex;
+          display: flex !important;
           margin-bottom: 0;
           gap: 5px;
         }
@@ -2643,7 +2688,7 @@ img {
     }
 
     .gallery-box-wrap {
-      display: flex;
+      display: flex !important;
       gap: 12px;
       align-items: center;
 
@@ -2652,7 +2697,7 @@ img {
         margin-top: 14px;
         padding: 56px 21px;
         border-radius: 9px;
-        display: flex;
+        display: flex !important;
         justify-content: center;
         width: 14%;
         position: relative;
@@ -2667,7 +2712,7 @@ img {
           position: absolute;
           bottom: 0;
           top: 0;
-          display: flex;
+          display: flex !important;
           right: 0;
           align-items: center;
           justify-content: center;
@@ -2699,7 +2744,7 @@ img {
   .breedeerdasboard-profile-inner {
     width: 100%;
     height: auto;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     gap: 20px;
 
@@ -2724,7 +2769,7 @@ img {
         display: block;
         background: #fff;
         border-bottom: 1px solid #d9d9d9;
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 18px;
       }
@@ -2742,20 +2787,16 @@ img {
       }
 
       & ul li a:hover {
-        background: radial-gradient(
-          108.18% 50% at 50% 50%,
-          #ffe352 0%,
-          #ffbd12 100%
-        );
+        background: radial-gradient(108.18% 50% at 50% 50%,
+            #ffe352 0%,
+            #ffbd12 100%);
         color: #000;
       }
 
       & ul li a.active {
-        background: radial-gradient(
-          108.18% 50% at 50% 50%,
-          #ffe352 0%,
-          #ffbd12 100%
-        );
+        background: radial-gradient(108.18% 50% at 50% 50%,
+            #ffe352 0%,
+            #ffbd12 100%);
         color: var(--Primary-White, #000);
         font-size: 16px;
         font-style: normal;
@@ -2842,7 +2883,7 @@ img {
           height: 34px;
           position: absolute;
           bottom: 9px;
-          display: flex;
+          display: flex !important;
           right: -4px;
           margin: 0;
           background: #fff;
@@ -2869,7 +2910,7 @@ img {
 
       .profile-form-wrap {
         padding: 0 30px 0 30px;
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         gap: 15px;
 
@@ -2933,7 +2974,7 @@ img {
         }
 
         .profile-btn-wrap {
-          display: flex;
+          display: flex !important;
           justify-content: center;
 
           button {
@@ -2942,7 +2983,7 @@ img {
             color: #000 !important;
             padding: 14px 31px;
             border: none;
-            display: flex;
+            display: flex !important;
             border-radius: 30px;
             background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
             text-align: center;
@@ -2979,7 +3020,7 @@ img {
           .gallery-heading {
             border-bottom: 1px solid #e49a01;
             padding-bottom: 6px;
-            display: flex;
+            display: flex !important;
             align-items: center;
 
             h3 {
@@ -2987,7 +3028,7 @@ img {
               font-size: 20px;
               font-weight: 500;
               font-family: Open Sans;
-              display: flex;
+              display: flex !important;
               margin-bottom: 0;
               gap: 5px;
             }
@@ -3038,7 +3079,7 @@ img {
         }
 
         .gallery-box-wrap {
-          display: flex;
+          display: flex !important;
           gap: 12px;
           align-items: center;
 
@@ -3047,7 +3088,7 @@ img {
             margin-top: 14px;
             padding: 56px 21px;
             border-radius: 9px;
-            display: flex;
+            display: flex !important;
             justify-content: center;
             width: 14%;
             position: relative;
@@ -3062,7 +3103,7 @@ img {
               position: absolute;
               bottom: 0;
               top: 0;
-              display: flex;
+              display: flex !important;
               right: 0;
               align-items: center;
               justify-content: center;
@@ -3081,7 +3122,7 @@ img {
         }
 
         .gallery-uploadedbox-wrap {
-          display: flex;
+          display: flex !important;
           gap: 12px;
           align-items: center;
 
@@ -3106,7 +3147,7 @@ img {
           .available-heading {
             border-bottom: 1px solid #e49a01;
             padding-bottom: 6px;
-            display: flex;
+            display: flex !important;
             align-items: center;
 
             h3 {
@@ -3114,7 +3155,7 @@ img {
               font-size: 20px;
               font-weight: 500;
               font-family: Open Sans;
-              display: flex;
+              display: flex !important;
               margin-bottom: 0;
               gap: 5px;
             }
@@ -3164,7 +3205,7 @@ img {
           }
 
           & .available-plansbox-wrap {
-            display: flex;
+            display: flex !important;
             gap: 12px;
             align-items: center;
 
@@ -3185,7 +3226,7 @@ img {
             }
 
             .price-sec-wrap {
-              display: flex;
+              display: flex !important;
               justify-content: space-between;
               margin-bottom: 10px;
 
@@ -3199,7 +3240,7 @@ img {
             }
 
             .available-plans-btns {
-              display: flex;
+              display: flex !important;
               justify-content: center;
 
               button {
@@ -3208,13 +3249,11 @@ img {
                 color: #000 !important;
                 padding: 6px 24px;
                 border: none;
-                display: flex;
+                display: flex !important;
                 border-radius: 30px;
-                background: linear-gradient(
-                  270deg,
-                  #e09100 -18.6%,
-                  #f5c006 100%
-                );
+                background: linear-gradient(270deg,
+                    #e09100 -18.6%,
+                    #f5c006 100%);
                 text-align: center;
                 align-items: center;
                 justify-content: center;
@@ -3256,7 +3295,7 @@ img {
           .coaching-heading {
             border-bottom: 1px solid #e49a01;
             padding-bottom: 6px;
-            display: flex;
+            display: flex !important;
             align-items: center;
             margin-bottom: 9px;
 
@@ -3265,7 +3304,7 @@ img {
               font-size: 20px;
               font-weight: 500;
               font-family: Open Sans;
-              display: flex;
+              display: flex !important;
               margin-bottom: 0;
               gap: 5px;
             }
@@ -3313,7 +3352,7 @@ img {
   }
 
   & .profile-btn-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
 
     button {
@@ -3322,7 +3361,7 @@ img {
       color: #000 !important;
       padding: 14px 64px;
       border: none;
-      display: flex;
+      display: flex !important;
       border-radius: 30px;
       background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
       text-align: center;
@@ -3343,7 +3382,7 @@ img {
 
   .quotes2 {
     position: relative;
-    display: flex;
+    display: flex !important;
     justify-content: end;
     margin-bottom: 14px;
   }
@@ -3362,7 +3401,7 @@ img {
     background: #e49a01;
     max-width: 82px;
     text-align: left;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-around;
   }
@@ -3381,7 +3420,7 @@ img {
   }
 
   .filter-data-list {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 3px;
     margin-bottom: 4px;
@@ -3443,7 +3482,7 @@ img {
 
   .leads-card-wrap {
     padding: 14px 2px;
-    display: flex;
+    display: flex !important;
     align-items: flex-start;
     gap: 14px;
     flex-wrap: wrap;
@@ -3454,7 +3493,7 @@ img {
       background: #fffcea;
       border-radius: 10px;
       padding: 14px 14px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 17px;
       width: 49%;
@@ -3471,7 +3510,7 @@ img {
 
     .leads-content-wrap {
       & .headinglead-wrap {
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 37px;
 
@@ -3516,7 +3555,7 @@ img {
       }
 
       .date-wrap {
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 48px;
 
@@ -3565,7 +3604,7 @@ img {
   /* user breeder toggle css */
 
   .heading-favourite {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -3573,13 +3612,11 @@ img {
   }
 
   .user-breeder-toggle {
-    background: radial-gradient(
-      108.18% 50% at 50% 50%,
-      #ffe352 0%,
-      #ffbd12 100%
-    );
+    background: radial-gradient(108.18% 50% at 50% 50%,
+        #ffe352 0%,
+        #ffbd12 100%);
     border-radius: 30px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -3631,15 +3668,15 @@ img {
       transition: 0.4s;
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
       background-color: #fff;
     }
 
-    input:focus + .slider {
+    input:focus+.slider {
       box-shadow: 0 0 1px #fff;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
@@ -3659,7 +3696,7 @@ img {
   /* filter sec css */
 
   & .filter-sec {
-    display: flex;
+    display: flex !important;
     align-items: baseline;
     gap: 14px;
     justify-content: flex-end;
@@ -3671,7 +3708,7 @@ img {
     color: #000 !important;
     padding: 11px 22px;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 6px;
     background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
     text-align: center;
@@ -3691,7 +3728,7 @@ img {
 
   & .quotes2 {
     position: relative;
-    display: flex;
+    display: flex !important;
     justify-content: end;
     margin-bottom: 14px;
   }
@@ -3710,7 +3747,7 @@ img {
     background: #e49a01;
     max-width: 82px;
     text-align: left;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-around;
   }
@@ -3729,7 +3766,7 @@ img {
   }
 
   .filter-data-list {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 3px;
     margin-bottom: 4px;
@@ -3768,7 +3805,7 @@ img {
   /* post card css */
 
   .all-posts-cards {
-    display: flex;
+    display: flex !important;
     gap: 15px;
     flex-wrap: wrap;
     margin-bottom: 14px;
@@ -3789,6 +3826,7 @@ img {
     padding-bottom: 0px;
     margin: 0px 0px 0px 0px;
     gap: 0px;
+    overflow: hidden;
 
     .post-cardsimg-wrap {
       position: relative;
@@ -3798,11 +3836,11 @@ img {
       img {
         width: 100%;
         height: auto;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 0px 0px 66px 0px;
       }
-      
-      .postImage{
+
+      .postImage {
         min-height: 200px;
         max-height: 250px;
       }
@@ -3811,7 +3849,7 @@ img {
         position: absolute;
         top: 11px;
         padding: 10px 10px;
-        display: flex;
+        display: flex !important;
         right: 11px;
         background: #fff;
         border-radius: 33px;
@@ -3842,7 +3880,7 @@ img {
         position: absolute;
         top: 75px;
         padding: 10px 10px;
-        display: flex;
+        display: flex !important;
         right: 13px;
         background: #fff;
         border-radius: 33px;
@@ -3887,7 +3925,7 @@ img {
       }
 
       .viewmore-wrap {
-        display: flex;
+        display: flex !important;
         justify-content: space-between;
 
         h4 {
@@ -3919,7 +3957,7 @@ img {
     }
 
     .posts-content {
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: space-between;
 
@@ -3929,6 +3967,7 @@ img {
         border-radius: 4px;
 
         span {
+          display: inline-block;
           font-size: 12px;
           color: #fff;
         }
@@ -3940,7 +3979,7 @@ img {
         box-shadow: 0px 1px 4px 0px #00000040;
         padding: 9px 9px;
         border-radius: 32px;
-        display: flex;
+        display: flex !important;
         align-items: center;
         /* gap: 22px; */
         flex-direction: column;
@@ -4005,7 +4044,7 @@ img {
   .contacted-breeder-inner {
     width: 100%;
     height: auto;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     gap: 20px;
   }
@@ -4061,7 +4100,7 @@ img {
     .contacted-heading {
       border-bottom: 1px solid #000;
       padding-bottom: 16px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: space-between;
 
@@ -4070,7 +4109,7 @@ img {
         font-size: 24px;
         font-weight: 500;
         font-family: "GoodDog New";
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -4079,7 +4118,7 @@ img {
         position: relative;
         top: -5px;
         padding: 10px 10px;
-        display: flex;
+        display: flex !important;
         right: 11px;
         background: #fff;
         border-radius: 33px;
@@ -4109,7 +4148,7 @@ img {
     }
 
     .viewmore-wrap {
-      display: flex;
+      display: flex !important;
       justify-content: space-between;
 
       h4 {
@@ -4135,7 +4174,7 @@ img {
   .experience-heading {
     border-bottom: 1px solid #e49a01;
     padding-bottom: 6px;
-    display: flex;
+    display: flex !important;
     align-items: center;
 
     h3 {
@@ -4143,7 +4182,7 @@ img {
       font-size: 18px;
       font-weight: 500;
       font-family: "GoodDog New";
-      display: flex;
+      display: flex !important;
       margin-bottom: 0;
       gap: 5px;
     }
@@ -4195,7 +4234,7 @@ img {
         font-size: 14px;
         font-weight: 700;
         font-family: Open Sans;
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -4217,7 +4256,7 @@ img {
 
     & .inner-btns-rating {
       margin-bottom: 16px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 96px;
 
@@ -4228,7 +4267,7 @@ img {
         color: #252525 !important;
         padding: 6px 24px;
         border: none;
-        display: flex;
+        display: flex !important;
         border-radius: 30px;
         background: #fff;
         text-align: center;
@@ -4247,14 +4286,14 @@ img {
     }
 
     .star-ratings-coming {
-      display: flex;
+      display: flex !important;
       gap: 13px;
     }
   }
 
   .updatedstatus-btn-ratingwrap {
     padding-top: 16px;
-    display: flex;
+    display: flex !important;
     gap: 29px;
     justify-content: center;
 
@@ -4267,7 +4306,7 @@ img {
         color: #252525 !important;
         padding: 6px 24px;
         border: none;
-        display: flex;
+        display: flex !important;
         border-radius: 30px;
         background: #fff;
         text-align: center;
@@ -4333,7 +4372,7 @@ img {
   }
 
   & .contucted-btn-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
 
     button {
@@ -4342,7 +4381,7 @@ img {
       color: #000 !important;
       padding: 14px 62px;
       border: none;
-      display: flex;
+      display: flex !important;
       border-radius: 30px;
       background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
       text-align: center;
@@ -4360,7 +4399,7 @@ img {
   }
 
   & .calender-warp {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 16px;
 
@@ -4400,7 +4439,7 @@ img {
   text-align: center;
   margin-top: 2px;
   /* position: relative; */
-  display: flex;
+  display: flex !important;
   padding: 0 0px 0 0px;
   align-items: center;
   justify-content: center;
@@ -4467,7 +4506,7 @@ img {
   .breedeerdasboard-createpost-inner {
     width: 100%;
     height: auto;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     gap: 20px;
 
@@ -4496,7 +4535,7 @@ img {
         padding: 14px 14px;
         border-radius: 10px 10px 0 0;
         height: 300px;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         position: relative;
@@ -4507,7 +4546,7 @@ img {
       }
 
       .add-icon-upload {
-        display: flex;
+        display: flex !important;
         justify-content: center;
         flex-direction: column;
         align-items: center;
@@ -4542,7 +4581,7 @@ img {
         /* width: 100%; */
         border-radius: 10px 10px 0 0;
         height: auto;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         position: relative;
@@ -4562,7 +4601,7 @@ img {
 
         #uploaded-post-imgs .owl-dots {
           margin-top: -19px;
-          display: flex;
+          display: flex !important;
           gap: 5px;
           align-items: center;
           justify-content: center;
@@ -4595,27 +4634,46 @@ img {
       border-radius: 2px;
 
       .edit-heartpost {
-        display: flex;
+        display: flex !important;
         gap: 16px;
         /* align-items: center; */
 
         .inner-heartt {
-          display: flex;
+          display: flex ;
           flex-direction: column;
           align-items: center;
+          gap: 5px;
         }
 
-        .inner-heartt-div{
+        .inner-heartt-div {
           margin: 0;
           background: #fff;
           border-radius: 50%;
-          padding: 11px 7px;
+          padding: 0px;
           cursor: pointer;
+          width: 42px;
+          height: 42px;
           box-shadow: 0px 2px 10px 0px #00000040;
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            border-radius: 0;
+            object-fit: contain;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+          }
         }
 
-        .inner-heartt-div:hover{
-          background-color: yellow;
+        .inner-heartt-div:hover {
+          /* background-color: #68f146; */
+          background-color: #e49a01;
+        }
+
+        .inner-heartt-div:hover img {
+          filter: brightness(0) invert(1);
         }
 
         a {
@@ -4630,16 +4688,16 @@ img {
       .postcreate-heading {
         border-bottom: 1px solid #000;
         padding-bottom: 16px;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: space-between;
 
         h3 {
           color: #000;
-          font-size: 24px;
+          font-size: 32px;
           font-weight: 500;
           font-family: "GoodDog New";
-          display: flex;
+          display: flex !important;
           margin-bottom: 0;
           gap: 5px;
         }
@@ -4649,6 +4707,11 @@ img {
           background: #fff;
           border-radius: 50%;
           box-shadow: 0px 2px 10px 0px #00000040;
+          width: 40px;
+          height: 40px;
+          padding: 0;
+          justify-content: center;
+          align-items: center;
         }
 
         img {
@@ -4691,7 +4754,7 @@ img {
           font-size: 18px;
           font-weight: 500;
           font-family: "GoodDog New";
-          display: flex;
+          display: flex !important;
           margin-bottom: 14px;
           margin-top: 14px;
           gap: 5px;
@@ -4699,7 +4762,7 @@ img {
 
         & .list-post-form {
           .formdata-wrap:nth-child(odd) {
-            display: flex;
+            display: flex !important;
             align-items: baseline;
             justify-content: space-between;
             padding: 8px 3px 8px 47px;
@@ -4707,7 +4770,7 @@ img {
           }
 
           .formdata-wrap:nth-child(even) {
-            display: flex;
+            display: flex !important;
             align-items: baseline;
             justify-content: space-between;
             padding: 8px 3px 8px 47px;
@@ -4719,7 +4782,7 @@ img {
             font-size: 18px;
             font-weight: 500;
             font-family: Open Sans;
-            display: flex;
+            display: flex !important;
             margin-bottom: 0;
             gap: 5px;
           }
@@ -4760,7 +4823,7 @@ img {
           .switch-toggle {
             background: #fff;
             border: 2px solid #e49a01;
-            display: flex;
+            display: flex !important;
             width: 20%;
             margin: 12px 0 12px 0;
             height: 30px;
@@ -4771,25 +4834,25 @@ img {
               opacity: 0;
             }
 
-            input + label {
+            input+label {
               padding: 7px;
               font-size: 14px;
               font-weight: 600;
               color: #868686;
               text-align: center;
               justify-content: center;
-              display: flex;
+              display: flex !important;
               align-items: center;
               cursor: pointer;
             }
 
-            input:checked + label {
+            input:checked+label {
               background: #e49a01;
               font-size: 14px;
               color: #fff;
               font-weight: 600;
               justify-content: center;
-              display: flex;
+              display: flex !important;
               align-items: center;
               border-radius: 4px 0 0 4px;
             }
@@ -4798,7 +4861,7 @@ img {
           /* YES NO TOOGLE NEW */
 
           .posts-btn-wrap {
-            display: flex;
+            display: flex !important;
             justify-content: center;
             padding-top: 20px;
             gap: 18px;
@@ -4810,22 +4873,22 @@ img {
               width: auto;
               height: auto;
               color: #000 !important;
-              padding: 14px 62px;
+              padding: 10px 130px;
               border: none;
-              display: flex;
+              display: flex !important;
               border-radius: 30px;
               background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
               text-align: center;
               align-items: center;
               justify-content: center;
               font-size: 18px;
-              font-weight: 700;
+              font-weight: 600;
+              border: 1px solid #fabb15;
             }
 
             button:hover {
               background: transparent;
               border: 1px solid #fabb15;
-              padding: 13px 62px;
             }
           }
         }
@@ -4846,7 +4909,7 @@ img {
   .breedeerdasboard-subscription-inner {
     width: 100%;
     height: auto;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     gap: 20px;
 
@@ -4871,7 +4934,7 @@ img {
         display: block;
         background: #fff;
         border-bottom: 1px solid #d9d9d9;
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 18px;
       }
@@ -4889,20 +4952,16 @@ img {
       }
 
       & ul li a:hover {
-        background: radial-gradient(
-          108.18% 50% at 50% 50%,
-          #ffe352 0%,
-          #ffbd12 100%
-        );
+        background: radial-gradient(108.18% 50% at 50% 50%,
+            #ffe352 0%,
+            #ffbd12 100%);
         color: #000;
       }
 
       & ul li a.active {
-        background: radial-gradient(
-          108.18% 50% at 50% 50%,
-          #ffe352 0%,
-          #ffbd12 100%
-        );
+        background: radial-gradient(108.18% 50% at 50% 50%,
+            #ffe352 0%,
+            #ffbd12 100%);
         color: var(--Primary-White, #000);
         font-size: 16px;
         font-style: normal;
@@ -4947,7 +5006,7 @@ img {
       }
 
       & .subscription-payment-wrap {
-        display: flex;
+        display: flex !important;
         gap: 10px;
         flex-wrap: wrap;
         justify-content: center;
@@ -4965,7 +5024,7 @@ img {
       }
 
       .subscription-btn-wrap {
-        display: flex;
+        display: flex !important;
         justify-content: center;
         padding-top: 30px;
 
@@ -4975,7 +5034,7 @@ img {
           color: #000 !important;
           padding: 14px 62px;
           border: none;
-          display: flex;
+          display: flex !important;
           border-radius: 30px;
           background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
           text-align: center;
@@ -4995,13 +5054,11 @@ img {
       /* header subscription css */
 
       .header-subscription {
-        background: radial-gradient(
-          108.18% 50% at 50% 50%,
-          #ffe352 0%,
-          #ffbd12 100%
-        );
+        background: radial-gradient(108.18% 50% at 50% 50%,
+            #ffe352 0%,
+            #ffbd12 100%);
         padding: 10px 10px;
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         justify-content: center;
         border-radius: 44px 0px 58.74px 0px;
@@ -5038,7 +5095,7 @@ img {
 
       .content-subscription {
         padding: 15px 13px 15px 13px;
-        display: flex;
+        display: flex !important;
         align-items: flex-start;
         gap: 10px;
         flex-direction: column;
@@ -5054,7 +5111,7 @@ img {
         }
 
         & .inner-subscription {
-          display: flex;
+          display: flex !important;
           align-content: flex-start;
           justify-content: center;
           align-items: flex-start;
@@ -5076,7 +5133,7 @@ img {
 /* DELETE YOU ACCOUNT POPUP CSS */
 
 .delete-account-btns {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   gap: 11px;
 
@@ -5086,7 +5143,7 @@ img {
     color: #000 !important;
     padding: 9px 43px;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 30px;
     background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
     text-align: center;
@@ -5102,7 +5159,7 @@ img {
     color: #000 !important;
     padding: 9px 43px;
     border: none;
-    display: flex;
+    display: flex !important;
     border-radius: 30px;
     background: transparent;
     border: 1px solid #e49a01;
@@ -5121,20 +5178,20 @@ img {
 .footer-wrap {
   width: 100%;
   height: auto;
-  padding: 16px 0;
+  padding: 20px 0;
   background-image: url(/images/Nextpet-imgs/footer-imgs/footer-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 
   .footer-logo-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     gap: 16px;
     flex-direction: column;
     align-items: center;
 
     img {
-      width: 155px;
+      width: 200px;
     }
 
     p {
@@ -5143,11 +5200,12 @@ img {
       font-weight: 400;
       line-height: 27.6px;
       text-align: center;
+      width: 65%;
     }
   }
 
   .footer-quick-links {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     gap: 90px;
 
@@ -5160,7 +5218,7 @@ img {
   }
 
   .footer-social-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     margin: 23px 0 14px 0;
     border-bottom: 1px solid #e49a01;
@@ -5168,7 +5226,7 @@ img {
     ul {
       padding: 0;
       margin: 0;
-      display: flex;
+      display: flex !important;
       gap: 15px;
       margin-bottom: 20px;
     }
@@ -5178,7 +5236,7 @@ img {
     }
 
     a {
-      display: flex;
+      display: flex !important;
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -5197,12 +5255,12 @@ img {
   }
 
   .footer-bottom-wrap {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-between;
 
     .download-footer-applink {
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 16px;
     }
@@ -5226,7 +5284,7 @@ img {
 
 .alert-form-wrap {
   padding: 0 30px 0 30px;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 15px;
 
@@ -5236,7 +5294,7 @@ img {
     .alert-heading {
       /* border-bottom: 1px solid #E49A01; */
       padding-bottom: 6px;
-      display: flex;
+      display: flex !important;
       align-items: center;
 
       h3 {
@@ -5244,7 +5302,7 @@ img {
         font-size: 20px;
         font-weight: 500;
         font-family: "GoodDog New";
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -5307,7 +5365,7 @@ img {
     font-size: 16px;
     font-weight: 500;
     font-family: Open Sans;
-    display: flex;
+    display: flex !important;
     margin-bottom: 0px;
     gap: 5px;
   }
@@ -5320,6 +5378,10 @@ img {
     position: relative;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
+
+    p {
+      width: max-content;
+    }
 
     #range {
       -webkit-appearance: none;
@@ -5357,11 +5419,9 @@ img {
       height: 4px;
       cursor: pointer;
       animate: 0.2s;
-      background: linear-gradient(
-        90deg,
-        #e49a01 var(--range-progress),
-        #d9d9d9 var(--range-progress)
-      );
+      background: linear-gradient(90deg,
+          #e49a01 var(--range-progress),
+          #d9d9d9 var(--range-progress));
       border-radius: 1rem;
     }
 
@@ -5482,7 +5542,7 @@ img {
   }
 
   .alert-btn-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
 
     button {
@@ -5491,7 +5551,7 @@ img {
       color: #000 !important;
       padding: 14px 60px;
       border: none;
-      display: flex;
+      display: flex !important;
       border-radius: 30px;
       background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
       text-align: center;
@@ -5532,7 +5592,7 @@ img {
     .gallery-heading {
       border-bottom: 1px solid #e49a01;
       padding-bottom: 6px;
-      display: flex;
+      display: flex !important;
       align-items: center;
 
       h3 {
@@ -5540,7 +5600,7 @@ img {
         font-size: 20px;
         font-weight: 500;
         font-family: Open Sans;
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -5591,7 +5651,7 @@ img {
   }
 
   .gallery-box-wrap {
-    display: flex;
+    display: flex !important;
     gap: 12px;
     align-items: center;
 
@@ -5600,7 +5660,7 @@ img {
       margin-top: 14px;
       padding: 56px 21px;
       border-radius: 9px;
-      display: flex;
+      display: flex !important;
       justify-content: center;
       width: 14%;
       position: relative;
@@ -5615,7 +5675,7 @@ img {
         position: absolute;
         bottom: 0;
         top: 0;
-        display: flex;
+        display: flex !important;
         right: 0;
         align-items: center;
         justify-content: center;
@@ -5634,7 +5694,7 @@ img {
   }
 
   .gallery-uploadedbox-wrap {
-    display: flex;
+    display: flex !important;
     gap: 12px;
     align-items: center;
 
@@ -5659,7 +5719,7 @@ img {
     .available-heading {
       border-bottom: 1px solid #e49a01;
       padding-bottom: 6px;
-      display: flex;
+      display: flex !important;
       align-items: center;
 
       h3 {
@@ -5667,7 +5727,7 @@ img {
         font-size: 20px;
         font-weight: 500;
         font-family: Open Sans;
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -5717,7 +5777,7 @@ img {
     }
 
     & .available-plansbox-wrap {
-      display: flex;
+      display: flex !important;
       gap: 12px;
       align-items: center;
 
@@ -5738,7 +5798,7 @@ img {
       }
 
       .price-sec-wrap {
-        display: flex;
+        display: flex !important;
         justify-content: space-between;
         margin-bottom: 10px;
 
@@ -5752,7 +5812,7 @@ img {
       }
 
       .available-plans-btns {
-        display: flex;
+        display: flex !important;
         justify-content: center;
 
         button {
@@ -5761,7 +5821,7 @@ img {
           color: #000 !important;
           padding: 6px 24px;
           border: none;
-          display: flex;
+          display: flex !important;
           border-radius: 30px;
           background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
           text-align: center;
@@ -5805,7 +5865,7 @@ img {
     .coaching-heading {
       border-bottom: 1px solid #e49a01;
       padding-bottom: 6px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       margin-bottom: 9px;
 
@@ -5814,7 +5874,7 @@ img {
         font-size: 20px;
         font-weight: 500;
         font-family: Open Sans;
-        display: flex;
+        display: flex !important;
         margin-bottom: 0;
         gap: 5px;
       }
@@ -5855,7 +5915,7 @@ img {
   }
 
   & .profile-btn-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
 
     button {
@@ -5864,7 +5924,7 @@ img {
       color: #000 !important;
       padding: 14px 64px;
       border: none;
-      display: flex;
+      display: flex !important;
       border-radius: 30px;
       background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
       text-align: center;
@@ -5885,7 +5945,7 @@ img {
 
   .quotes2 {
     position: relative;
-    display: flex;
+    display: flex !important;
     justify-content: end;
     margin-bottom: 14px;
   }
@@ -5904,7 +5964,7 @@ img {
     background: #e49a01;
     max-width: 82px;
     text-align: left;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-around;
   }
@@ -5923,7 +5983,7 @@ img {
   }
 
   .filter-data-list {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 3px;
     margin-bottom: 4px;
@@ -5985,7 +6045,7 @@ img {
 
   .leads-card-wrap {
     padding: 14px 2px;
-    display: flex;
+    display: flex !important;
     align-items: flex-start;
     gap: 14px;
     flex-wrap: wrap;
@@ -5996,7 +6056,7 @@ img {
       background: #fffcea;
       border-radius: 10px;
       padding: 14px 14px;
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 17px;
       width: 49%;
@@ -6029,7 +6089,7 @@ img {
 
     .leads-content-wrap {
       & .headinglead-wrap {
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: space-between;
         gap: 37px;
@@ -6099,7 +6159,7 @@ img {
       }
 
       .date-wrap {
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 48px;
         margin-top: 7px;
@@ -6120,6 +6180,7 @@ img {
       }
     }
   }
+
   /* leads card sec css */
 }
 
@@ -6142,7 +6203,7 @@ img {
   }
 
   & .subscription-payment-wrap {
-    display: flex;
+    display: flex !important;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
@@ -6160,7 +6221,7 @@ img {
   }
 
   .subscription-btn-wrap {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     padding-top: 30px;
 
@@ -6170,7 +6231,7 @@ img {
       color: #000 !important;
       padding: 14px 62px;
       border: none;
-      display: flex;
+      display: flex !important;
       border-radius: 30px;
       background: linear-gradient(270deg, #e09100 -18.6%, #f5c006 100%);
       text-align: center;
@@ -6190,13 +6251,11 @@ img {
   /* header subscription css */
 
   .header-subscription {
-    background: radial-gradient(
-      108.18% 50% at 50% 50%,
-      #ffe352 0%,
-      #ffbd12 100%
-    );
+    background: radial-gradient(108.18% 50% at 50% 50%,
+        #ffe352 0%,
+        #ffbd12 100%);
     padding: 10px 10px;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: center;
     border-radius: 44px 0px 58.74px 0px;
@@ -6233,7 +6292,7 @@ img {
 
   .content-subscription {
     padding: 15px 13px 15px 13px;
-    display: flex;
+    display: flex !important;
     align-items: flex-start;
     gap: 10px;
     flex-direction: column;
@@ -6249,7 +6308,7 @@ img {
     }
 
     & .inner-subscription {
-      display: flex;
+      display: flex !important;
       align-content: flex-start;
       justify-content: center;
       align-items: flex-start;
@@ -6263,37 +6322,22 @@ img {
 
   /* content subscription css */
 }
-.newyear-cat-dog-wrap {
-  .rating-wrap{
-    padding: 1px 6px !important;
-    
-  }
-}
-.icon-wrapper {
-  display: inline-block;
-  transition: transform 0.3s ease;
-  border-radius: 50%;
-  padding: 5px;
+
+.formdata-wrap .css-1x8o21m-container {
+  width: 50%;
 }
 
-.rotate-up {
-  transform: rotate(180deg);
+.formdata-wrap .css-1x8o21m-container .css-1b7ggsr-control,
+.formdata-wrap .css-1x8o21m-container .css-tv7wn1-control {
+  width: 100%;
 }
 
-.rotate-down {
-  transform: rotate(0deg);
+.formdata-wrap .css-1x8o21m-container .css-1b7ggsr-control span.css-1u9des2-indicatorSeparator,
+.formdata-wrap .css-1x8o21m-container .css-tv7wn1-control span.css-1u9des2-indicatorSeparator {
+  display: none !important;
 }
 
-.ErrorMessage{
-  position: absolute;
-  right: 60px;
-  padding-top: 5px;
+.formdata-wrap .css-1x8o21m-container .css-1b7ggsr-control .css-1xc3v61-indicatorContainer,
+.formdata-wrap .css-1x8o21m-container .css-tv7wn1-control .css-1xc3v61-indicatorContainer {
+  color: #e69e01 !important;
 }
-
-@media screen and (min-width: 768px) {
-  .ErrorMessage{
-    position: absolute;
-    right: 10%;
-  }
-}
-

@@ -60,6 +60,10 @@ const Contacts = () => {
         `${BASE_URL}/api/contacted_list_filter`,
         user
       );
+
+      if (response.data.status_code === 400) {
+        setContactsList([]);
+      }
       if (response.data.status_code === 200) {
         setContactsList(response.data.data);
       }
@@ -166,11 +170,10 @@ const Contacts = () => {
                       </div>
                     </div>
                     
-                    {!(currentPosts && currentPosts.length) &&
-                      <div className="text-center" style={{paddingTop:'45px'}}>No Contacts found</div>
-                    }
                     <div className="leads-card-wrap">
-                      {currentPosts && currentPosts?.map((item, index) => (
+                  {currentPosts?.length === 0 ? (
+                    <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Data Found...</h1>
+                  ) : (currentPosts && currentPosts?.map((item, index) => (
                         <div
                           className={`leads-box" ${
                             item?.status_leads == "Adopted"
@@ -256,7 +259,7 @@ const Contacts = () => {
                             </div>
                           </div>
                         </div>
-                      ))}
+                      )))}
                     </div>
                   </div>
 

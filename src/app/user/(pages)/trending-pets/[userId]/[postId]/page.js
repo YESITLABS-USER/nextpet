@@ -487,8 +487,8 @@ const ContactPetDetails2 = () => {
                 <div className="col-lg-2 col-md-12">
                   <div className="breeder-info-left">
                     <img
-                      src="/images/Nextpet-imgs/dashboard-imgs/brreder-info-img.png"
-                      alt=""
+                      src={postData?.breeder_image || "/images/Nextpet-imgs/dashboard-imgs/brreder-info-img.png"}
+                      alt="image"
                       loading="lazy"
                     />
                   </div>

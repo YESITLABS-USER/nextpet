@@ -258,6 +258,13 @@ const Index = () => {
     );
   
     setFilteredData(filtered);
+
+    if (filtered.length > 0 && filtered[0].latitude && filtered[0].longitude) {
+      setLocation({
+        lat: filtered[0].latitude,
+        lon: filtered[0].longitude,
+      });
+    }
   };
   
   const handleKeyDown = (event) => {

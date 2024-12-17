@@ -95,7 +95,7 @@ const Breeder = () => {
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-    if (event.target.value.length < 1) {
+    if (event.target.value.length < 3) {
       setFilteredData();
     }
   };
@@ -110,6 +110,7 @@ const Breeder = () => {
         ""
       );
     });
+
     setFilteredData(filtered);
   };
 
@@ -141,9 +142,11 @@ const Breeder = () => {
 
   // Logic for pagination
   let petsData = filteredData?.length > 0 ? filteredData : breederList;
+  let allfilteredData = filteredData?.length > 0 ? filteredData : [];
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = petsData?.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = (searchQuery.length>3) && filteredData ? allfilteredData.slice(indexOfFirstPost, indexOfLastPost) : petsData.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleModal = (value) => {
@@ -171,6 +174,9 @@ const Breeder = () => {
     setDropdownVisible(!isDropdownVisible);
   }
 
+  function handleAuth() {
+    router.push("/map-breeder");
+  }
   
   function handleMail(item) {
     if(isAuthenticated){
@@ -258,7 +264,7 @@ const Breeder = () => {
                 </div>
 
                 <div className="location-filter">
-                  <a href="map.html">
+                <span style={{ borderRadius: "10px 0 0 10px", color: '#fff', border: 'none', width: '50px', fontWeight: '500', border: '1px solid #d1d1d1', height: '44px', cursor: 'pointer', background: '#fff'}}  onClick={handleAuth} >
                     <MdLocationOn
                       className="fas fa-map-marker-alt"
                       // onClick={}
@@ -269,7 +275,7 @@ const Breeder = () => {
                       }}
                       size={20}
                     />
-                  </a>
+                  </span>
                   <button type="button">
                     <img
                       src="/images/Nextpet-imgs/all-icons/filter-map-icon.svg"
@@ -282,7 +288,10 @@ const Breeder = () => {
           </div>
 
           <div className="pets-breeder-cards">
-            {currentPosts?.map((item, index) => (
+          {currentPosts?.length === 0 ? (
+              <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Data Found...</h1>
+            ) : (
+            currentPosts?.map((item, index) => (
               <div className="newyear-cat-dog-in" key={index}>
                 <div className="popular-breedersimg-wrap">
                   <Image
@@ -318,7 +327,7 @@ const Breeder = () => {
                     <div className="rating-wrap">
                       <span>
                         {/* {item?.star_rating || 0}&nbsp;{" "} */}
-                        {(Math.round((parseFloat(item?.star_rating || "5")) * 10) / 10).toFixed(1) || 0} &nbsp;
+                        {(Math.round((parseFloat(item?.star_rating || "0")) * 10) / 10).toFixed(1) || 0} &nbsp;
                         <FaStar
                           style={{
                             color: "white",
@@ -375,13 +384,13 @@ const Breeder = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))}
           </div>
 
           <div className="influ-pagi pt-4">
             <Pagination
               postPerPage={postsPerPage}
-              totalPosts={breederList?.length}
+              totalPosts={currentPosts?.length === 0 || petsData?.length}
               paginate={paginate}
               currentPage={currentPage}
             />
