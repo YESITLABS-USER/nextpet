@@ -198,11 +198,6 @@ const CreatePost = () => {
       formData.append("image[]", img);
     });
 
-    // Log FormData contents
-for (let [key, value] of formData.entries()) {
-  console.log(`${key}: ${value}`);
-}
-
     try {
       await axios.post(
         `${BASE_URL}/api/post_breed`,

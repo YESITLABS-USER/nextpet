@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const HomePopularBreddersSec = ({ slides, onClick }) => {
-console.log(slides)
 
   const [userId, setUserId] = useState(null);
   const prevRef = useRef(null);
@@ -166,7 +165,7 @@ console.log(slides)
                     <div className="flex justify-center items-center">
                       <div className="newyear-cat-dog-in">
                         <div className="popular-breedersimg-wrap">
-                        <Image src={slide.image} alt="Popular Breeder" 
+                        <Image src={slide?.image || "/images/Nextpet-imgs/contact-default.webp"} alt="Popular Breeder" 
                           width={500} height={300} /> 
                           <div
                             className="heart-icon-wrap"
