@@ -37,7 +37,7 @@ const VerificationCode = () => {
     } else{
       setError('Otp Send Error. Please try again later')
       console.log('Error in Sending OTP')
-    }
+    } 
   }
 
   useEffect(() => {

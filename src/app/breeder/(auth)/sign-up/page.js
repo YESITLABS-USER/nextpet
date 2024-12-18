@@ -179,8 +179,8 @@ const SignUp = () => {
 
             <div className="terms-condition-paragraph">
               <p>
-                By signing up, you agree to our <a href="#">Privacy Policy</a>
-                and <a href="#">Terms and Conditions</a>.
+                By signing up, you agree to our <Link href={'/privacy-policy'} style={{paddingRight:'3px'}}>Privacy Policy</Link> 
+                and <Link href="/terms-conditions">Terms and Conditions</Link>.
               </p>
             </div>
             <div className="or-sec-wrap">

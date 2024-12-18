@@ -76,18 +76,6 @@ const UserDashboard = () => {
           console.error(error.message);
         });
     };
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition(({ coords }) => {
-    //     const { latitude, longitude } = coords;
-        console.log("Latitude ::", latitude, "Longitude ::", longitude);
-    //     setLatitude(latitude);
-    //     setLongitude(longitude);
-    //   });
-    // } else {
-    //   setLatitude(35.1258);
-    //   setLongitude(17.9859);
-      console.log("Not Allow location");
-    // }
 
     loadUser();
   }, [userId]);

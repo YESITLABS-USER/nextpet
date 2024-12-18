@@ -81,7 +81,7 @@ const BreederDashboard = () => {
                         style={{
                           backgroundImage: formData?.image
                             ? `url(${formData?.image})`
-                            : "url('/images/Nextpet-imgs/all-icons/user.svg')",
+                            : "url('/images/Nextpet-imgs/contact-default.webp')",
                         }}
                         id="imagePreview"
                       />

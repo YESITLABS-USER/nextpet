@@ -131,8 +131,8 @@ function Header() {
                 <Image
                   src="/images/Nextpet-imgs/LOGO.png"
                   alt="Logo"
-                  width={100}
-                  height={100}
+                  width={250}
+                  height={250}
                 />
               </Link>
               <button onClick={() => setMobileToggleBtn((prev) => !prev)} className="navbar-toggler"

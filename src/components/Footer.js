@@ -101,7 +101,7 @@ function Footer() {
                     height={40}
                   />
                 </a>
-                <a href="#">
+                <a href="https://play.google.com/store/apps/details?id=com.yesitlab.petquest&hl=en_IN" target='_blank'>
                   <Image
                     src="/images/Nextpet-imgs/download-app-imgs/googleplay.png"
                     alt="Google Play"

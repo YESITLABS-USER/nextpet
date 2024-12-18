@@ -11,6 +11,7 @@ import { MdNavigateNext } from "react-icons/md";
 import ProtectedRoute from "../../context/ProtectedRoute";
 import Pagination from "../../../components/Pagination";
 import Image from "next/image";
+import { useAuth } from "../../context/AuthContext";
 
 const Favorites = () => {
   const [userId, setUserId] = useState(null);
@@ -24,7 +25,8 @@ const Favorites = () => {
     post_id: "",
     breeder_id: "",
   });
-;
+    const { isAuthenticated } = useAuth(); 
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -47,12 +49,15 @@ const Favorites = () => {
         ? `${BASE_URL}/api/breeder_favourites_list`
         : `${BASE_URL}/api/favourites_list`;
     try {
-      const response = await axios.post(apiURL, user);
-      if (response.data.code === 200 || 400) {
-        setFavoriteList(response.data.data);
-        setShowModal(false);
-        setShowPreviousModal(false);
+      if(userId){
+        const response = await axios.post(apiURL, user);
+        if (response.data.code === 200 || 400) {
+          setFavoriteList(response.data.data);
+          setShowModal(false);
+          setShowPreviousModal(false);
+        }
       }
+      
     } catch (err) {
       console.error("error : ", err);
     }
@@ -86,8 +91,8 @@ const Favorites = () => {
     setIsBreeder(!isBreeder);
   };
 
-  const handleModal = (post_id, breeder_id, contacts_colour) => {
-    setModalData({ post_id, breeder_id, contacts_colour });
+  const handleModal = (post_id, breeder_id, contacts_colour, contacts_date,) => {
+    setModalData({ post_id, breeder_id, contacts_colour, "date_contacts_breeder" : contacts_date, });
     if (contacts_colour == 1) {
       setShowPreviousModal(true);
     } else {
@@ -123,6 +128,22 @@ const Favorites = () => {
   const userPages = {
     page: "favorites",
   };
+
+  function handleMail(item) {
+    if(isAuthenticated){
+      handleModal(
+        item.post_id,
+        item.user_breeder_id,
+        item?.contacts_colour,
+        item?.contacts_date,
+      )
+    } else{
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
+  }
 
   return (
     <>
@@ -169,12 +190,13 @@ const Favorites = () => {
                                 <div className="heart-icon-wrap" onClick={() => handlePostLike(item)}
                                   style={{ cursor: "pointer" }} >
                                   <Image
-                                    width={15}
-                                    height={15}
                                     src={ item?.like_colour == 1
                                         ? "/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
                                         : "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"
                                     }
+                                    width={15}
+                                    height={15}
+                                    
                                     alt=""
                                     className="active"
                                   />
@@ -204,13 +226,14 @@ const Favorites = () => {
                                     style={{ cursor: "pointer" }}
                                   >
                                     <Image
-                                      width={15}
-                                      height={15}
                                       src={
                                         item?.contacts_colour_breeder == null
                                           ? "/images/Nextpet-imgs/dashboard-imgs/yellow-mail-letter.svg"
                                           : "/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
                                       }
+                                      width={15}
+                                      height={15}
+                                      
                                       alt=""
                                     />
 
@@ -303,13 +326,7 @@ const Favorites = () => {
                                   <h3>{item?.name}</h3>
                                   <div
                                     className="mail-boxwrap"
-                                    onClick={() =>
-                                      handleModal(
-                                        item.post_id,
-                                        item.user_breeder_id,
-                                        item?.contacts_colour
-                                      )
-                                    }
+                                    onClick={() => handleMail(item)}
                                     style={{ cursor: "pointer" }}
                                   >
                                     <img

@@ -19,6 +19,8 @@ import Image from "next/image";
 import BASE_URL from "@/src/app/utils/constant";
 import axios from "axios";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import ContactModal from "@/src/components/ContactModal";
+import PreviouslyContacted from "@/src/components/PreviouslyContacted";
 
 const ContactPetDetails2 = () => {
   const { postId, userId } = useParams();
@@ -30,13 +32,43 @@ const ContactPetDetails2 = () => {
   const [postData, setPostData] = useState("");
   const [errorMsg, setErrorMsg] = useState();
 
-  async function likeHandler() {
-    const updatedLikeStatus = postData?.check_like == "0"? false : true; // Toggle the like status
+  const [showModal, setShowModal] = useState(false);
+  const [showPreviousModal, setShowPreviousModal] = useState(false);
+  
+    const [modalData, setModalData] = useState({
+      post_id: "",
+      breeder_id: "",
+    });
+
+    const handleModal = (value) => {
+      console.log(value)
+      let checkConnect = value?.breeder_do_not_show_me == null ? 1 : 0;
+      setModalData({
+        user_id: userId,
+        breeder_id: value?.breeder_id,
+        breeder_do_not_show_me: checkConnect,
+        "total_contacts": value?.breeder_total_count_all,
+        "date_contacts_breeder" :  value?.date_contacts_breeder
+      });
+      if (checkConnect == 1) {
+        setShowPreviousModal(true);
+      } else {
+        setShowModal(true);
+      }
+    };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setShowPreviousModal(false);
+  };
+
+  async function likeHandler(check_like) {
+    const updatedLikeStatus = check_like == 1 || check_like == "0" ? 111 : 1; // Toggle the like status
     const payload = {
-      user_id: userId,
+      user_id: localStorage.getItem("user_user_id"),
       post_id: postData?.post_id,
-      breeder_id: postData?.user_id,
-      like_post: updatedLikeStatus ? 1 : 111,
+      breeder_id: userId,
+      like_post: updatedLikeStatus,
     };
   
     try {
@@ -47,21 +79,19 @@ const ContactPetDetails2 = () => {
       });
   
       if (response.data.code === 200) { // Check for a successful response
-        console.log("response like", response);
-  
-        // Update the local state for postData to reflect the new like status
         setPostData((prevPostData) => ({
           ...prevPostData,
           check_like: updatedLikeStatus,
-          likes_count: updatedLikeStatus
-            ? prevPostData.likes_count + 1
-            : prevPostData.likes_count - 1,
+          total_like: response.data.total_like || prevPostData.likes_count, // Fallback if total_like is undefined
         }));
+      } else {
+        console.error("Error: Invalid response code", response.data);
       }
     } catch (error) {
-      console.log(error || "Post Like Error");
+      console.error("Post Like Error:", error);
     }
   }
+  
   
   
   useEffect(() => {
@@ -78,7 +108,6 @@ const ContactPetDetails2 = () => {
 
     const response = await PostDetail(payload);
     if (response.data.code === 200) {
-      console.log("response.data 121", response.data.data[0]);
       setPostData(response.data.data[0]);
       setPreviousPostImage(response.data.data[0].image);
     }
@@ -93,12 +122,10 @@ const ContactPetDetails2 = () => {
     const response = await UserShowNotes(payload);
 
     if (response.data.code === 200) {
-      console.log("response.data.data : Response New", response.data.data);
       setUserNotes(response.data.data);
     }
   };
 
-  //   console.log("Response New userAddNotes",showUserNotes);
 
   const submitAddNotesForm = async () => {
     const payload = {
@@ -127,10 +154,7 @@ const ContactPetDetails2 = () => {
         user_breeder_id: userId,
       };
 
-      console.log("payload", payload);
-
       const response = await UserStatusNotesLeadsUpdate(payload);
-      console.log("handleUserStatusNotesLeadsUpdate", response);
 
       if (response.data.code === 200) {
         toast.success(" Updated!");
@@ -143,9 +167,6 @@ const ContactPetDetails2 = () => {
   };
 
   const PolitenessRaTing = async (num, ret) => {
-    console.log(num);
-    console.log(ret);
-
     const payload = {
       breeder_id: userId,
       user_id: localStorage.getItem("user_user_id"),
@@ -153,11 +174,7 @@ const ContactPetDetails2 = () => {
     };
 
     const allReatingResponse = await GetRattingTrendingPost(payload);
-
-    // console.log("allReatingResponse", allReatingResponse);
-
     if (allReatingResponse.data.code == 200) {
-      console.log("True ::", allReatingResponse.data.data[0]);
       let res = allReatingResponse.data.data[0];
       const payloadTwo = {
         breeder_id: userId,
@@ -168,10 +185,7 @@ const ContactPetDetails2 = () => {
         communication_rating: num == 3 ? ret : res.communication_rating,
       };
 
-      const setRes = await SetRattingTrendingPost(payloadTwo);
-      console.log("setRes.data :", setRes);
-      // console.log(payloadTwo);
-
+      await SetRattingTrendingPost(payloadTwo);
       getAllRattingTrandingPost();
     } else {
       const payloadTwo = {
@@ -183,8 +197,7 @@ const ContactPetDetails2 = () => {
         communication_rating: num == 3 ? ret : 0,
       };
 
-      const setRes = await SetRattingTrendingPost(payloadTwo);
-      console.log("setRes.data :", setRes);
+      await SetRattingTrendingPost(payloadTwo);
       getAllRattingTrandingPost();
     }
   };
@@ -198,10 +211,6 @@ const ContactPetDetails2 = () => {
 
     const response = await GetRattingTrendingPost(payload);
     if (response.data.code === 200) {
-      console.log(
-        "ratting response.data.data : Response ratting New",
-        response.data.data[0]
-      );
       setRatingData(response.data.data[0]);
     }
   };
@@ -284,7 +293,7 @@ const ContactPetDetails2 = () => {
                     <h3>{postData.name ? postData.name : "Animal"}</h3>
                     <div className="edit-heartpost">
                       <div className="inner-heartt">
-                        <a href="#">
+                        <a onClick={() => handleModal(postData)}>
                           <Image width={15} height={15}
                             src="/images/Nextpet-imgs/newyear-cats-imgs/mail.svg"
                             alt=""
@@ -292,9 +301,9 @@ const ContactPetDetails2 = () => {
                         </a>
                         <div> {postData?.total_contact} </div>
                       </div>
-                      <div className="inner-heartt" onClick={likeHandler}>
+                      <div className="inner-heartt" onClick={() => likeHandler(postData?.check_like)}>
                         <a>
-                          {postData?.check_like ? 
+                      {postData?.check_like == 1 || postData?.check_like == "0" || postData?.check_like ==0 ? 
                         <Image width={15} height={15}
                           src="/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
                           alt="heart"
@@ -306,7 +315,7 @@ const ContactPetDetails2 = () => {
                         /> 
                         } 
                         </a>
-                        <div> {postData?.total_like} </div>
+                        <div> {postData?.total_like } </div>
                       </div>
                       <div className="inner-heartt" onClick={handleShare}>
                         <a style={{ padding: "7px 4px" }}>
@@ -712,6 +721,16 @@ const ContactPetDetails2 = () => {
             </div>
           </div>
         </div>
+        <ContactModal
+        modalIsOpen={showModal}
+        closeModal={closeModal}
+        modalDetails={modalData}
+      />
+      <PreviouslyContacted
+        modalIsOpen={showPreviousModal}
+        closeModal={closeModal}
+        modalDetails={modalData}
+      />
       {/* </ProtectedRoute> */}
     </>
   );

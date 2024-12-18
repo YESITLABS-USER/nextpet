@@ -65,7 +65,7 @@ const CreatePost = () => {
     animalGender: "",
     weight: "",
     birthdate: "",
-    date_available: "",
+    date_avialable: "",
     animalType: "",
     type: "",
     breed: "",
@@ -93,7 +93,7 @@ const CreatePost = () => {
       .required("Weight is required")
       .positive("Weight must be positive"),
     birthdate: Yup.date().required("Birthdate is required"),
-    date_available: Yup.date().required("Date Available is required"),
+    date_avialable: Yup.date().required("Date Available is required"),
     animalType: Yup.string().required("Animal type is required"),
     certification: Yup.string().required("Certification is required"),
     breed: Yup.string().required("Breed type is required"),
@@ -188,7 +188,7 @@ const CreatePost = () => {
     formData.append("size", values.size);
     formData.append("weight", values.weight);
     formData.append("birthdate", values.birthdate);
-    formData.append("date_available", values.date_available);
+    formData.append("date_avialable", values.date_avialable);
     formData.append("latitude", location.latitude);
     formData.append("longitude", location.longitude);
     formData.append("user_id", breederUserId);
@@ -453,9 +453,9 @@ const CreatePost = () => {
 
                       <div className="formdata-wrap">
                         <p>Date Available</p>
-                        <Field type="date" name="date_available" />
+                        <Field type="date" name="date_avialable" />
                         <ErrorMessage className="ErrorMessage"
-                          name="date_available"
+                          name="date_avialable"
                           component="div"
                           style={{ color: "red" }}
                         />

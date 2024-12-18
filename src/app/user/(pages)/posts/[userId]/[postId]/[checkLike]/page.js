@@ -32,24 +32,32 @@ const ContactPetDetails = () => {
       const storedUserId = localStorage.getItem("user_user_id");
       setUserId(storedUserId);
     }
-  }, []);
-
-  useEffect(() => {
-    PostDetailGet();
   }, [userId]);
 
+  useEffect(() => {
+    if (userId) {
+      PostDetailGet();
+    }
+    PostDetailGet();
+  }, [userId]);
+  
   const PostDetailGet = async () => {
     const payload = {
-      user_id: userId,
+      user_id: userId || null, // Send null if userId doesn't exist
       id: postId,
     };
-
-    const response = await PostDetail(payload);
-    if (response.data.code === 200) {
-      setPostData(response.data.data[0]);
-      setPreviousPostImage(response.data.data[0].image);
+  
+    try {
+      const response = await PostDetail(payload);
+      if (response.data.code === 200) {
+        setPostData(response.data.data[0]);
+        setPreviousPostImage(response.data.data[0].image);
+      }
+    } catch (error) {
+      console.error("Error fetching post details:", error);
     }
   };
+  
 
   const handlePostLike = async () => {
     if(isAuthenticated){

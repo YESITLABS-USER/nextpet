@@ -219,7 +219,7 @@ const Alert = () => {
                         <div className="alert-plans-wp">
                           <div className="alert-heading">
                             <h3>Set Alerts</h3>
-                            <div className="tooltip" style={{ zIndex: 10 }}>
+                            <div className="tooltip" style={{ zIndex: 1 }}>
                               <Image
                                 src="/images/Nextpet-imgs/profile-page-imgs/i-icon.svg"
                                 alt=""
@@ -280,7 +280,7 @@ const Alert = () => {
                         <div className="alert-plans-wp">
                           <div className="alert-heading">
                             <h3>Location</h3>
-                            <div className="tooltip">
+                            <div className="tooltip" style={{ zIndex: 1 }}>
                               <Image
                                 src="/images/Nextpet-imgs/profile-page-imgs/i-icon.svg"
                                 alt=""

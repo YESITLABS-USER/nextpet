@@ -27,6 +27,37 @@ const ContactPetDetails = () => {
     breeder_id: "",
   });
 
+  const [likedData, setLikeData] = useState(like_colour);
+
+  const breederDetail = async () => {
+    try {
+      if(userId) {
+
+        const response = await axios.post(`${BASE_URL}/api/all_post_listing`, {
+          user_id: userId,
+        });
+        
+        if (response.data.code === 200 && breeder_id) {
+          // Find the breeder with the matching breeder_id
+          const liked = response.data.popular_breeder?.find(
+          (breeder) => breeder.breeder_id == breeder_id
+        );
+        
+        console.log(liked)
+        
+        setLikeData(liked?.like_colour);
+      }
+    }
+      } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
+    breederDetail();
+  }, []);
+  
+
   const { isAuthenticated } = useAuth(); 
   
   const router = useRouter();
@@ -46,28 +77,12 @@ const ContactPetDetails = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const storedUserId = localStorage.getItem("authToken");
-  //     if (!storedUserId) {
-  //       toast.error('User or Breeder must be login')
-  //       router.push('/')
-  //     }
-  //   }
-  // }, []);
-
-  
   useEffect(() => {
     const fetchBreederData = async () => {
       try {
-        // const response = await axios.post(`${BASE_URL}/api/all_post_listing`, {
-        //   user_id: userId,
-        // });
-        // setBreederData(response.data);
         await axios.post(`${BASE_URL}/api/all_post_listing`, {
           user_id: userId,
         });
-        // setBreederData(response.data);
       } catch (err) {
         console.error("error:", err);
       }
@@ -100,35 +115,41 @@ const ContactPetDetails = () => {
   const handlePostLike = async (value) => {
     const storedUserId = localStorage.getItem("authToken");
     if (!storedUserId) {
-      toast.error('User or Breeder must be login')
+      toast.error("User or Breeder must be logged in");
       setTimeout(() => {
-        router.push('/')
+        router.push("/");
       }, 1000);
-      }
-   
-    let checkBreederLike = like_colour ? 1 : 111;
-    let checkUserLike = value?.check_like == "0" ? 1 : 111;
-    let likeData = {
+      return;
+    }
+  
+    const checkBreederLike = likedData === null || likedData === "0" || likedData == 111 ? 1 : 111;
+    const checkUserLike = value?.check_like === "0" ? "1" : "0"; 
+  
+    const likeData = {
       user_id: userId,
       breeder_id: breeder_id || "",
       post_id: value?.post_id || "",
       like_post: value?.post_id ? checkUserLike : checkBreederLike,
     };
-
-    let apiURL = value?.post_id
+  
+    const apiURL = value?.post_id
       ? `${BASE_URL}/api/like_post`
       : `${BASE_URL}/api/breeder_like`;
+  
     try {
       const response = await axios.post(apiURL, likeData);
       if (response.data.code === 200) {
         if (value?.post_id) {
+          // Refresh posts
           getAllRecentPost();
         } else {
+          // Refresh breeder details
           getBreederDetails();
+          setLikeData(checkBreederLike); // Update likedData
         }
       }
     } catch (err) {
-      console.error("error : ", err);
+      console.error("error:", err);
     }
   };
 
@@ -219,7 +240,7 @@ const ContactPetDetails = () => {
                   <div className="breedeerdasboard-createpost-left">
                     <div className="breeder-profileinner-wrap">
                       <Image
-                        src={breederDetails?.image || ""}
+                        src={breederDetails?.image || "/images/Nextpet-imgs/contact-default.webp"}
                         alt="Breeder Profile"
                         loading="lazy" width={250} height={250}
                       />
@@ -229,11 +250,11 @@ const ContactPetDetails = () => {
                     <div className="postcreate-heading">
                       <h3>{breederDetails?.name}</h3>
                       <div className="edit-heartpost">
-                        <div className="inner-heartt" onClick={handlePostLike}>
+                        <div className="inner-heartt" onClick={() => handlePostLike()}>
                           <div className="inner-heartt-div">
                             <Image
                               src={
-                                like_colour == "1"
+                                likedData == "1"
                                   ? "/images/Nextpet-imgs/dashboard-imgs/heart-fill.svg"
                                   : "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"
                               }
@@ -323,7 +344,7 @@ const ContactPetDetails = () => {
                     </div>
                     
                   <p className="pt-1">
-                    {item?.description && item?.description.length > 50 ? item.description.slice(0, 40) + "..." : item?.description || "No Description available"}
+                    {item?.description && item?.description.length > 50 ? item?.description.slice(0, 40) + "..." : item?.description || "No Description available"}
                   </p>
 
 

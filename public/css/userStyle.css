@@ -239,15 +239,15 @@ img {
   transition: 0.4s;
 }
 
-.notification-heading input:checked+.slider {
+.notification-heading input:checked + .slider {
   background-color: #197e00;
 }
 
-.notification-heading input:focus+.slider {
+.notification-heading input:focus + .slider {
   box-shadow: 0 0 1px #fff;
 }
 
-.notification-heading input:checked+.slider:before {
+.notification-heading input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -1753,7 +1753,6 @@ img {
   }
 }
 
-
 /* BETWEEN BANNERS CSS */
 
 /* RECENTLY POSTED SEC CSS */
@@ -2061,7 +2060,8 @@ img {
   text-align: left;
 }
 
-.nextpet-app-wrap-in a {}
+.nextpet-app-wrap-in a {
+}
 
 .nextpet-app-wrap-in a img {
   width: 143px;
@@ -2376,7 +2376,9 @@ img {
     text-align: center;
   }
 
-  .otp-verification-input .otp-verification-input .inputs::-webkit-outer-spin-button,
+  .otp-verification-input
+    .otp-verification-input
+    .inputs::-webkit-outer-spin-button,
   .otp-verification-input .inputs::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -2961,16 +2963,20 @@ img {
       }
 
       & ul li a:hover {
-        background: radial-gradient(108.18% 50% at 50% 50%,
-            #ffe352 0%,
-            #ffbd12 100%);
+        background: radial-gradient(
+          108.18% 50% at 50% 50%,
+          #ffe352 0%,
+          #ffbd12 100%
+        );
         color: #000;
       }
 
       & ul li a.active {
-        background: radial-gradient(108.18% 50% at 50% 50%,
-            #ffe352 0%,
-            #ffbd12 100%);
+        background: radial-gradient(
+          108.18% 50% at 50% 50%,
+          #ffe352 0%,
+          #ffbd12 100%
+        );
         color: var(--Primary-White, #000);
         font-size: 16px;
         font-style: normal;
@@ -3305,12 +3311,16 @@ img {
             border-radius: 9px;
             margin-top: 14px;
             width: 14%;
+            height: 110px;
 
             img {
               width: 100%;
               height: 100%;
+              object-fit: cover;
               position: static;
               border-radius: 2px;
+              min-width: 100% !important;
+              min-height: 100% !important;
             }
           }
         }
@@ -3425,9 +3435,11 @@ img {
                 border: none;
                 display: flex !important;
                 border-radius: 30px;
-                background: linear-gradient(270deg,
-                    #e09100 -18.6%,
-                    #f5c006 100%);
+                background: linear-gradient(
+                  270deg,
+                  #e09100 -18.6%,
+                  #f5c006 100%
+                );
                 text-align: center;
                 align-items: center;
                 justify-content: center;
@@ -3572,7 +3584,7 @@ img {
 
         & label {
           width: 100%;
-          /* position: relative; */
+          position: relative;
           /* overflow: hidden; */
         }
 
@@ -3632,9 +3644,11 @@ img {
             height: 4px;
             cursor: pointer;
             animate: 0.2s;
-            background: linear-gradient(90deg,
-                #e49a01 var(--range-progress),
-                #d9d9d9 var(--range-progress));
+            background: linear-gradient(
+              90deg,
+              #e49a01 var(--range-progress),
+              #d9d9d9 var(--range-progress)
+            );
             border-radius: 1rem;
           }
 
@@ -3687,8 +3701,9 @@ img {
           border-radius: 34px;
           height: 43px;
           position: absolute;
-          right: 44px;
+          right: 15px;
           left: inherit;
+          top: 0;
         }
 
         input[type="text"] {
@@ -3736,7 +3751,7 @@ img {
           border-radius: 9px;
           appearance: none;
           /* padding: 0 10px; */
-          /* background: url(../images/Nextpet-imgs/all-icons/dropdown.svg); */
+          background: url("/images/Nextpet-imgs/all-icons/drop-yellow.png");
           background-position: center right 13px;
           background-size: 16px;
           background-repeat: no-repeat;
@@ -4036,9 +4051,11 @@ img {
                 border: none;
                 display: flex !important;
                 border-radius: 30px;
-                background: linear-gradient(270deg,
-                    #e09100 -18.6%,
-                    #f5c006 100%);
+                background: linear-gradient(
+                  270deg,
+                  #e09100 -18.6%,
+                  #f5c006 100%
+                );
                 text-align: center;
                 align-items: center;
                 justify-content: center;
@@ -4438,9 +4455,11 @@ img {
   }
 
   .user-breeder-toggle {
-    background: radial-gradient(108.18% 50% at 50% 50%,
-        #ffe352 0%,
-        #ffbd12 100%);
+    background: radial-gradient(
+      108.18% 50% at 50% 50%,
+      #ffe352 0%,
+      #ffbd12 100%
+    );
     border-radius: 30px;
     display: flex !important;
     align-items: center;
@@ -4494,15 +4513,15 @@ img {
       transition: 0.4s;
     }
 
-    input:checked+.slider {
+    input:checked + .slider {
       background-color: #fff;
     }
 
-    input:focus+.slider {
+    input:focus + .slider {
       box-shadow: 0 0 1px #fff;
     }
 
-    input:checked+.slider:before {
+    input:checked + .slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
@@ -5580,7 +5599,7 @@ img {
         }
 
         .inner-heartt {
-          display: flex ;
+          display: flex;
           flex-direction: column;
           align-items: center;
         }
@@ -5592,7 +5611,6 @@ img {
           padding: 11px 7px;
           box-shadow: 0px 2px 10px 0px #00000040;
         }
-
       }
 
       .breeder_profile-inner-heart {
@@ -5780,7 +5798,7 @@ img {
               opacity: 0;
             }
 
-            input+label {
+            input + label {
               padding: 7px;
               font-size: 14px;
               font-weight: 600;
@@ -5792,7 +5810,7 @@ img {
               cursor: pointer;
             }
 
-            input:checked+label {
+            input:checked + label {
               background: #e49a01;
               font-size: 14px;
               color: #fff;
@@ -6125,7 +6143,6 @@ img {
     gap: 30px;
     flex-wrap: wrap;
     padding-top: 30px;
-
 
     .newyear-catimg-wrap {
       position: relative;
@@ -7223,9 +7240,8 @@ img {
   color: yellow;
 }
 
-@media screen and (min-width: 0px) and (max-width : 400px) {
+@media screen and (min-width: 0px) and (max-width: 400px) {
   .pets-breeder-cards {
-
     .newyear-cat-dog-in {
       width: 95% !important;
       height: 100%;
@@ -7233,9 +7249,8 @@ img {
   }
 }
 
-@media screen and (min-width: 400px) and (max-width : 768px) {
+@media screen and (min-width: 400px) and (max-width: 768px) {
   .pets-breeder-cards {
-
     .newyear-cat-dog-in {
       width: 46% !important;
       height: 100%;
@@ -7243,9 +7258,8 @@ img {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width : 1200px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .pets-breeder-cards {
-
     .newyear-cat-dog-in {
       width: 30% !important;
       height: 100%;
@@ -7327,23 +7341,22 @@ img {
   }
 }
 
-
 /* DK-CSS */
 
 .banner-cat-wrap button.slider-button.slider-button-prev {
   left: -13px;
-  color: #2F353E;
+  color: #2f353e;
 }
 
 .banner-cat-wrap button.slider-button.slider-button-next {
   right: -13px;
-  color: #2F353E;
+  color: #2f353e;
 }
 
 .banner-cat-wrap button.slider-button.slider-button-prev:hover,
 .banner-cat-wrap button.slider-button.slider-button-next:hover {
   color: #fff;
-  background-color: #2F353E;
+  background-color: #2f353e;
 }
 
 .banner-cat-wrap .slider-container.shadow-md {
@@ -7365,6 +7378,20 @@ img {
 .list-post-form .css-nyv196-container .css-1xc3v61-indicatorContainer,
 .list-post-form .css-tv7wn1-control .css-151sz6c-indicatorContainer {
   color: #e69e01 !important;
+}
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 2;
+}
+
+.formdata-wrap {
+  position: relative;
+}
+
+.formdata-wrap .ErrorMessage {
+  position: absolute;
+  right: 40px;
+  top: 15px;
+  font-size: 14px;
 }
 
 /* DK-CSS */

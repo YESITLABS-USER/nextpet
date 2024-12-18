@@ -12,8 +12,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 const EditPost = () => {
   const { id } = useParams();
   const breederUserId = localStorage.getItem("breeder_user_id");
-  // console.log("breederUserId : ", breederUserId);
-  // console.log("Post Id", id);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [animalTypes, setAnimalTypes] = useState([]);
@@ -28,7 +26,7 @@ const EditPost = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   // const [imageError, setPostImageError] = useState(null);
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  // const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [additionalRequestAnimalType, setAdditionalRequestAnimalType] =
     useState(null);
@@ -53,7 +51,6 @@ const EditPost = () => {
         console.error("Error fetching post count:", error);
       }
     };
-  console.log(selectedAnimal, 'selectedAnimal')
     if (breederUserId) {
       fetchPostCount();
     }
@@ -72,11 +69,11 @@ const EditPost = () => {
     date_available: postDetails?.avialable || "",
     certification: postDetails?.certification || "",
   };
+
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const { latitude, longitude } = coords;
-        // console.log("Latitude ::", latitude, "Longitude ::", longitude);
+        const { latitude, longitude } = coords;;
         setLatitude(latitude);
         setLongitude(longitude);
       });
@@ -85,6 +82,14 @@ const EditPost = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (animalBreeds.length === 0 && postDetails?.type) {
+      console.log('Fetching breeds for type:', postDetails?.type);
+      handleSelectedAnimalTypesChange({ value: postDetails?.type });
+    }
+  }, [animalBreeds.length, postDetails?.type]); 
+  
+  
   useEffect(() => {
     const oldBreedrData = async () => {
       const formData = new FormData();
@@ -101,7 +106,6 @@ const EditPost = () => {
             },
           }
         );
-        // console.log("Post Form Details :", response.data);
 
         if (response.data.status) {
           setPostDetails(response.data.data[0]);
@@ -119,18 +123,15 @@ const EditPost = () => {
   }, [breederUserId]);
 
   useEffect(() => {
-    // console.log("previousPostImage.length ", previousPostImage.length);
+    
     setPostImageLength(previousPostImage.length);
   }, [previousPostImage, animal_type_id, type]);
 
   const handleSubmit = async (value) => {
-    // e.preventDefault();
-    // console.log("value1111", value);
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const { latitude, longitude } = coords;
-        // console.log("Lat ::", latitude, "Long ::", longitude);
         setLatitude(latitude);
         setLongitude(longitude);
       });
@@ -166,6 +167,7 @@ const EditPost = () => {
     formData.append("longitude", longitude);
     formData.append("user_id", breederUserId);
 
+    
     try {
       await axios.post(
         `${BASE_URL}/api/post_update_breeder`,
@@ -206,7 +208,6 @@ const EditPost = () => {
             (type) =>
               type.value == selectedAnimalId.toLowerCase().replace(/\s+/g, "_")
           );
-          // setSelectedAnimal(initialSelectedAnimal?.value || "");
         }
         setLoading(false);
       } catch (err) {
@@ -224,9 +225,9 @@ const EditPost = () => {
 
 
   const handleSelectedAnimalTypesChange = async (selectedOption) => {
-    if(selectedOption?.value){
-      setSelectedAnimal(selectedOption.value);
-    }
+    // if(selectedOption?.value){
+    //   setSelectedAnimal(selectedOption.value);
+    // }
   
     if (selectedOption?.value === "other") {
       setShowModal(true); // Open modal for "Other" selection
@@ -400,9 +401,9 @@ const EditPost = () => {
                 <h3>Pet Name </h3>
                 <div className="edit-heartpost">
                   <div className="inner-heartt">
-                    <a href="#">
+                    <a >
                       <img
-                        src="/images/Nextpet-imgs/dashboard-imgs/heart-post.png"
+                        src={(postDetails?.total_like && postDetails?.total_like > 0 )? "/images/Nextpet-imgs/dashboard-imgs/heart-post.png" : "/images/Nextpet-imgs/dashboard-imgs/heart-border2.svg"}
                         alt=""
                         loading="lazy"
                       />
@@ -410,9 +411,9 @@ const EditPost = () => {
                     <span>{postDetails?.total_like}</span>
                   </div>
                   <div className="inner-heartt">
-                    <a href="#">
+                    <a >
                       <img
-                        src="/images/Nextpet-imgs/dashboard-imgs/message-post.png"
+                        src={postDetails?.total_contact && postDetails?.total_contact >0 ?"/images/Nextpet-imgs/dashboard-imgs/message-post.png" : "/images/Nextpet-imgs/dashboard-imgs/yellow-mail-letter.svg"}
                         alt=""
                         loading="lazy"
                       />
@@ -421,7 +422,7 @@ const EditPost = () => {
                   </div>
                   {!editPostPage && (
                     <div className="inner-heartt">
-                      <a href="#" onClick={setEditPostPageHandle}>
+                      <a onClick={setEditPostPageHandle}>
                         <img
                           src="/images/Nextpet-imgs/profile-page-imgs/edit-profile.svg"
                           alt=""

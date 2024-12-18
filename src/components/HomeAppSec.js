@@ -46,7 +46,7 @@ function HomeAppSec({ homePageData }) {
                         height={20}
                       />
                     </a>
-                    <a href="#" onClick={(e) => e.preventDefault()}>
+                    <a href="https://play.google.com/store/apps/details?id=com.yesitlab.petquest&hl=en_IN" target="_blank">
                       <Image
                         src="/images/Nextpet-imgs/download-app-imgs/googleplay.png"
                         alt=""

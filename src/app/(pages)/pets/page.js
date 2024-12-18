@@ -59,7 +59,6 @@ const Pets = () => {
         pet.location?.toLowerCase().includes(query)
       );
     });
-
     setFilteredData(filtered);
   }, [searchItemParam, allPets]);
 
@@ -120,6 +119,10 @@ const Pets = () => {
         `${BASE_URL}/api/all_pets_listing`,
         user
       );
+      
+      if(response.data.code === 404){
+        setAllPets([])
+      }
       if (response.data.code === 200) {
         setAllPets(response.data.pets_list);
       }
@@ -191,9 +194,6 @@ const Pets = () => {
   };
 
   function fillterPets() {
-    console.log(animalTypeFilter,'animalTypeFilter')
-    console.log(breedTypeFilter,'breedTypeFilter')
-
     if (recentDate || location) {
       setAnimalTypeFilter(null);
       setBreedTypeFilter(null);
@@ -268,7 +268,7 @@ const Pets = () => {
   }
   
   const handlePostLike = async (value) => {
-    let checkLikeDislike = value?.check_like == "0" ? 1 : 111;
+    let checkLikeDislike = value?.check_like == "0" ? "1" : "0";
     let likeData = {
       user_id: userIdOrBreederId,
       post_id: value?.id || "",
@@ -381,7 +381,7 @@ const Pets = () => {
                           <input
                             type="radio"
                             name="exp_language2"
-                            value="nearby"
+                            value="nearby" style={{cursor: 'pointer'}}
                             checked={filter === "nearby"}
                             onChange={() => setFilter("nearby")}
                           />
@@ -391,7 +391,7 @@ const Pets = () => {
                           <input
                             type="radio"
                             name="exp_language2"
-                            value="recent"
+                            value="recent" style={{cursor: 'pointer'}}
                             checked={filter === "recent"}
                             onChange={() => setFilter("recent")}
                           />

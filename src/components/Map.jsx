@@ -18,6 +18,17 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { 
 const StoreMap = ({ data, location }) => {
   const router = useRouter();
   const stores = data || [];
+  const [isBreeder, setIsBreeder] = useState(false);
+
+  useEffect(() => {
+    const path = window.location.pathname; 
+    if (path === '/map-breeder') { 
+      setIsBreeder(true);
+    } else {
+      setIsBreeder(false);
+    }
+  }, []); 
+  
 
   const [center, setCenter] = useState([40.7128, -74.0060]); // Default to New York City
 
@@ -87,9 +98,8 @@ const StoreMap = ({ data, location }) => {
                         border: "#e49a01",
                       }}
                       onClick={() =>
-                        router.push(
-                          `/user/posts/${store?.user_breeder_id}/${store?.id}/${store?.check_like}`
-                        )
+                      {isBreeder ? router.push(`/user/breeder-profile/${store?.breeder_id}/${store?.like_colour}`) : 
+                        router.push(`/user/posts/${store?.user_breeder_id}/${store?.id}/${store?.check_like}`) }
                       }
                     >
                       View Details
