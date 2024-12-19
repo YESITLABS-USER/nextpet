@@ -288,7 +288,7 @@ const Favorites = () => {
                                   src={
                                     item?.delivery == 1
                                       ? "/images/Nextpet-imgs/dashboard-imgs/adopted.svg"
-                                      : ""
+                                      : "/images/Nextpet-imgs/Image_not_available.webp"
                                   }
                                   alt=""
                                 />
