@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import { breederSignUp } from "../../../services/user/verificationService"; // Import service
 // import { verifyOtp, breederSignUp } from "../../../services/user/verificationService"; // Import service
 import SignUpSuccessPopUp from "../../../../components/ModelSignUpSuccess";
+import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 
 const VerificationCode = () => {
   const savedOtp = Cookies.get("otp_email");
@@ -19,6 +21,7 @@ const VerificationCode = () => {
   const [countdown, setCountdown] = useState(0);
   const [isExpired, setIsExpired] = useState(false);
   const [email, setEmail] = useState(null);
+  const { login } = useAuth();
 
   useEffect(() => {
     const data = Cookies.get('email')
@@ -98,6 +101,7 @@ const VerificationCode = () => {
 
       if (response.data.code === 200) {
         // const expireDate = new Date(new Date().getTime() + 15000 * 1000);
+        login({UniqueKey: response.data.user_id, type: 'user-type'})
         localStorage.setItem("user_user_id", response.data.user_id);
 
         //Write Here code to delete Breeder here
@@ -120,7 +124,7 @@ const VerificationCode = () => {
           <form onSubmit={handleSubmit}>
             <h1>Verification Code</h1>
             <p>Enter the verification code sent to your registered email/phone</p>
-            {error && <p>{error}</p>}
+            {error && <p style={{color:'red'}}>{error}</p>}
             {/* {success && <p>{success}</p>} */}
 
             <div className="otp-verification-input">

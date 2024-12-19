@@ -174,7 +174,7 @@ const Pets = () => {
   const handleSelectedAnimalTypesChange = async (selectedOption) => {
     setAnimalTypeFilter(selectedOption);
     if (selectedOption.value === "other") {
-      setShowModal(true);
+      // setShowModal(true);
     } else {
       try {
         const response = await axios.get(
@@ -221,7 +221,7 @@ const Pets = () => {
     setAnimalTypeFilter(null);
     setBreedTypeFilter(null);
   }
-  
+  console.log(animalTypeFilter,'animalTypeFilter', breedTypeFilter, 'breedTypeFilter')
   // Logic for pagination
   let petsData = filteredData?.length > 0 ? filteredData : allPets;
   let allfilteredData = filteredData?.length > 0 ? filteredData : [];
@@ -590,12 +590,14 @@ const Pets = () => {
                         control: (provided) => ({
                           ...provided,
                           backgroundColor: "transparent",
-                          border: `2px solid ${requiredFields && !animalTypeFilter ? 'red' : 'rgb(230 158 1)'}`,
+                          border: `2px solid rgb(230 158 1)`,
                           borderRadius: "10px",
                         }),
                       }}
-                      onChange={(selectedOption) =>
+                      onChange={(selectedOption) => {
+                        setRequiredFields(true);
                         handleSelectedAnimalTypesChange(selectedOption)
+                      }
                       }
                       label={animalTypeFilter ? animalTypeFilter.label : ""}
                     />

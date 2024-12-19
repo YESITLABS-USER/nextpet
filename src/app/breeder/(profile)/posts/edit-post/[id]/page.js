@@ -23,8 +23,8 @@ const EditPost = () => {
   const [postDetails, setPostDetails] = useState(null);
   const [animal_type_id, setAnimalTypeId] = useState(null);
   const [type, setType] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(36.778259); // california latitude and longitude
+  const [longitude, setLongitude] = useState(-119.417931);
   // const [imageError, setPostImageError] = useState(null);
   // const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -84,11 +84,9 @@ const EditPost = () => {
 
   useEffect(() => {
     if (animalBreeds.length === 0 && postDetails?.type) {
-      console.log('Fetching breeds for type:', postDetails?.type);
       handleSelectedAnimalTypesChange({ value: postDetails?.type });
     }
   }, [animalBreeds.length, postDetails?.type]); 
-  
   
   useEffect(() => {
     const oldBreedrData = async () => {
@@ -128,7 +126,6 @@ const EditPost = () => {
   }, [previousPostImage, animal_type_id, type]);
 
   const handleSubmit = async (value) => {
-
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const { latitude, longitude } = coords;
@@ -525,9 +522,9 @@ const EditPost = () => {
                               setFieldValue("breed", selectedOption.value);
                             }
                           }}
-                          value={animalBreeds.find((option) => option.value === values.breed)}
+                          value={animalBreeds.find((option) => option.value == values.breed)}
                           isDisabled={!editPostPage}
-                        />
+                          />
                         <ErrorMessage
                           name="breed"
                           component="div"

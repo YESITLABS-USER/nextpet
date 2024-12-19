@@ -172,7 +172,7 @@ const Contacts = () => {
                     
                     <div className="leads-card-wrap">
                   {currentPosts?.length === 0 ? (
-                    <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Data Found...</h1>
+                    <h1 style={{ fontFamily:'GoodDog New', display:'flex', justifyContent:'center', width:'100%', padding:'50px 0'}}> No Contacts Found...</h1>
                   ) : (currentPosts && currentPosts?.map((item, index) => (
                         <div
                           className={`leads-box" ${

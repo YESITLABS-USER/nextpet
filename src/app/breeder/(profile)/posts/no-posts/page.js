@@ -8,18 +8,13 @@ import BASE_URL from '../../../../utils/constant'
 
 const Post = () => {
     const router = useRouter();
-
     let breederUserId="";
-
     useEffect(() => {
       breederUserId = localStorage.getItem("breeder_user_id");
-      console.log("breederUserId : ",breederUserId);
     }, []);
-
     const [noPost, setNoPost] = useState(true);
     const [loding, setLoading] = useState(true);
    
-    
     const breederData = {
         page: "posts",
       };
@@ -83,17 +78,13 @@ const Post = () => {
                         </div>
                     </div>
                     </div>
-                </div>}
-                {/* <h1>Aryan Chaurasia</h1> */}
-              
+                </div>}              
             </>
         );
       }
       else{
         router.push('/breeder/posts');
       }
-
-      console.log("noPostnoPostnoPost: ",noPost);
     
 };
 export default Post;

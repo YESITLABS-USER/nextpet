@@ -5699,6 +5699,8 @@ img {
     display: flex !important;
     gap: 12px;
     align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
 
     & .gallery-uploadedimg-box {
       border: 1px solid #d9d9d9;
@@ -6360,4 +6362,7 @@ img {
   .css-tv7wn1-control
   .css-1xc3v61-indicatorContainer {
   color: #e69e01 !important;
+}
+.leaflet-control-attribution .leaflet-control {
+  display: none !important;
 }

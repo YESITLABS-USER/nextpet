@@ -105,9 +105,9 @@ const SignIn = () => {
         setValidationError(response.data.message);
       } else {
         login({UniqueKey: response.data.data.user_id, type: 'user-type'});
+        localStorage.setItem("user_user_id", response.data.data.user_id);
         // localStorage.setItem("name", response.data.data.name);
         // localStorage.setItem("email", response.data.data.email);
-        localStorage.setItem("user_user_id", response.data.data.user_id);
         // router.push("/");
         window.location.href = "/";
       }

@@ -117,7 +117,7 @@ const VerificationCode = () => {
           <form onSubmit={handleSubmit}>
             <h1>Verification Code</h1>
             <p>Enter the verification code sent to your registered email/phone</p>
-            {error && <p>{error}</p>}
+            {error && <p style={{color:'red'}}>{error}</p>}
             {/* {success && <p>{success}</p>} */}
 
             <div className="otp-verification-input">

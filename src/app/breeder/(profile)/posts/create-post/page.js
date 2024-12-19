@@ -18,7 +18,7 @@ const CreatePost = () => {
   const [animalTypes, setAnimalTypes] = useState([]);
   const [animalBreeds, setAnimalBreeds] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [location, setLocation] = useState({ latitude: 36.778259, longitude: -119.417931 }); // default latitude and longitude of california
   const [healthGuarantee, setHealthGuarantee] = useState(false);
   const [deliveryAvailability, setDeliveryAvailability] = useState(0);
   const [boardingAvailability, setBoardingAvailability] = useState(false);
@@ -199,15 +199,21 @@ const CreatePost = () => {
     });
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${BASE_URL}/api/post_breed`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      toast.success('Post Created Successfully');
-      router.push('/breeder/posts')
+      if(response.data.code === 400) {
+        toast.error(response.data.msg);
+        return;
+      }
+      if(response.data.code === 200){
+        toast.success('Post Created Successfully');
+        router.push('/breeder/posts')
+      }
     } catch (error) {
       console.error("Error submitting post:", error);
     }
@@ -380,8 +386,9 @@ const CreatePost = () => {
                               border: "none",
                             }),
                           }}
-                          onChange={(selectedOption) =>
+                          onChange={(selectedOption) => {
                             setFieldValue("breed", selectedOption.value)
+                          }
                           }
                         />
                         <ErrorMessage className="ErrorMessage"
