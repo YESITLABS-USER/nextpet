@@ -93,7 +93,7 @@ function Footer() {
               <a href="#">Copyright ©2024. All Rights Reserved.</a>
               <div className="download-footer-applink">
                 <p>Download the NextPet App!</p>
-                <a href="#">
+                <a href="https://apps.apple.com/us/app/nextpet/id6474237184">
                   <Image
                     src="/images/Nextpet-imgs/download-app-imgs/appstore.png"
                     alt="App Store"

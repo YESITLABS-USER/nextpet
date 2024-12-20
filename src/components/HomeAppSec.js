@@ -38,7 +38,7 @@ function HomeAppSec({ homePageData }) {
                   <h2>{homePageData?.section_three_app_heading_two}</h2>
                   <p>{homePageData?.section_three_app_text}</p>
                   <div className="download-app-btns">
-                    <a href="#" onClick={(e) => e.preventDefault()}>
+                    <a href="https://apps.apple.com/us/app/nextpet/id6474237184" target="_blank">
                       <Image
                         src="/images/Nextpet-imgs/download-app-imgs/appstore.png"
                         alt=""

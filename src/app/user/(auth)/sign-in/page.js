@@ -56,7 +56,7 @@ const SignIn = () => {
 
   // const handleUserAppleLogin = async () => {
   //   try {
-  //     const provider = new OAuthProvider("apple.com");
+  //     const provider = new OAuthProvider('apple.com');
   //     const result = await signInWithPopup(auth, provider);
   //     const user = result.user;
   
@@ -90,6 +90,57 @@ const SignIn = () => {
   //   }
   // };
   
+  useEffect(() => {
+    const scriptId = "apple-auth-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js";
+      script.onload = initializeAppleSignIn;
+      document.body.appendChild(script);
+    }
+  }, []);
+  
+  const initializeAppleSignIn = () => {
+    if (window.AppleID) {
+      window.AppleID.auth.init({
+        clientId: "com.nextpet", // Replace with your Service ID
+        scope: "email name", // Request necessary fields
+        redirectURI: "https://nextpet.vercel.app/user/sign-in/callback", // Replace with your redirect URL
+        usePopup: true,
+      });
+    }
+  };
+  
+  const handleAppleSignIn = async () => {
+    try {
+      const appleResponse = await window.AppleID.auth.signIn();
+      const { authorization, user } = appleResponse;
+      console.log(user, 'apple user')
+      const payload = {
+        social_id: authorization.id_token, // Token for backend validation
+        name: user?.name || {},         // Optional: Extract user name
+        email: user?.email || "",       // Optional: Extract user email
+      };
+  
+      console.log("Apple Sign-In Payload:", payload);
+  
+      // Send payload to backend for authentication
+      const response = await axios.post(`${BASE_URL}/api/user_social_login`, payload);
+  
+      if (response.status === 200) {
+        login({UniqueKey: response.data.data.user_id, type: 'user-type'});
+        localStorage.setItem("user_user_id", response.data.data.user_id);
+  
+      } else {
+        toast.error("Login successful, but an error occurred on the server.");
+        console.error("Backend Response Error:", response.data);
+      }
+    } catch (error) {
+      console.error("Apple Sign-In Error:", error);
+      toast.error("Failed to login with Apple.");
+    }
+  };
   
 
   const handleSubmit = async (e) => {
@@ -202,7 +253,7 @@ const SignIn = () => {
                 <Image
                   src="/images/Nextpet-imgs/breeder-signin-imgs/social2.png"
                   alt="Social 2"
-                  width={40}
+                  width={40} onClick={handleAppleSignIn}
                   height={40} style={{ cursor: 'pointer'}} 
                 />
               {/* </a> */}
