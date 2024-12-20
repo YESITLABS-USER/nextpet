@@ -1,27 +1,50 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import BASE_URL from "../app/utils/constant";
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
+  const [allSlides, setAllSlides] = useState([]);
 
-  const slides = [
-    { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
-    { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/additional_request_web`);
+
+        // Extracting only the required fields: animal, id, and image
+        const formattedSlides = response.data.data.map(item => ({
+          animal: item.animal,
+          id: item.id,
+          image: item.image
+        }));
+
+        setAllSlides(formattedSlides);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // const slides = [
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate2.png", alt: "Cat", title: "Cat" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate3.png", alt: "Rabbit", title: "Rabbit" },
+  //   { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
+  // ];
 
   const itemsPerPage = 6;
-  const numPages = slides.length - itemsPerPage + 1;
+  const numPages = allSlides.length - itemsPerPage + 1;
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % numPages);
@@ -53,18 +76,18 @@ const Slider = () => {
                   transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
                 }}
               >
-                {slides.map((slide, index) => (
+                {allSlides.map((slide, index) => (
                   <div
                     key={index}
                     className="slider-item"
                     style={{ flex: `0 0 ${100 / itemsPerPage}%` }}
                   >
                     <div className="banner-cat-in">
-                      <div className="banner-inner-category" style={{cursor:'pointer'}} onClick={() => {router.push(`pets?searchItem=${slide.title}`)}}>
+                      <div className="banner-inner-category" style={{cursor:'pointer'}} onClick={() => {router.push(`pets?searchItem=${slide?.animal}`)}}>
                       {/* <div className="banner-inner-category"> */}
-                        <Image src={slide.src} alt={slide.alt} width={45} height={45} />
+                        <Image src={slide?.image} alt={slide?.animal} width={40} height={40} />
                         <a>
-                          <h3>{slide.title}</h3>
+                          <h3>{slide?.animal}</h3>
                         </a>
                       </div>
                     </div>

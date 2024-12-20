@@ -57,50 +57,6 @@ const CreatePost = () => {
   }, [breederUserId]);
   
   // console.log("deliveryAvailability", deliveryAvailability);
-  const initialValues = {
-    petname: "",
-    description: "",
-    price: "",
-    size: "",
-    animalGender: "",
-    weight: "",
-    birthdate: "",
-    date_avialable: "",
-    animalType: "",
-    type: "",
-    breed: "",
-    certification: "",
-    deliveryAvailability: "",
-  };
-  const validationSchema = Yup.object({
-    petname: Yup.string().required("Pet name is required"),
-    description: Yup.string().test(
-      'min-words',
-      'Description must be at least 20 words',
-      (value) => {
-        if (!value) return false;
-        const wordCount = value.trim().split(/\s+/).length;
-        return wordCount >= 20;
-      }
-    )
-    .required('Description is required'),
-    price: Yup.number()
-      .required("Price is required")
-      .positive("Price must be positive"),
-    size: Yup.string().required("Size is required"),
-    animalGender: Yup.string().required("Gender is required"),
-    weight: Yup.number()
-      .required("Weight is required")
-      .positive("Weight must be positive"),
-    birthdate: Yup.date().required("Birthdate is required"),
-    date_avialable: Yup.date().required("Date Available is required"),
-    animalType: Yup.string().required("Animal type is required"),
-    certification: Yup.string().required("Certification is required"),
-    breed: Yup.string().required("Breed type is required"),
-    // deliveryAvailability: Yup.number().required(
-    //   "Delivery availability is required"
-    // ),
-  });
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -172,53 +128,6 @@ const CreatePost = () => {
     }
   };
 
-  const submitPostForm = async (values) => {
-    const formData = new FormData();
-    formData.append("health_guarantee", healthGuarantee ? 1 : 0);
-    formData.append("delivery_availability", deliveryAvailability ? 1 : 0);
-    formData.append("boarding_availability", boardingAvailability ? 1 : 0);
-    formData.append("flying_availability", flyingAvailability ? 1 : 0);
-    formData.append("petname", values.petname);
-    formData.append("description", values.description);
-    formData.append("animal_type_id", values.animalType);
-    formData.append("type", values.type);
-    formData.append("breed", values.breed);
-    formData.append("price", values.price);
-    formData.append("animal_gender", values.animalGender);
-    formData.append("size", values.size);
-    formData.append("weight", values.weight);
-    formData.append("birthdate", values.birthdate);
-    formData.append("date_avialable", values.date_avialable);
-    formData.append("latitude", location.latitude);
-    formData.append("longitude", location.longitude);
-    formData.append("user_id", breederUserId);
-    formData.append("certification", values.certification);
-
-    images.forEach((img) => {
-      formData.append("image[]", img);
-    });
-
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/api/post_breed`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      if(response.data.code === 400) {
-        toast.error(response.data.msg);
-        return;
-      }
-      if(response.data.code === 200){
-        toast.success('Post Created Successfully');
-        router.push('/breeder/posts')
-      }
-    } catch (error) {
-      console.error("Error submitting post:", error);
-    }
-  };
-
   const submitAdditionalRequest = async (e) => {
     e.preventDefault();
 
@@ -263,6 +172,99 @@ const CreatePost = () => {
     setShowModal(false);
   };
 
+  const initialValues = {
+    petname: "",
+    description: "",
+    price: "",
+    size: "",
+    animalGender: "",
+    weight: "",
+    birthdate: "",
+    date_avialable: "",
+    animalType: "",
+    type: "",
+    breed: "",
+    certification: "",
+    deliveryAvailability: "",
+  };
+
+  const validationSchema = Yup.object({
+    petname: Yup.string().required("Pet name is required"),
+    description: Yup.string().test(
+      'min-words',
+      'Description must be at least 20 words',
+      (value) => {
+        if (!value) return false;
+        const wordCount = value.trim().split(/\s+/).length;
+        return wordCount >= 20;
+      }
+    )
+    .required('Description is required'),
+    price: Yup.number()
+      .required("Price is required")
+      .positive("Price must be positive"),
+    size: Yup.string().required("Size is required"),
+    animalGender: Yup.string().required("Gender is required"),
+    weight: Yup.number()
+      .required("Weight is required")
+      .positive("Weight must be positive"),
+    birthdate: Yup.date().required("Birthdate is required"),
+    date_avialable: Yup.date().required("Date Available is required"),
+    animalType: Yup.string().required("Animal type is required"),
+    certification: Yup.string().required("Certification is required"),
+    breed: Yup.string().required("Breed type is required"),
+    // deliveryAvailability: Yup.number().required(
+    //   "Delivery availability is required"
+    // ),
+  });
+
+  const submitPostForm = async (values) => {
+    const formData = new FormData();
+    formData.append("health_guarantee", healthGuarantee ? 1 : 0);
+    formData.append("delivery_availability", deliveryAvailability ? 1 : 0);
+    formData.append("boarding_availability", boardingAvailability ? 1 : 0);
+    formData.append("flying_availability", flyingAvailability ? 1 : 0);
+    formData.append("petname", values.petname);
+    formData.append("description", values.description);
+    formData.append("animal_type_id", values.animalType);
+    formData.append("type", values.type);
+    formData.append("breed", values.breed.toLowerCase());
+    formData.append("price", values.price);
+    formData.append("animal_gender", values.animalGender);
+    formData.append("size", values.size);
+    formData.append("weight", values.weight);
+    formData.append("birthdate", values.birthdate);
+    formData.append("date_avialable", values.date_avialable);
+    formData.append("latitude", location.latitude);
+    formData.append("longitude", location.longitude);
+    formData.append("user_id", breederUserId);
+    formData.append("certification", values.certification);
+
+    images.forEach((img) => {
+      formData.append("image[]", img);
+    });
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/post_breed`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      if(response.data.code === 400) {
+        toast.error(response.data.msg);
+        return;
+      }
+      if(response.data.code === 200){
+        toast.success('Post Created Successfully');
+        router.push('/breeder/posts')
+      }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -277,7 +279,7 @@ const CreatePost = () => {
                   <a href="#">
                     <Image
                       src="/images/Nextpet-imgs/dashboard-imgs/edit-post-icon.svg"
-                      alt=""
+                      alt="edit-post-icon"
                       width={22}
                       height={20}
                     />
@@ -292,7 +294,7 @@ const CreatePost = () => {
                   />
                   <Image
                     src="/images/Nextpet-imgs/dashboard-imgs/createpost-upload-icon.png"
-                    alt=""
+                    alt="createpost-upload-icon"
                     width={44}
                     height={44}
                   />
@@ -447,7 +449,7 @@ const CreatePost = () => {
                         />
                       </div>
 
-                      <div className="formdata-wrap">
+                      {/* <div className="formdata-wrap">
                         <p>Birthdate</p>
                         <Field type="date" name="birthdate" />
 
@@ -466,7 +468,10 @@ const CreatePost = () => {
                           component="div"
                           style={{ color: "red" }}
                         />
-                      </div>
+                      </div> */}
+
+                        <DateField name="birthdate" label="Birthdate" />
+                        <DateField name="date_avialable" label="Date Available" />
 
                       <div className="formdata-wrap">
                         <p>Health guarantee</p>
@@ -642,3 +647,39 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useFormikContext } from "formik";
+
+const DateField = ({ name, label }) => {
+  const { setFieldValue } = useFormikContext();
+  
+  // Handle the date format change on display and submission
+  const handleDateChange = (date) => {
+    setFieldValue(name, date ? date.toISOString().split("T")[0] : "");
+  };
+
+  return (
+    <div className="formdata-wrap">
+      <p>{label}</p>
+      <Field name={name}>
+        {({ field }) => (
+          <ReactDatePicker
+            selected={field.value ? new Date(field.value) : null}
+            onChange={handleDateChange}
+            dateFormat="MM-dd-yyyy" 
+            placeholderText="MM-dd-yyyy"
+            className="form-control"
+          />
+        )}
+      </Field>
+      <ErrorMessage
+        className="ErrorMessage"
+        name={name}
+        component="div"
+        style={{ color: "red" }}
+      />
+    </div>
+  );
+};

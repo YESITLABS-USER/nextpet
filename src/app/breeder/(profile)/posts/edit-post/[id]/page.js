@@ -56,19 +56,6 @@ const EditPost = () => {
     }
   }, [breederUserId]);
 
-  const initialValues = {
-    description: postDetails?.description || "",
-    petname: postDetails?.name || "",
-    type: postDetails?.type || "",
-    breed: postDetails?.breed || "",
-    price: postDetails?.price || "",
-    size: postDetails?.size || "",
-    animal_gender: postDetails?.animal_gender || "",
-    weight: postDetails?.weight || "",
-    birthdate: postDetails?.birthdate || "",
-    date_available: postDetails?.avialable || "",
-    certification: postDetails?.certification || "",
-  };
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -125,64 +112,6 @@ const EditPost = () => {
     setPostImageLength(previousPostImage.length);
   }, [previousPostImage, animal_type_id, type]);
 
-  const handleSubmit = async (value) => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const { latitude, longitude } = coords;
-        setLatitude(latitude);
-        setLongitude(longitude);
-      });
-    } else {
-      console.error("Not Allow location");
-      setLatitude(35.1258);
-      setLongitude(117.9859);
-    }
-    if (latitude == null || longitude == null) {
-      setLatitude(35.1258);
-      setLongitude(117.9859);
-    }
-
-    const formData = new FormData();
-    formData.append("post_id", id);
-    formData.append("flying_availability", flying_availability);
-    formData.append("boarding_availability", boarding_availability);
-    formData.append("health_guarantee", health_guarantee);
-    formData.append("delivery_availability", delivery_availability);
-    formData.append("petname", value?.petname);
-    formData.append("description", value?.description);
-    formData.append("animal_type_id", value?.animal_type_id);
-    formData.append("type", value?.type);
-    formData.append("breed", value?.breed);
-    formData.append("price", value?.price);
-    formData.append("animal_gender", value?.animal_gender);
-    formData.append("size", value?.size);
-    formData.append("certification", value?.certification);
-    formData.append("weight", value?.weight);
-    formData.append("birthdate", value?.birthdate);
-    formData.append("date_avialable", value?.date_available);
-    formData.append("latitude", latitude);
-    formData.append("longitude", longitude);
-    formData.append("user_id", breederUserId);
-
-    
-    try {
-      await axios.post(
-        `${BASE_URL}/api/post_update_breeder`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      setEditPostPage(false);
-      // toast.success(response.data.msg);
-      toast.success("Breeder’s post updated successfully");
-    } catch (error) {
-      console.error("Error registering user:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -371,6 +300,81 @@ const EditPost = () => {
     setEditPostPage(true);
   };
 
+  const initialValues = {
+    description: postDetails?.description || "",
+    petname: postDetails?.name || "",
+    type: postDetails?.type || "",
+    breed: postDetails?.breed || "",
+    price: postDetails?.price || "",
+    size: postDetails?.size || "",
+    animal_gender: postDetails?.animal_gender || "",
+    weight: postDetails?.weight || "",
+    birthdate: postDetails?.birthdate || "",
+    date_available: postDetails?.avialable || "",
+    certification: postDetails?.certification || "",
+  };
+
+  const handleSubmit = async (value) => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
+      });
+    } else {
+      console.error("Not Allow location");
+      setLatitude(35.1258);
+      setLongitude(117.9859);
+    }
+    if (latitude == null || longitude == null) {
+      setLatitude(35.1258);
+      setLongitude(117.9859);
+    }
+
+    const formData = new FormData();
+    const formattedBirthdate = values.birthdate ? new Date(values.birthdate).toISOString().split("T")[0] : "";
+  const formattedDateAvailable = values.date_available ? new Date(values.date_available).toISOString().split("T")[0] : "";
+    formData.append("post_id", id);
+    formData.append("flying_availability", flying_availability);
+    formData.append("boarding_availability", boarding_availability);
+    formData.append("health_guarantee", health_guarantee);
+    formData.append("delivery_availability", delivery_availability);
+    formData.append("petname", value?.petname);
+    formData.append("description", value?.description);
+    formData.append("animal_type_id", value?.animal_type_id);
+    formData.append("type", value?.type);
+    formData.append("breed", value?.breed);
+    formData.append("price", value?.price);
+    formData.append("animal_gender", value?.animal_gender);
+    formData.append("size", value?.size);
+    formData.append("certification", value?.certification);
+    formData.append("weight", value?.weight);
+    formData.append("birthdate", formattedBirthdate);
+    formData.append("date_avialable", formattedDateAvailable);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
+    formData.append("user_id", breederUserId);
+
+    
+    try {
+      await axios.post(
+        `${BASE_URL}/api/post_update_breeder`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setEditPostPage(false);
+      // toast.success(response.data.msg);
+      toast.success("Breeder’s post updated successfully");
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   return (
@@ -522,7 +526,7 @@ const EditPost = () => {
                               setFieldValue("breed", selectedOption.value);
                             }
                           }}
-                          value={animalBreeds.find((option) => option.value == values.breed)}
+                          value={animalBreeds.find((option) => option.value == values.breed.replace(/ /g, '_'))}
                           isDisabled={!editPostPage}
                           />
                         <ErrorMessage
@@ -594,7 +598,7 @@ const EditPost = () => {
                         />
                       </div>
 
-                      <div className="formdata-wrap">
+                      {/* <div className="formdata-wrap">
                         <p>Birthdate</p>
                         <Field required="required"
                           type="date"
@@ -620,7 +624,10 @@ const EditPost = () => {
                           component="div"
                           style={{ color: "red"}}
                         />
-                      </div>
+                      </div> */}
+                      <DateField name="birthdate" label="Birthdate" editPostPage={editPostPage} />
+<DateField name="date_available" label="Date Available" editPostPage={editPostPage} />
+
 
                       <div className="formdata-wrap">
                         <p>Health guarantee</p>
@@ -822,3 +829,39 @@ const EditPost = () => {
 };
 
 export default EditPost;
+
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useFormikContext } from "formik";
+
+const DateField = ({ name, label, editPostPage }) => {
+  const { setFieldValue } = useFormikContext();
+  
+  // Handle the date format change on display and submission
+  const handleDateChange = (date) => {
+    setFieldValue(name, date ? date.toISOString().split("T")[0] : "");
+  };
+
+  return (
+    <div className="formdata-wrap">
+      <p>{label}</p>
+      <Field name={name} disabled={!editPostPage}>
+        {({ field }) => (
+          <ReactDatePicker disabled={!editPostPage}
+            selected={field.value ? new Date(field.value) : null}
+            onChange={handleDateChange}
+            dateFormat="MM-dd-yyyy" 
+            placeholderText="MM-dd-yyyy"
+            className="form-control"
+          />
+        )}
+      </Field>
+      <ErrorMessage
+        className="ErrorMessage"
+        name={name}
+        component="div"
+        style={{ color: "red" }}
+      />
+    </div>
+  );
+};

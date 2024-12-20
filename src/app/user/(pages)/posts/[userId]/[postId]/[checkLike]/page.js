@@ -11,6 +11,7 @@ import PreviouslyContacted from "../../../../../../../components/PreviouslyConta
 import { CustomPlaceholder } from "react-placeholder-image";
 import { useAuth } from "@/src/app/context/AuthContext";
 import { toast } from "react-toastify";
+import moment from "moment";
 // import ProtectedRoute from "../../../../../../context/ProtectedRoute";
 const ContactPetDetails = () => {
   const [userId, setUserId] = useState(null);
@@ -267,18 +268,18 @@ const ContactPetDetails = () => {
                       <p>Birthdate</p>
                       <input
                         type="text"
-                        value={postData.birthdate ? postData.birthdate : ""}
+                        value={postData.birthdate ? moment(postData.birthdate).format("MM/DD/YYYY") : ""}
                         id="datepicker"
                         placeholder=""
                         disabled
-                      />
+                      /> 
                     </div>
 
                     <div className="formdata-wrap">
                       <p>Date Available</p>
                       <input
                         type="text"
-                        value={postData.avialable ? postData.avialable : ""}
+                        value={postData.avialable ? moment(postData.avialable).format("MM/DD/YYYY") : ""}
                         id="datepicker2"
                         placeholder=""
                         disabled
