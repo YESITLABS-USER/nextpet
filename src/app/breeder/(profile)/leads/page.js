@@ -97,6 +97,9 @@ const Leads = () => {
         fillterLeads();
       }
     }
+    setTimeout(() => {
+      setDropdownVisible(!isDropdownVisible)
+    }, 500);
   };
 
   // Logic for pagination
@@ -209,17 +212,17 @@ const Leads = () => {
                                     }}
                                   />
                                   {lead?.created_at
-                                    ? new Date(lead?.created_at)
-                                        .toLocaleString("en-GB", {
-                                          day: "2-digit",
-                                          month: "2-digit",
-                                          year: "numeric",
-                                          hour: "2-digit",
-                                          minute: "2-digit",
-                                          hour12: true,
-                                        })
-                                        .replace(",", " |")
-                                    : "Date not available"}
+                                    ? `${new Date(lead?.created_at).toLocaleDateString("en-US", {
+                                        month: "2-digit",
+                                        day: "2-digit",
+                                        year: "numeric",
+                                      })} | ${new Date(lead?.created_at).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                      }).toLowerCase()}`
+                                  : "Date not available"}
+
                                   <Link
                                     href={{
                                       pathname: `/breeder/contacted`,

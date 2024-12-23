@@ -129,6 +129,17 @@ const ContactPetDetails = () => {
     }
   };
 
+  function sethandleData () {
+    if(isAuthenticated){
+      handleModal()
+    } else {
+      toast.error("User must be logged in");
+      setTimeout(() => {
+        router.push('/user/sign-in');
+      }, 1000);
+    }
+  }
+
   return (
     // <ProtectedRoute>
     <>
@@ -152,7 +163,7 @@ const ContactPetDetails = () => {
                 <div className="postcreate-heading">
                   <h3>{postData?.name}</h3>
                   <div className="edit-heartpost">
-                    <div className="inner-heartt" onClick={handleModal}>
+                    <div className="inner-heartt" onClick={sethandleData}>
                       <div className="inner-heartt-div">
                         <Image
                           src={
@@ -346,7 +357,7 @@ const ContactPetDetails = () => {
                       >
                         Contact Breeder
                       </a> */}
-                      <button type="button" onClick={handleModal}  data-bs-target="#breeder-guide2" data-bs-toggle="modal">Contact
+                      <button type="button" onClick={sethandleData}  data-bs-target="#breeder-guide2" data-bs-toggle="modal">Contact
                       Breeder</button>
                     </div>
                   </div>

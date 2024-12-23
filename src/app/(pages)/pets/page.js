@@ -221,7 +221,6 @@ const Pets = () => {
     setAnimalTypeFilter(null);
     setBreedTypeFilter(null);
   }
-  console.log(animalTypeFilter,'animalTypeFilter', breedTypeFilter, 'breedTypeFilter')
   // Logic for pagination
   let petsData = filteredData?.length > 0 ? filteredData : allPets;
   let allfilteredData = filteredData?.length > 0 ? filteredData : [];
@@ -241,8 +240,7 @@ const Pets = () => {
 
   const handleSearch = () => {
     let filtered = allPets.filter((pet) => {
-      const query = searchQuery.toLowerCase();
-
+      const query = searchQuery.toLowerCase().replace(" ", "_");
       return (
         pet.type?.toLowerCase().includes(query) ||
         "" ||

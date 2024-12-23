@@ -98,6 +98,9 @@ const Contacts = () => {
         fillterContacted();
       }
     }
+    setTimeout(() => {
+      setDropdownVisible(!isDropdownVisible)
+    }, 500);
   };
 
   // Logic for pagination
@@ -235,7 +238,7 @@ const Contacts = () => {
                                     marginBottom: "5px",
                                   }}
                                 />
-                                {item.updated_at
+                                {/* {item.updated_at
                                   ? new Date(item.updated_at)
                                       .toLocaleString("en-GB", {
                                         day: "2-digit",
@@ -246,7 +249,20 @@ const Contacts = () => {
                                         hour12: true,
                                       })
                                       .replace(",", " |")
+                                  : "Date not available"} */}
+
+                                {item.updated_at
+                                    ? `${new Date(item.updated_at).toLocaleDateString("en-US", {
+                                        month: "2-digit",
+                                        day: "2-digit",
+                                        year: "numeric",
+                                      })} | ${new Date(item.updated_at).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                      }).toLowerCase()}`
                                   : "Date not available"}
+
                                 <a
                                   href={`/user/trending-pets/${item.breeder_id}/${item.post_id}`}
                                 >

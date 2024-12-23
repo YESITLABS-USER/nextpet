@@ -181,7 +181,7 @@ const Favorites = () => {
                             <div className="newyear-cat-dog-in" style={{ width: "33%" }} key={index} >
                               <div className="popular-breedersimg-wrap">
                                 <Image
-                                  src={item?.image || "/images/Nextpet-imgs/Image_not_available.webp"}
+                                  src={item?.image[0] || "/images/Nextpet-imgs/Image_not_available.webp"}
                                   width={250}
                                   height={206}
                                   alt="new "
@@ -288,7 +288,7 @@ const Favorites = () => {
                                   src={
                                     item?.delivery == 1
                                       ? "/images/Nextpet-imgs/dashboard-imgs/adopted.svg"
-                                      : "/images/Nextpet-imgs/Image_not_available.webp"
+                                      : ""
                                   }
                                   alt=""
                                 />

@@ -43,7 +43,7 @@ const Slider = () => {
   //   { src: "/images/Nextpet-imgs/categories-imgs/cate1.png", alt: "Dog", title: "Dog" },
   // ];
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
   const numPages = allSlides.length - itemsPerPage + 1;
 
   const nextSlide = () => {
