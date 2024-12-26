@@ -17,6 +17,7 @@ const Contacted = () => {
   const [user_id, setUserId] = useState();
   const [post_id, setPostId] = useState();
   const [breeder_id, setBreederId] = useState();
+  const [errors, setErrors] = useState();
   const router = useRouter();
   const [ratings, setRatings] = useState({"politeness_rating": "0", "responsive_rating": "0", 
     "communication_rating": "0" });
@@ -75,19 +76,25 @@ const Contacted = () => {
   };
 
   const AddNotesSave = async () => {
+    if (!addNotes || addNotes.trim() === "") {
+      setErrors("Please fill the Notes field");
+      return;
+    }
+  
     const payload = {
       user_id: user_id,
       post_id: post_id,
       breeder_id: breeder_id,
       notes: addNotes,
     };
-
+  
     const response = await AddNotes(payload);
     if (response.data.code === 200) {
       setAddNotes(null);
       ShowNotesFunction();
     }
   };
+  
   function handleViewMore (view) {
     router.push(`/user/posts/${view.user_id}/${view.post_id}/${view.pet_total_like}`)
     // if(isAuthenticated){
@@ -446,14 +453,24 @@ const Contacted = () => {
                   </div>
 
                   <label>
-                    <textarea
+                    <textarea style={{border: errors ? '1px solid red' : ''}}
                       name=""
                       placeholder="You can add a personal memo here.."
-                      onChange={(e) => setAddNotes(e.target.value)}
+                      onChange={(e) => {
+                        const value = e.target.value.trim();
+                        if (value === "") {
+                          setErrors("Fill the Notes field");
+                          setAddNotes(null);
+                        } else {
+                          setErrors("");
+                          setAddNotes(e.target.value);
+                        }
+                      }}
                     ></textarea>
                   </label>
 
                   <p>These notes are only visible to you.</p>
+                  <p style={{color:'red'}}> {errors} </p>
                 </div>
               </div>
             </div>

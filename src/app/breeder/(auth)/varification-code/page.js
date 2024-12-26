@@ -96,6 +96,7 @@ const VerificationCode = () => {
 
       if (response.data.code === 200) {
         // const expireDate = new Date(new Date().getTime() + 15000 * 1000);
+        localStorage.setItem("authToken", JSON.stringify({UniqueKey: response.data.user_id, type: 'breeder-admin-type'}) );
         localStorage.setItem("breeder_user_id", response.data.user_id);
         setShowModal(true);
       } else {
@@ -145,7 +146,7 @@ const VerificationCode = () => {
                 )}
               />
             </div>
-            <span>{otpError}</span>
+            <span style={{color:'red'}}>{otpError}</span>
             <input type="submit" className="login-btn" value="Verify & Proceed" />
 
             <div className="terms-condition-paragraph">

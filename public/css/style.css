@@ -391,7 +391,7 @@ img {
   img {
     width: 31px;
     height: 31px;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   i {

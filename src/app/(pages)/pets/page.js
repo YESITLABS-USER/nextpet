@@ -55,7 +55,7 @@ const Pets = () => {
       return (
         pet.type?.toLowerCase().includes(query) ||
         pet.name?.toLowerCase().includes(query) ||
-        pet.breed?.toLowerCase().includes(query) ||
+        pet.breed?.toLowerCase().includes(query.replace(" ", "_")) ||
         pet.location?.toLowerCase().includes(query)
       );
     });
@@ -240,13 +240,13 @@ const Pets = () => {
 
   const handleSearch = () => {
     let filtered = allPets.filter((pet) => {
-      const query = searchQuery.toLowerCase().replace(" ", "_");
+      const query = searchQuery.toLowerCase();
       return (
         pet.type?.toLowerCase().includes(query) ||
         "" ||
         pet.name?.toLowerCase().includes(query) ||
         "" ||
-        pet.breed?.toLowerCase().includes(query) ||
+        pet.breed?.toLowerCase().includes(query.replace(" ", "_")) ||
         "" ||
         pet.location?.toLowerCase().includes(query) ||
         ""

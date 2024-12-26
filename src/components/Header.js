@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 
 function Header() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const [breederId, setBreederId] = useState(null);
   const [notificationDetails, setNotificationDetails] = useState(null);
@@ -193,9 +193,12 @@ function Header() {
                           : ( userData?.name ? (userData.name.split(" ").length > 10 ? `${userData.name.split(" ").slice(0, 10).join(" ")}...` : userData.name) : "Breeder Profile" ) }
 
                           {/* <i className="far fa-chevron-down"></i> */}
-                          <span style={{ display: "inline-block", transition: "transform 0.3s ease", transform: `rotate(${isOpen ? 360 : 0}deg)`}}  className="mt-1">
-                            {userId && isOpen ? < FaAngleDown/> : < FaAngleDown/>}
+                          <span style={{ display: "inline-block", transition: "transform 0.3s ease",
+                            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} className="mt-1" >
+                              
+                            <FaAngleDown />
                           </span>
+
                         </button>
 
                         <DropdownUserMenu
@@ -265,42 +268,75 @@ const Notification = ({ notificationDetails }) => (
 const NotificationItem = ({ item }) => (
   <div className="notification-list-item">
     <div className="notification-list-item-image">
-      <Image
-        width={50}
-        height={50}
+      <Image width={40} height={40}
         src={
-          item?.user_image
-            ? item?.user_image
-            : "/images/Nextpet-imgs/notification-imgs/user1.png"
+          ["post_moderate", "post_block_message", "post_hold_up", "account_under_verified"].includes(item?.type_notification)
+            ? "/images/Nextpet-imgs/all-icons/retry-notification.svg"
+            : ["post_approved", "account_verified"].includes(item?.type_notification)
+            ? "/images/Nextpet-imgs/all-icons/success-notification.svg"
+            : (item?.user_image || item?.pet_image?.[0])
+            ? (item?.user_image || item?.pet_image?.[0])
+            : "/images/Nextpet-imgs/all-icons/retry-notification.svg"
         }
-        alt=""
+        alt="Notification Icon"
       />
+
     </div>
     <div className="notification-list-item-text">
-      <p>
-        {item?.user_name ? item?.user_name : "Richard Brown"} (
-        {item.pet_name + " " + item.pet_breed + " " + item.pet_type ||
-          "Notification Not Available"}
-        )
-      </p>
+    {[ "post_moderate", "post_approved", "post_block_message", "account_verified", "post_hold_up",    "account_under_verified", ].includes(item?.type_notification)  ? (
+      <>
+      <p style={{maxWidth:"300px"}}>{item?.message_one}</p>
       <span>
-        <i className="far fa-clock"></i>
+              <i className="far fa-clock"></i>
+              <p>
+                <GoClock style={{ margin: "3px", marginBottom: "6px" }} />
+                  {item.date_time
+                    ? `${new Date(item?.date_time).toLocaleDateString("en-US", {
+                        month: "2-digit",
+                        day: "2-digit",
+                        year: "numeric",
+                      })} | ${new Date(item?.date_time).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      }).toLowerCase()}`
+                  : "Date not available"}
+              </p>
+            </span></>
+      ) : (
+        <>
         <p>
-          <GoClock style={{ margin: "3px", marginBottom: "6px" }} />
-          {item.date_time
-            ? new Date(item.date_time)
-                .toLocaleString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: true,
-                })
-                .replace(",", " |")
-            : "Date not available"}
+          {item?.breeder_name || item?.user_name
+            ? item?.breeder_name || item?.user_name
+            : "Richard Brown"} (
+          {item?.pet_name && item?.pet_breed && item?.pet_type
+            ? `${item.pet_name} ${item.pet_breed} ${item.pet_type}`
+            : item?.message_notification
+            ? (item?.message_notification)
+            : "Notification Not Available"}
+          )
         </p>
-      </span>
+
+        <span>
+              <i className="far fa-clock"></i>
+              <p>
+                <GoClock style={{ margin: "3px", marginBottom: "6px" }} />
+                  {item.date_time
+                    ? `${new Date(item?.date_time).toLocaleDateString("en-US", {
+                        month: "2-digit",
+                        day: "2-digit",
+                        year: "numeric",
+                      })} | ${new Date(item?.date_time).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      }).toLowerCase()}`
+                  : "Date not available"}
+              </p>
+            </span>
+        </>
+      )}
+
     </div>
   </div>
 );

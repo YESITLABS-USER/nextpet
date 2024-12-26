@@ -202,7 +202,7 @@ const CreatePost = () => {
     .required('Description is required'),
     price: Yup.number()
       .required("Price is required")
-      .positive("Price must be positive"),
+      .typeError("Price must be a number"),
     size: Yup.string().required("Size is required"),
     animalGender: Yup.string().required("Gender is required"),
     weight: Yup.number()

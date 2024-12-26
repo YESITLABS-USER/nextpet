@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import axios from "axios";
 import BASE_URL from "../../../utils/constant";
 import { toast } from "react-toastify";
@@ -25,7 +25,7 @@ const VerificationCode = () => {
   const [breeder_max_image_error, setBreederMaxImageError] = useState(null);
   const [breederUserId, setBreederUserId] = useState(null);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleLocationSelect = (lat, lng, address) => {
     // setLatitude(lat || '35.1258');
@@ -134,14 +134,20 @@ const VerificationCode = () => {
     }
 
     try {
-      await axios.post(`${BASE_URL}/api/update_profile`, formData, {
+      const response = await axios.post(`${BASE_URL}/api/update_profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(response)
+      if(response.data.code == 200) {
+        toast.success(response.data.msg);
 
-      toast.success("Profile updated successfully!");
-      router.push("/breeder/breeder-profile/dashboard-breeder-profile");
+        // Redirect to dashboard
+        setTimeout(() => {
+          window.location.href = "/breeder/breeder-profile/dashboard-breeder-profile";
+        }, 2000);
+      }
     } catch (error) {
       toast.error("Network Error: Unable to update profile.");
       console.error("Error updating profile:", error);

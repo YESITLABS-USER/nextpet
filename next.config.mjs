@@ -6,6 +6,7 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
+  basePath: '/nextpet', // Specify the subpath
 };
 
 export default nextConfig;

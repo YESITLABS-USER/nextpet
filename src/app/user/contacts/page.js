@@ -117,6 +117,22 @@ const Contacts = () => {
     page: "contacts",
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".dropdown-showfilter") && 
+          !event.target.closest(".dropdown-filterbtn")) {
+        setDropdownVisible(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  
+
   return (
     <ProtectedRoute>
       <div className="breedeerdasboard-profile-wrap">
