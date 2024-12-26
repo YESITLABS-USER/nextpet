@@ -92,6 +92,7 @@ const SignIn = () => {
   
   useEffect(() => {
     const scriptId = "apple-auth-script";
+
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
@@ -99,39 +100,50 @@ const SignIn = () => {
       script.onload = initializeAppleSignIn;
       document.body.appendChild(script);
     }
+
+    // Clean up script when component unmounts
+    return () => {
+      const script = document.getElementById(scriptId);
+      if (script) {
+        document.body.removeChild(script);
+      }
+    };
   }, []);
-  
+
+  // Initializes the Apple Sign-In SDK
   const initializeAppleSignIn = () => {
     if (window.AppleID) {
       window.AppleID.auth.init({
-        clientId: "com.nextpet", // Replace with your Service ID
+        clientId: "app.vercel.nextpet-test", // Replace with your Service ID
         scope: "email name", // Request necessary fields
-        redirectURI: "https://nextpet.vercel.app/user/sign-in/callback", // Replace with your redirect URL
-        usePopup: true,
+        redirectURI: "https://nextpet-test.vercel.app/user/sign-in/callback", // Replace with your redirect URL
+        usePopup: true, // You can change this to false if you prefer a redirect flow
       });
     }
   };
-  
+
+  // Handles the Apple Sign-In flow
   const handleAppleSignIn = async () => {
     try {
+      // Initiates the sign-in flow
       const appleResponse = await window.AppleID.auth.signIn();
-      const { authorization, user } = appleResponse;
-      console.log(user, 'apple user')
+      const { authorization } = appleResponse; // Only need authorization for social_id
+      console.log(appleResponse, 'apple Response: ' + authorization)
       const payload = {
-        social_id: authorization.id_token, // Token for backend validation
-        name: user?.name || {},         // Optional: Extract user name
-        email: user?.email || "",       // Optional: Extract user email
+        social_id: authorization.id_token, // id_token is used as the social ID
+        name: appleResponse.user?.name || "", // If name exists, use it, otherwise send an empty string
+        email: appleResponse.user?.email || "", // Similarly, use the email from the response
       };
-  
+
       console.log("Apple Sign-In Payload:", payload);
-  
-      // Send payload to backend for authentication
+
+      // Send the payload to the backend for authentication
       const response = await axios.post(`${BASE_URL}/api/user_social_login`, payload);
-  
+
       if (response.status === 200) {
-        login({UniqueKey: response.data.data.user_id, type: 'user-type'});
+        // Handle login success (adjust based on your login method)
+        login({ UniqueKey: response.data.data.token, type: 'user-type' });
         localStorage.setItem("user_user_id", response.data.data.user_id);
-  
       } else {
         toast.error("Login successful, but an error occurred on the server.");
         console.error("Backend Response Error:", response.data);
